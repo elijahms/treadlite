@@ -10,36 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_05_185204) do
+ActiveRecord::Schema.define(version: 2021_12_23_160445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "birds", force: :cascade do |t|
-    t.string "name"
-    t.string "species"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "name"
-    t.datetime "start_date", precision: 6
-    t.datetime "end_date", precision: 6
-    t.string "weekday"
-    t.datetime "start_hour", precision: 6
-    t.datetime "end_hour", precision: 6
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "notes", force: :cascade do |t|
-    t.text "content"
-    t.integer "event_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
