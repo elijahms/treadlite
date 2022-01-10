@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.login-box {
+/* background-color: #C2CAD0; */
+min-height: 60vh;
+padding-top: 5%;
+/* border: 2px solid red; */
+margin: auto;
+padding-bottom: 2%;
+}
+
+/* .event-tile-container {
+width: 500px;
+border: 2px solid red;
+} */
+
+.event-tile-name {
+  width: 100%;
+  align-items: center;
+  margin: auto;
+  }
+
+.logout-box {
+  /* background-color: #C2CAD0; */
+  min-height: 60vh;
+  padding-top: 5%;
+  /* border: 2px solid red; */
+  align-items: center;
+  margin: auto;
+  padding-bottom: 2%;
+  }
+
+
+.add-event-main-box {
+/* background-color: #C2CAD0; */
+min-height: 60vh;
+padding-top: 5%;
+border: 2px solid red;
+margin: auto;
+padding-bottom: 2%;
+}
+.add-event-main-grid {
+/* padding-top: 5%;
+text-align: center;
+border: 2px solid green; */
+margin: auto;
+width: 100%;
+/* justify-content: center;
+display: flex; */
+}
+
+.nav-bar-item {
+font-size: 15pt;
+text-align: center;
+padding-top: 5%;
+}
+
+.note-div {
+padding-top: 4%;
+opacity: 0.8;
+/* height: 450px; */
+}
+
+a:link {
+  text-decoration: none;
+  color: #757ce8;
+}
+a:visited {
+  text-decoration: none;
+  color: #757ce8;
+}
+a:hover {
+  text-decoration: none;
+  color: #757ce8;
+}
+a:active {
+  text-decoration: none;
+  color: #757ce8;
+}
+
+
+/* .login-link a:link {
+  text-decoration: none;
+  color: black;
+}
+.login-link a:visited {
+  text-decoration: none;
+  color: black;
+}
+.login-link a:hover {
+  text-decoration: none;
+  color: black;
+}
+.login-link a:active {
+  text-decoration: none;
+  color: black;
+} */
+
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+h1 {
+  text-align: center;
+}
+
+div.rdw-editor-toolbar {
+  padding: 6px 5px 0;
+  margin: 1px;
+  border-radius: 6px 6px 2px 2px ;
+  opacity: 70%;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: flex-start;
+  background: #c2c2c2;
+  flex-wrap: wrap;
+  font-size: 15px;
+  margin-bottom: 5px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+div.rdw-option-active {
+  /* box-shadow: 1px 1px 0px #bfbdbd inset; */
+  background: #818181;
+}

@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start-date: 2021-12-23 17:26:29
+  end-date: 2021-12-23 17:26:29
+  weekday: MyString
+  start-hour: 2021-12-23 17:26:29
+  end-hour: 2021-12-23 17:26:29
+  user_id: 1
+
+two:
+  name: MyString
+  start-date: 2021-12-23 17:26:29
+  end-date: 2021-12-23 17:26:29
+  weekday: MyString
+  start-hour: 2021-12-23 17:26:29
+  end-hour: 2021-12-23 17:26:29
+  user_id: 1

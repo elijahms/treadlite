@@ -1,0 +1,26 @@
+{
+    
+        "name": "phase-4-deploying-app-demo",
+        "description": "Build scripts for Heroku",
+        "engines": {
+          "node": "16.x"
+        },
+        "scripts": {
+          "clean": "rm -rf public",
+          "build": "npm install --prefix client && npm run build --prefix client",
+          "deploy": "cp -a client/build/. public/",
+          "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+        }
+      ,
+    "dependencies": {
+        "@mui/icons-material": "^5.2.5",
+        "@mui/lab": "^5.0.0-alpha.61",
+        "draft-js": "^0.11.7",
+        "pry": "^0.8.12",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-draft-wysiwyg": "^1.14.7",
+        "react-router-dom": "^5.3.0",
+        "styled-components": "^5.3.3"
+    }
+}
