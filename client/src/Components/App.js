@@ -37,8 +37,10 @@ function App() {
         <SignUpPage setUser={setUser} />
         </Route>
         <Route exact path="/mynotes">
+        <SignUpPage setUser={setUser} />
         </Route>
         <Route path="/">  
+        <SignUpPage setUser={setUser} />
         </Route>
       </Switch>
   </div>
