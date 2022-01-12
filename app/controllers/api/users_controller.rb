@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :authorize, only: %i[create show]
+  skip_before_action :authorize, only: %i[create show index]
 
   def create
     user = User.create!(user_params)
@@ -16,6 +16,12 @@ class Api::UsersController < ApplicationController
     else
       head :no_content
     end 
+  end
+
+  def index
+    users = User.all
+    userrecords = users.map {|u| [u.username, u.userrecord.score]}
+    render json: userrecords
   end
 
   private

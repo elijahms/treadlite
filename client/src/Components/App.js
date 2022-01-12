@@ -1,51 +1,33 @@
-import NavBar from "./NavBar";
-import SignUpPage from "./SignupPage";
-import { Route, Switch } from "react-router-dom";
-import {useState, useEffect} from 'react'
-import LoginPage from "./LoginPage";
-import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
+import MainPage from "./MainPage";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import CssBaseline from "@mui/material/CssBaseline";
 
 
-function App() {
+const App = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const theme = createTheme({
+    palette: {
+      type: "light",
+      mode: prefersDarkMode ? "dark" : "light",
+      primary: {
+        main: "rgba(0,245,109,0.79)",
+      },
+      secondary: {
+        main: "#0090f5",
+      },
+      background: {
+        default: "#eee2dc",
+      },
+    },
+  });
 
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    fetch("/api/me")
-    .then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      } else {
-        r.json().then(console.log("no user"))
-      }
-    });
-
-  }, []);
-  
- 
   return (
-  <div>
-    <CssBaseline />
-    <NavBar />
-    <Divider variant="middle"/>
-    <Switch>
-        <Route path="/newevent">
-        <LoginPage setUser={setUser} />
-        </Route>
-        <Route exact path="/login">
-        <SignUpPage setUser={setUser} />
-        </Route>
-        <Route exact path="/mynotes">
-        <SignUpPage setUser={setUser} />
-        </Route>
-        <Route path="/">  
-        <SignUpPage setUser={setUser} />
-        </Route>
-      </Switch>
-  </div>
+    <ThemeProvider theme={theme}>
+        <CssBaseline />
+      <MainPage />
+    </ThemeProvider>
   );
-  
-}
+};
 
 export default App;
