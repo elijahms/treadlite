@@ -13,14 +13,26 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Friends = () => {
-  const [friendList, setFriendList] = useState(["maddie", 69]);
+  const [friendList, setFriendList] = useState([{
+      name: "maddie",
+      score: 69
+    }]);
 
   useEffect(() => {
     fetch("api/users").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
           console.log(data);
-          setFriendList(data);
+          let listOfFriends = []
+          data.map((f) => 
+          listOfFriends = ([...listOfFriends, {
+              name: f[0],
+              score: f[1],
+              avatar: f[0][0]
+          }])
+          )
+          console.log(listOfFriends);
+          setFriendList(listOfFriends)
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -44,11 +56,11 @@ const Friends = () => {
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
-            width: '80%',
+            width: "80%",
           }}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1}}
+            sx={{ ml: 1, flex: 1 }}
             placeholder="Search Treadlite"
             inputProps={{ "aria-label": "search google maps" }}
           />
@@ -57,8 +69,8 @@ const Friends = () => {
             <SearchIcon />
           </IconButton>
         </Paper>
-        </Box>
-        <Box
+      </Box>
+      <Box
         sx={{
           marginTop: 5,
           display: "flex",
@@ -66,25 +78,29 @@ const Friends = () => {
           //   alignItems: "center",
         }}
       >
-          <Paper>
-        <List>
-          {[...friendList].map((friend, index) => {
-            return (
+        <Paper>
+          <List>
+            {[...friendList].map((friend, index) => {
+              return (
                 <div>
-              <ListItem>
-                <ListItemAvatar>
-                  <Avatar>E</Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={friend[0]}
-                  secondary={friend[1] + "/100"}
-                />
-              </ListItem>
-              {index === 1 ? null : <Divider/>}
-              </div>
-            );
-          })}
-        </List>
+                  <ListItem
+                    secondaryAction={
+                      <ListItemText primary={friend.score + "/100"} />
+                    }
+                  >
+                    <ListItemAvatar>
+                      <Avatar>{friend.avatar}</Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      edge="end"
+                      primary={friend.name}
+                    />
+                  </ListItem>
+                  <Divider />
+                </div>
+              );
+            })}
+          </List>
         </Paper>
       </Box>
     </Container>

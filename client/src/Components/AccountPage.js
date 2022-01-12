@@ -17,7 +17,7 @@ const AccountPage = ({ user, setUser }) => {
   };
 
   return (
-    <Container maxWidth="false">
+    <Container maxWidth="md">
         <Paper>
       <Box
         sx={{

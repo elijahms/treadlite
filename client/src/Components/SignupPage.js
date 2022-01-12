@@ -6,9 +6,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const SignUpPage = ({ setUser }) => {
+  const history = useHistory();
+
   function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
@@ -18,7 +20,7 @@ const SignUpPage = ({ setUser }) => {
           color="inherit"
           href="https://elijahsilverman.com/"
         >
-          Elijah
+          Elijah Silverman -
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}
@@ -49,6 +51,7 @@ const SignUpPage = ({ setUser }) => {
         r.json().then((user) => {
           setUser(user);
           console.log(user);
+          history.push("/")
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -152,6 +155,8 @@ const SignUpPage = ({ setUser }) => {
           </Grid>
         </Box>
       </Box>
+      <br />
+
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );

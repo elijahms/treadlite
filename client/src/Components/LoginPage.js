@@ -7,8 +7,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const LoginPage = ({ setUser }) => {
+
+  const history = useHistory();
+
   function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
@@ -18,7 +22,7 @@ const LoginPage = ({ setUser }) => {
           color="inherit"
           href="https://elijahsilverman.com/"
         >
-          Elijah Silverman + Andrew Busel
+          Elijah Silverman -
         </Link>{" "}
         {new Date().getFullYear()}
         {"."}
@@ -45,6 +49,7 @@ const LoginPage = ({ setUser }) => {
         r.json().then((user) => {
           setUser(user);
           console.log(user);
+          history.push("/")
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -101,13 +106,14 @@ const LoginPage = ({ setUser }) => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <NavLink className="login-link" exact to="/" variant="body2">
+              <NavLink className="login-link" exact to="/signup" variant="body2">
                 Dont have an account? Sign Up
               </NavLink>
             </Grid>
           </Grid>
         </Box>
       </Box>
+      <br />
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );
