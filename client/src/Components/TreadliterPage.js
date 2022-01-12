@@ -1,79 +1,163 @@
-import { useState } from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Checkbox from "@mui/material/Checkbox";
-import Avatar from "@mui/material/Avatar";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import Slider from "@mui/material/Slider";
 
-const TreadliterPage = () => {
-  const [checked, setChecked] = useState([1]);
+const TreadliterPage = ({ user }) => {
+  useEffect(() => {
+    fetch(`/api/dashboard`).then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          console.log(data);
+          setDatabaseScore(data);
+        });
+      } else {
+        r.json().then((err) => console.log(err));
+      }
+    });
+  }, []);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  const [databaseScore, setDatabaseScore] = useState(0);
+  const [busTaken, setBusTaken] = useState(0);
+  const [bikeTaken, setBikeTaken] = useState(0);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = {
+      score: databaseScore.score + (busTaken + bikeTaken * 2),
+      id: databaseScore.id,
+    };
+    console.log(form);
+    fetch("/api/treadliter", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((userdatum) => {
+          console.log(userdatum);
+        });
+      } else {
+        r.json().then((err) => console.log(err));
+      }
+    });
+  };
 
-    setChecked(newChecked);
+  const loweredScore = () => {
+    return busTaken + bikeTaken * 2;
   };
 
   return (
     <Container component="main" maxWidth="md">
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <List
-        //   dense
-          sx={{ width: "100%",
-          maxWidth: 360,
-          bgcolor: "background.paper"
-        }}
+      <Paper>
+        <Box
+          sx={{
+            // marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            // alignItems: "center",
+            height: "50vh",
+            m: 3,
+          }}
         >
-          {[0, 1, 2, 3].map((value) => {
-            const labelId = `checkbox-list-secondary-label-${value}`;
-            return (
-              <ListItem
-                key={value}
-                secondaryAction={
-                  <Checkbox
-                    edge="end"
-                    onChange={handleToggle(value)}
-                    checked={checked.indexOf(value) !== -1}
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                }
-                disablePadding
+          <Typography
+            sx={{
+              mt: 3,
+              // border: "2px solid red",
+              textAlign: "center",
+            }}
+            variant="h4"
+          >
+            Up Your Score!
+          </Typography>
+          <Typography variant="h5">....What did you do this week?</Typography>
+
+          <Grid
+            container
+            spacing={0}
+            sx={{
+              // border: "2px solid blue",
+              mt: 2,
+            }}
+          >
+            <Grid item lg={4} sm={12}>
+              <Typography sx={{ alignText: "left" }} variant="p">
+                Took the bus instead of driving to work?
+              </Typography>
+            </Grid>
+            <Grid item lg={8} sm={12}>
+              <Slider
+                aria-label="Custom marks"
+                size="medium"
+                defaultValue={3}
+                step={1}
+                valueLabelDisplay="auto"
+                min={0}
+                max={5}
+                onChange={(e) => setBusTaken(e.target.value)}
+              />
+            </Grid>
+            <Grid item lg={4} sm={12}>
+              <Typography variant="p">
+                Took the bus instead of driving to work?
+              </Typography>
+            </Grid>
+            <Grid item lg={8} xs={12}>
+              <Slider
+                aria-label="Custom marks"
+                size="medium"
+                defaultValue={2}
+                step={1}
+                valueLabelDisplay="auto"
+                min={0}
+                max={5}
+                onChange={(e) => setBikeTaken(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={0}
+            sx={{
+              // border: "2px solid blue",
+              mt: 2,
+            }}
+          >
+            <Grid item lg={8}>
+              <Box
+                sx={{
+                  // border: "2px solid blue",
+                  display: "flex",
+                  // justifyContent: 'right'
+                }}
               >
-                <ListItemButton>
-                  {/* <ListItemAvatar> */}
-                    {/* <Avatar
-                      alt={`Avatar n°${value + 1}`}
-                      src={`/static/images/avatar/${value + 1}.jpg`}
-                    />
-                  </ListItemAvatar> */}
-                  <ListItemText
-                    id={labelId}
-                    primary={`Line item ${value + 1}`}
-                  />
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Box>
+                <h3>You raised your score by: {loweredScore()} </h3>
+              </Box>
+            </Grid>
+            <Grid item lg={4}>
+              <Box
+                sx={{
+                  // border: "2px solid blue",
+                  display: "flex",
+                  height: "100%",
+                  alignItems: "center",
+                  justifyContent: "right",
+                }}
+              >
+                <Button variant="contained" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </Box>
+      </Paper>
     </Container>
   );
 };

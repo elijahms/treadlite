@@ -13,26 +13,32 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Friends = () => {
-  const [friendList, setFriendList] = useState([{
+  const [friendList, setFriendList] = useState([
+    {
       name: "maddie",
-      score: 69
-    }]);
+      score: 69,
+    },
+  ]);
 
   useEffect(() => {
     fetch("api/users").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
           console.log(data);
-          let listOfFriends = []
-          data.map((f) => 
-          listOfFriends = ([...listOfFriends, {
-              name: f[0],
-              score: f[1],
-              avatar: f[0][0]
-          }])
-          )
+          let listOfFriends = [];
+          data.map(
+            (f) =>
+              (listOfFriends = [
+                ...listOfFriends,
+                {
+                  name: f[0],
+                  score: f[1],
+                  avatar: f[0][0],
+                },
+              ])
+          );
           console.log(listOfFriends);
-          setFriendList(listOfFriends)
+          setFriendList(listOfFriends);
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -91,10 +97,7 @@ const Friends = () => {
                     <ListItemAvatar>
                       <Avatar>{friend.avatar}</Avatar>
                     </ListItemAvatar>
-                    <ListItemText
-                      edge="end"
-                      primary={friend.name}
-                    />
+                    <ListItemText edge="end" primary={friend.name} />
                   </ListItem>
                   <Divider />
                 </div>

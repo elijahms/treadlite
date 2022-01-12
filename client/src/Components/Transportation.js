@@ -1,14 +1,8 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-// import Container from "@mui/material/Container";
-// import XMLParser from "react-xml-parser";
-// import InputLabel from "@mui/material/InputLabel";
-// import MenuItem from "@mui/material/MenuItem";
-// import FormControl from "@mui/material/FormControl";
-// import NativeSelect from "@mui/material/NativeSelect";
-// import DatePicker from "react-date-picker";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
+
 
 const Transportation = () => {
 //   const [carYears, setCarYears] = useState({});
@@ -22,7 +16,8 @@ const Transportation = () => {
   const [MPG, setMPG] = useState(20);
   const [milesDriven, setMilesDriven] = useState(70);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
+    
     e.preventDefault();
     const form = {
       miles_per_gallon: MPG,
@@ -46,6 +41,7 @@ const Transportation = () => {
         r.json().then((err) => console.log(err));
       }
     });
+    // enqueueSnackbar('Successfully Updated Details');
   }
 
   //   useEffect(() => {

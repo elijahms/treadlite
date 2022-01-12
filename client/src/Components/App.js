@@ -15,14 +15,14 @@ import Container from "@mui/material/Container";
 
 const App = () => {
   const [user, setUser] = useState(null);
-  
+
   useEffect(() => {
     fetch("/api/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) =>{ 
-        console.log(user)
-        setUser(user)
-            });
+        r.json().then((user) => {
+          console.log(user);
+          setUser(user);
+        });
       } else {
         r.json().then(console.log("no user"));
       }
@@ -48,42 +48,42 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <NewMain user={user} />
-      <Container
-      sx={{
-          mt: 14
-      }}
-      maxWidth='false'
-      >
-      <Switch>
-        <Route exact path="/about">
-          <AboutPage />
-        </Route>
-        <Route exact path="/treadliter">
-          <TreadliterPage />
-        </Route>
-        <Route exact path="/friends">
-          <Friends />
-        </Route>
-        <Route exact path="/account">
-          {!user ? (
-            <SignUpPage setUser={setUser} />
-          ) : (
-            <AccountPage setUser={setUser} user={user} />
-          )}
-        </Route>
-        <Route exact path="/login">
-          <LoginPage setUser={setUser} />
-        </Route>
-        <Route path="/signup">
-          <SignUpPage setUser={setUser} />
-        </Route>
-        <Route path="/">
-          <HomePage />
-        </Route>
-      </Switch>
-      </Container>
+        <CssBaseline />
+        <NewMain user={user} />
+        <Container
+          sx={{
+            mt: 14,
+          }}
+          maxWidth="false"
+        >
+          <Switch>
+            <Route exact path="/about">
+              <AboutPage />
+            </Route>
+            <Route exact path="/treadliter">
+              <TreadliterPage user={user} />
+            </Route>
+            <Route exact path="/friends">
+              <Friends />
+            </Route>
+            <Route exact path="/account">
+              {!user ? (
+                <SignUpPage setUser={setUser} />
+              ) : (
+                <AccountPage setUser={setUser} user={user} />
+              )}
+            </Route>
+            <Route exact path="/login">
+              <LoginPage setUser={setUser} />
+            </Route>
+            <Route path="/signup">
+              <SignUpPage setUser={setUser} />
+            </Route>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+        </Container>
     </ThemeProvider>
   );
 };
