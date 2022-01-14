@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :api do
+    resources :friendships
     resources :userrecords
     resources :userdata
     get '/users', to: 'users#index'
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
     get '/me', to: 'users#show'
     get '/dashboard', to: 'userrecords#show'
     patch '/treadliter', to: 'userrecords#update'
+    get '/following', to: 'users#following'
   end
 
   get '*path',

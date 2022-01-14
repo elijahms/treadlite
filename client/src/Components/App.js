@@ -12,6 +12,7 @@ import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SignUpPage from "./SignupPage";
 import Container from "@mui/material/Container";
+import DashboardPage from "./DashboardPage";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -30,60 +31,79 @@ const App = () => {
   }, []);
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  // const theme = createTheme({
+  //   palette: {
+  //     type: "light",
+  //     mode: prefersDarkMode ? "dark" : "light",
+  //     primary: {
+  //       main: "rgba(0,245,109,0.79)",
+  //     },
+  //     secondary: {
+  //       main: "#0090f5",
+  //     },
+  //     background: {
+  //       default: "#eee2dc",
+  //     },
+  //   },
+  // });
+
   const theme = createTheme({
     palette: {
       type: "light",
       mode: prefersDarkMode ? "dark" : "light",
       primary: {
-        main: "rgba(0,245,109,0.79)",
+        main: "rgba(9,138,90,0.79)",
       },
       secondary: {
-        main: "#0090f5",
+        main: "#e040fb",
       },
       background: {
-        default: "#eee2dc",
+        default: "#756d6c",
       },
     },
   });
 
   return (
     <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <NewMain user={user} />
-        <Container
-          sx={{
-            mt: 14,
-          }}
-          maxWidth="false"
-        >
-          <Switch>
-            <Route exact path="/about">
-              <AboutPage />
-            </Route>
-            <Route exact path="/treadliter">
-              <TreadliterPage user={user} />
-            </Route>
-            <Route exact path="/friends">
-              <Friends />
-            </Route>
-            <Route exact path="/account">
-              {!user ? (
-                <SignUpPage setUser={setUser} />
-              ) : (
-                <AccountPage setUser={setUser} user={user} />
-              )}
-            </Route>
-            <Route exact path="/login">
-              <LoginPage setUser={setUser} />
-            </Route>
-            <Route path="/signup">
+      <CssBaseline />
+      <NewMain user={user} setUser={setUser} />
+      <Container
+        sx={{
+          mt: 14,
+        }}
+        maxWidth="false"
+      >
+        <Switch>
+          <Route exact path="/about">
+            <AboutPage />
+          </Route>
+          <Route exact path="/treadliter">
+            <TreadliterPage user={user} />
+          </Route>
+          <Route exact path="/friends">
+            <Friends user={user} />
+          </Route>
+          <Route exact path="/account">
+            {!user ? (
               <SignUpPage setUser={setUser} />
-            </Route>
-            <Route path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </Container>
+            ) : (
+              <AccountPage setUser={setUser} user={user} />
+            )}
+          </Route>
+          <Route exact path="/login">
+            <LoginPage setUser={setUser} />
+          </Route>
+          <Route exact path="/dashboard">
+            <DashboardPage />
+          </Route>
+          <Route path="/signup">
+            <SignUpPage setUser={setUser} />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </Container>
     </ThemeProvider>
   );
 };

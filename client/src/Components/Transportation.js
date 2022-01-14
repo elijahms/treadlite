@@ -87,7 +87,7 @@ const Transportation = () => {
       sx={{
         // border: "2px solid black",
         height: "60vh",
-        paddingLeft: "35%",
+        paddingLeft: "5%",
         paddingRight: "5%",
       }}
     >

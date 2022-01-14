@@ -40,6 +40,8 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activejob (7.0.0)
       activesupport (= 7.0.0)
       globalid (>= 0.3.6)
@@ -140,6 +142,7 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  active_model_serializers (= 0.9.3)
   bcrypt
   debug
   pg (~> 1.1)

@@ -18,9 +18,20 @@ class Api::UsersController < ApplicationController
     end 
   end
 
+  def following
+    user = User.find_by(id: session[:user_id])
+    if user
+      followings = user.followings
+      followings = followings.map {|f| [f.id]}
+      render json: followings, status: :ok
+    else
+      render json: { errors: ['No user found'] }, status: :not_found
+    end 
+  end
+
   def index
     users = User.all
-    userrecords = users.map {|u| [u.username, u.userrecord.score]}
+    userrecords = users.map {|u| {username: u.username, score: u.userrecord.score, avatar: u.username[0], id: u.id}}
     render json: userrecords
   end
 

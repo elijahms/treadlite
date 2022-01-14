@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Slider from "@mui/material/Slider";
+import Snackbar from "@mui/material/Snackbar";
 
 const TreadliterPage = ({ user }) => {
   useEffect(() => {
@@ -20,6 +21,20 @@ const TreadliterPage = ({ user }) => {
       }
     });
   }, []);
+
+  const [open, setOpen] = useState(false);
+
+  // const handleClick = () => {
+  //   setOpen(true);
+  // };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const [databaseScore, setDatabaseScore] = useState(0);
   const [busTaken, setBusTaken] = useState(0);
@@ -47,6 +62,7 @@ const TreadliterPage = ({ user }) => {
         r.json().then((err) => console.log(err));
       }
     });
+    setOpen(true);
   };
 
   const loweredScore = () => {
@@ -62,7 +78,7 @@ const TreadliterPage = ({ user }) => {
             display: "flex",
             flexDirection: "column",
             // alignItems: "center",
-            height: "50vh",
+            // height: "50vh",
             m: 3,
           }}
         >
@@ -71,12 +87,12 @@ const TreadliterPage = ({ user }) => {
               mt: 3,
               // border: "2px solid red",
               textAlign: "center",
+              fontFamily: "Raleway",
             }}
             variant="h4"
           >
-            Up Your Score!
+            Up Your Score! ....What did you do this week?
           </Typography>
-          <Typography variant="h5">....What did you do this week?</Typography>
 
           <Grid
             container
@@ -86,14 +102,14 @@ const TreadliterPage = ({ user }) => {
               mt: 2,
             }}
           >
-            <Grid item lg={4} sm={12}>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
               <Typography sx={{ alignText: "left" }} variant="p">
                 Took the bus instead of driving to work?
               </Typography>
             </Grid>
-            <Grid item lg={8} sm={12}>
+            <Grid item xs={12} sm={12} md={8} lg={8}>
               <Slider
-                aria-label="Custom marks"
+                aria-label="Bus Riding"
                 size="medium"
                 defaultValue={3}
                 step={1}
@@ -103,14 +119,14 @@ const TreadliterPage = ({ user }) => {
                 onChange={(e) => setBusTaken(e.target.value)}
               />
             </Grid>
-            <Grid item lg={4} sm={12}>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
               <Typography variant="p">
-                Took the bus instead of driving to work?
+                Rode your bike instead of driving to work?
               </Typography>
             </Grid>
-            <Grid item lg={8} xs={12}>
+            <Grid item xs={12} sm={12} md={8} lg={8}>
               <Slider
-                aria-label="Custom marks"
+                aria-label="Bike Riding"
                 size="medium"
                 defaultValue={2}
                 step={1}
@@ -129,18 +145,19 @@ const TreadliterPage = ({ user }) => {
               mt: 2,
             }}
           >
-            <Grid item lg={8}>
+            <Grid item xs={10} sm={10} md={10} lg={10}>
               <Box
                 sx={{
                   // border: "2px solid blue",
                   display: "flex",
                   // justifyContent: 'right'
+                  // fontSize: '1vw'
                 }}
               >
                 <h3>You raised your score by: {loweredScore()} </h3>
               </Box>
             </Grid>
-            <Grid item lg={4}>
+            <Grid item xs={2} sm={2} md={2} lg={2}>
               <Box
                 sx={{
                   // border: "2px solid blue",
@@ -158,6 +175,12 @@ const TreadliterPage = ({ user }) => {
           </Grid>
         </Box>
       </Paper>
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Score Updated"
+      />
     </Container>
   );
 };

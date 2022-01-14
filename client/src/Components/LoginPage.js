@@ -49,7 +49,7 @@ const LoginPage = ({ setUser }) => {
         r.json().then((user) => {
           setUser(user);
           console.log(user);
-          history.push("/")
+          history.push("/account")
         });
       } else {
         r.json().then((err) => console.log(err));

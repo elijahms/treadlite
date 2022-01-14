@@ -14,11 +14,18 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
 const pages = ["Friends", "Treadliter", "About"];
-const settings = ["Profile", "Account", "Logout"];
+const settings = ["Dashboard", "Account"];
 
-const ResponsiveAppBar = ({ user }) => {
+const ResponsiveAppBar = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleLogout = (event) => {
+    fetch("/api/logout", { method: "DELETE" }).then((data) =>
+      console.log(data)
+    );
+    setUser(null);
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,16 +46,16 @@ const ResponsiveAppBar = ({ user }) => {
     <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography
-            variant="h6"
+          {/* <img src="logo_transparent.png" alt="logo" className='logo' /> */}
+          <Box
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <NavLink exact to="/">
-              {"TREADLITE"}
+              <img src="logo_transparent.png" alt="logo" className="logo" />
             </NavLink>
-          </Typography>
+          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -80,13 +87,11 @@ const ResponsiveAppBar = ({ user }) => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <NavLink exact to={`/${page}`}>
-                      {page}
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
+                <NavLink className="navlinks" key={page} exact to={`/${page}`}>
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{page}</Typography>
+                  </MenuItem>
+                </NavLink>
               ))}
             </Menu>
           </Box>
@@ -97,26 +102,27 @@ const ResponsiveAppBar = ({ user }) => {
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
             <NavLink exact to="/">
-              {"TREADLITE"}
+              <img src="logo_transparent.png" alt="logo" className="logo" />
             </NavLink>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <NavLink exact to={`/${page}`}>
+              <NavLink key={page} exact to={`/${page}`}>
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2.5, color: "white", display: "block", fontWeight: 'bold' }}
+                >
                   {page}
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar>
+                <Avatar
+                sx={{color: '#e040fb'}}
+                >
                   {user ? user.first_name[0] + user.last_name[0] : null}
                 </Avatar>
               </IconButton>
@@ -140,12 +146,19 @@ const ResponsiveAppBar = ({ user }) => {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink exact to={`/${setting}`}>
+                    <NavLink className="navlinks" exact to={`/${setting}`}>
                       {setting}
                     </NavLink>
                   </Typography>
                 </MenuItem>
               ))}
+                <MenuItem key='Logout' onClick={handleCloseNavMenu, handleLogout}>
+                  <Typography textAlign="center">
+                    <NavLink className="navlinks" exact to='/logout'>
+                      Logout
+                    </NavLink>
+                  </Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
