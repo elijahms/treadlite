@@ -154,13 +154,12 @@ const TreadliterPage = ({ user }) => {
                   // fontSize: '1vw'
                 }}
               >
-                <h3>You raised your score by: {loweredScore()} </h3>
+                <h3>Upped your score by: {loweredScore()} </h3>
               </Box>
             </Grid>
             <Grid item xs={4} sm={2} md={2} lg={2}>
               <Box
                 sx={{
-                  // border: "2px solid blue",
                   display: "flex",
                   height: "100%",
                   alignItems: "center",
