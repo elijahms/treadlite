@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useHistory } from "react-router-dom";
 
 const pages = ["Friends", "Treadliter", "About"];
 const settings = ["Dashboard", "Account"];
@@ -19,12 +20,15 @@ const settings = ["Dashboard", "Account"];
 const ResponsiveAppBar = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const history = useHistory();
 
   const handleLogout = (event) => {
     fetch("/api/logout", { method: "DELETE" }).then((data) =>
       console.log(data)
     );
     setUser(null);
+    handleCloseUserMenu()
+    history.push("/")
   };
 
   const handleOpenNavMenu = (event) => {
@@ -152,13 +156,13 @@ const ResponsiveAppBar = ({ user, setUser }) => {
                   </Typography>
                 </MenuItem>
               ))}
-                <MenuItem key='Logout' onClick={handleCloseNavMenu, handleLogout}>
+                {user && <MenuItem key='Logout' onClick={handleCloseNavMenu, handleLogout}>
                   <Typography textAlign="center">
                     <NavLink className="navlinks" exact to='/logout'>
                       Logout
                     </NavLink>
                   </Typography>
-                </MenuItem>
+                </MenuItem>}
             </Menu>
           </Box>
         </Toolbar>

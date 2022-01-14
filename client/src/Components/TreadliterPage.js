@@ -145,7 +145,7 @@ const TreadliterPage = ({ user }) => {
               mt: 2,
             }}
           >
-            <Grid item xs={10} sm={10} md={10} lg={10}>
+            <Grid item xs={8} sm={10} md={10} lg={10}>
               <Box
                 sx={{
                   // border: "2px solid blue",
@@ -157,7 +157,7 @@ const TreadliterPage = ({ user }) => {
                 <h3>You raised your score by: {loweredScore()} </h3>
               </Box>
             </Grid>
-            <Grid item xs={2} sm={2} md={2} lg={2}>
+            <Grid item xs={4} sm={2} md={2} lg={2}>
               <Box
                 sx={{
                   // border: "2px solid blue",

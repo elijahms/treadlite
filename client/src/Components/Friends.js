@@ -23,11 +23,14 @@ const Friends = ({user}) => {
   ]);
   const [search, setSearch] = useState("");
   const [chipClick, setChipClick] = useState('All')
-  const [followingList, setFollowingList] = useState(0)
+  const [followingList, setFollowingList] = useState([''])
 
   function handleSearch(e) {
     e.preventDefault();
-    console.log(search);
+    // console.log(search);
+    let searchedList = [...friendList].filter((f) => f.username.startsWith(e.target.value))
+    setFriendList(searchedList)
+    // setSearch(null)
   }
 
   useEffect(() => {
@@ -51,7 +54,6 @@ const Friends = ({user}) => {
         r.json().then((err) => console.log(err));
       }
     });
-    // console.log(followingList.includes(4))
   }, []);
 
   return (
@@ -77,14 +79,14 @@ const Friends = ({user}) => {
             sx={{ ml: 1, flex: 1 }}
             placeholder="Follow other Treadlite-rs"
             inputProps={{ "aria-label": "search treadlite" }}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => handleSearch(e)}
           />
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
           <IconButton
             type="submit"
             sx={{ p: "10px" }}
             aria-label="search"
-            onClick={handleSearch}
+            // onClick={handleSearch}
           >
             <SearchIcon />
           </IconButton>
@@ -115,15 +117,14 @@ const Friends = ({user}) => {
       >
         <List>
           {[...friendList].filter((f) => {
-            let friend = followingList
               if (chipClick === 'All') {
                 return true
               } else if (chipClick === "Followers") {
-                return friend.includes(4)
+                return false
               } else if (chipClick === 'Top') {
                 return f.score > 96
               } else {
-                return true
+                return followingList.toString().includes(f.id)
               }
           }).map((friend, index) => {
             return (
