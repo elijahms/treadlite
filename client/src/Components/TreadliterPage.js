@@ -22,7 +22,7 @@ const TreadliterPage = ({ user }) => {
     });
   }, []);
 
-  const [open, setOpen] = useState(false);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
 
   // const handleClick = () => {
   //   setOpen(true);
@@ -33,7 +33,7 @@ const TreadliterPage = ({ user }) => {
       return;
     }
 
-    setOpen(false);
+    setOpenSnackBar(false);
   };
 
   const [databaseScore, setDatabaseScore] = useState(0);
@@ -62,7 +62,7 @@ const TreadliterPage = ({ user }) => {
         r.json().then((err) => console.log(err));
       }
     });
-    setOpen(true);
+    setOpenSnackBar(true);
   };
 
   const loweredScore = () => {
@@ -87,7 +87,7 @@ const TreadliterPage = ({ user }) => {
               mt: 3,
               // border: "2px solid red",
               textAlign: "center",
-              fontFamily: "Raleway",
+              // fontFamily: "Raleway",
             }}
             variant="h4"
           >
@@ -175,7 +175,7 @@ const TreadliterPage = ({ user }) => {
         </Box>
       </Paper>
       <Snackbar
-        open={open}
+        open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleClose}
         message="Score Updated"

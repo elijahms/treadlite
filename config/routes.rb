@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'userrecords#show'
     patch '/treadliter', to: 'userrecords#update'
     get '/following', to: 'users#following'
+    post '/newfollow', to: 'friendships#create'
   end
 
   get '*path',

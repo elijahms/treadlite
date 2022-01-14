@@ -68,6 +68,7 @@ const DashboardPage = () => {
               </Typography>
             </Box>
           </Box>
+          <h3>{"YOUR IN THE"} {"PERCENTILE OF TREADLITERS"}</h3>
         </Box>
       </Paper>
     </Container>

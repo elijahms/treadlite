@@ -30,7 +30,8 @@ class Api::UsersController < ApplicationController
   end
 
   def index
-    users = User.all
+    user = User.find_by(id: session[:user_id])
+    users = User.all.where.not(id: user.id)
     userrecords = users.map {|u| {username: u.username, score: u.userrecord.score, avatar: u.username[0], id: u.id}}
     render json: userrecords
   end

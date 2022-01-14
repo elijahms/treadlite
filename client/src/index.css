@@ -70,5 +70,23 @@ a:active {
 
 @font-face {
   font-family: 'Raleway';
-  src: local('Rakeway'), url(./Fonts/Raleway-ExtraBold.ttf) format('truetype');
+  src: local('Raleway'), url(./Fonts/Raleway-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'LatoR';
+  src: local('LatoR'), url(./Fonts/Lato-Regular.ttf) format('truetype');
+}
+
+
+
+@media (min-width: 600px){
+.css-t2zrls-MuiContainer-root {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+.css-t2zrls-MuiContainer-root {
+  padding-left: 0px;
+  padding-right: 0px;
 }

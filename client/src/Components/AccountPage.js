@@ -8,6 +8,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Paper } from "@mui/material";
 import Transportation from "./Transportation";
+
 // import Home from "./Home";
 // import Food from "./Food";
 // import Shopping from "./Shopping";
@@ -37,12 +38,12 @@ const AccountPage = ({ user, setUser }) => {
   return (
     <Container maxWidth="md">
       <Paper>
-        <Box sx={{ marginTop: "7%" }}>
+        <Box sx={{ marginTop: "7%", minHeight: '90vh' }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider"}}>
             <Tabs
               value={value}
               onChange={handleChange}
-              aria-label="basic tabs example"
+              aria-label="input example"
             >
               <Tab label="Getting Around" />
               <Tab label="Living" />

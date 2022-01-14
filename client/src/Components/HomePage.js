@@ -8,11 +8,14 @@ const HomePage = () => {
         flexDirection: "column",
         alignItems: "center",
         whiteSpace: "pre-line",
-        height: "80vh",
-        borderRadius: '7px',
-        width: '96vw',
+        height: "90vh",
+        // float: 'left',
+        // borderRadius: '7px',
+        width: '100vw',
         // border: '2px solid red',
         pl: 0,
+        // positionLeft: '0px',
+        // postitionTop: '0px'
       }}
       className="hero-image"    >
       <Box
@@ -33,7 +36,7 @@ const HomePage = () => {
         {"Treadlite"}
       </h1> */}
       <img style={{width: '80vw'}} src= 'logo_transparent.png'/>
-      <h1 style={{ color: "white", textAlign: "center", fontSize: '3vw' }}>
+      <h1 style={{ color: "white", textAlign: "center", fontSize: '3vw'}}>
         {"Make less of an impact."}
       </h1>
     </Box>

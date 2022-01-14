@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :followers, through: :received_follows, source: :follower
     # returns an array of other users who the user has followed
   has_many :followings, through: :given_follows, source: :followed_user
+
 end
 
 ## https://betterprogramming.pub/how-to-create-a-follow-feature-in-rails-by-aliasing-associations-30d63edee284

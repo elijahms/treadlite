@@ -2,19 +2,20 @@ import { useState } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
-
+import Snackbar from "@mui/material/Snackbar";
 
 const Transportation = () => {
-//   const [carYears, setCarYears] = useState({});
-  //   let year = new Date()
-  //   const years = Array.from(new Array(20), (val, index) => index + year);
-//   const [age, setAge] = useState("");
-//   const [value, onChange] = useState(new Date());
-//   const [makeNames, setMakeNames] = useState("none");
-//   const [currentMake, setCurrentMake] = useState("none");
-//   const [currentYear, setCurrentYear] = useState("2022");
   const [MPG, setMPG] = useState(20);
   const [milesDriven, setMilesDriven] = useState(70);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackBar(false);
+  };
 
   const handleSubmit = (e) => {
     
@@ -41,44 +42,18 @@ const Transportation = () => {
         r.json().then((err) => console.log(err));
       }
     });
-    // enqueueSnackbar('Successfully Updated Details');
+    setOpenSnackBar(true)
   }
 
-  //   useEffect(() => {
-  //     fetch("https://www.fueleconomy.gov/ws/rest/vehicle/menu/year")
-  //       .then((response) => response.text())
-  //       // .then(str => new window.DOMParser().carparseFromString(str, "text/xml"))
-  //       .then((xml) => new XMLParser().parseFromString(xml))
-  //       .then((data) => {
-  //         console.log(data.children.map((c) => c.children.map((v) => {
-  //             return v.value
-  //         })));
-  //         setCarYears(data.children.map((c) => c.children.map((v) => v.value)));
-  //       });
-  //   }, []);
-
-//   useEffect(() => {
-//     fetch(
-//       "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?ManufacturerType=Complete&format=json"
-//     )
-//       .then((r) => r.json())
-//       .then((data) => {
-//         setMakeNames(data.Results.map((name) => name.Mfr_Name));
-//       });
-//   }, []);
 
   const marks = [
-    {
-      value: 20,
-      label: "20 MPG",
-    },
     {
       value: 35,
       label: "35MPG",
     },
     {
-      value: 100,
-      label: "100 MPGe",
+      value: 80,
+      label: "80 MPG",
     },
   ];
 
@@ -113,33 +88,6 @@ const Transportation = () => {
         max={700}
         onChange={(e) => setMilesDriven(e.target.value)}
       />
-      {/* <InputLabel id="year-label">Year</InputLabel>
-        <NativeSelect
-          id="year-select"
-          value='1-25'
-          label="Year"
-          onChange={(e) => setCurrentYear(e.target.value)}
-        >
-          {for (let i = 2022; i >= 1985; i = i - 1) {
-            return (
-              <option value={i}>{i}</option>
-              )
-          }}
-          {yearsFunc()}
-        </NativeSelect> */}
-
-      {/* <InputLabel id="car-make-label">Make</InputLabel>
-
-        <NativeSelect
-          id="car-make"
-          value={currentMake}
-          label="Make"
-          onChange={(e) => setCurrentMake(e.target.value)}
-        >
-          {[...makeNames].map((make) => {
-            return <option value={make}>{make}</option>;
-          })}
-        </NativeSelect> */}
       <Button 
       type="submit"
       variant="contained"
@@ -148,6 +96,12 @@ const Transportation = () => {
       >
         Submit
       </Button>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Score Updated"
+      />
     </Box>
   );
 };
