@@ -27,8 +27,8 @@ const ResponsiveAppBar = ({ user, setUser }) => {
       console.log(data)
     );
     setUser(null);
-    handleCloseUserMenu()
-    history.push("/")
+    handleCloseUserMenu();
+    history.push("/");
   };
 
   const handleOpenNavMenu = (event) => {
@@ -114,7 +114,12 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               <NavLink key={page} exact to={`/${page}`}>
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2.5, color: "white", display: "block", fontWeight: 'bold' }}
+                  sx={{
+                    my: 2.5,
+                    color: "white",
+                    display: "block",
+                    fontWeight: "bold",
+                  }}
                 >
                   {page}
                 </Button>
@@ -124,9 +129,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar
-                sx={{color: '#e040fb'}}
-                >
+                <Avatar sx={{ color: "#e040fb" }}>
                   {user ? user.first_name[0] + user.last_name[0] : null}
                 </Avatar>
               </IconButton>
@@ -156,13 +159,18 @@ const ResponsiveAppBar = ({ user, setUser }) => {
                   </Typography>
                 </MenuItem>
               ))}
-                {user && <MenuItem key='Logout' onClick={handleCloseNavMenu, handleLogout}>
+              {user && (
+                <MenuItem
+                  key="Logout"
+                  onClick={(handleCloseNavMenu, handleLogout)}
+                >
                   <Typography textAlign="center">
-                    <NavLink className="navlinks" exact to='/logout'>
+                    <NavLink className="navlinks" exact to="/logout">
                       Logout
                     </NavLink>
                   </Typography>
-                </MenuItem>}
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>

@@ -51,7 +51,7 @@ const SignUpPage = ({ setUser }) => {
         r.json().then((user) => {
           setUser(user);
           console.log(user);
-          history.push("/account")
+          history.push("/account");
         });
       } else {
         r.json().then((err) => console.log(err));

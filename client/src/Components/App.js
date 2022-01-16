@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import SignUpPage from "./SignupPage";
 import Container from "@mui/material/Container";
 import DashboardPage from "./DashboardPage";
-import RalewayReg from '../Fonts/Raleway-Medium.ttf';
+import RalewayReg from "../Fonts/Raleway-Medium.ttf";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -63,7 +63,7 @@ const App = () => {
       },
     },
     typography: {
-      fontFamily: 'Raleway, Arial',
+      fontFamily: "Raleway, Arial",
     },
     components: {
       MuiCssBaseline: {

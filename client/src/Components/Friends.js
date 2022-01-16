@@ -14,36 +14,41 @@ import SearchIcon from "@mui/icons-material/Search";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
-//import { FixedSizeList as List } from "react-window";
+import Snackbar from "@mui/material/Snackbar";
 
 const Friends = ({ user }) => {
   const [friendList, setFriendList] = useState([
     { username: "The Greenest", score: 100, avatar: "T", id: 0 },
   ]);
-  const [search, setSearch] = useState("");
-  const [followFriend, setFollowFriend] = useState(null);
+  const [searchList, setSearchList] = useState([
+    { username: "The Greenest", score: 100, avatar: "T", id: 0 },
+  ]);
   const [chipClick, setChipClick] = useState("All");
   const [followingList, setFollowingList] = useState([""]);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackBar(false);
+  };
 
   function handleSearch(e) {
     e.preventDefault();
-    // console.log(search);
-    let searchedList = [...friendList].filter((f) =>
-      f.username.startsWith(e.target.value)
+    let searchedList = [...friendList].filter(
+      (f) =>
+        f.username.toLowerCase().startsWith(e.target.value) ||
+        f.username.startsWith(e.target.value)
     );
-    setFriendList(searchedList);
-    // setSearch(null)
+    setSearchList(searchedList);
   }
 
   function followFunc(friend, id) {
-    const form = {
-      username: friend,
-    };
-    console.log(form);
+    const form = { username: friend };
     fetch("/api/newfollow", {
       method: "POST",
       headers: {
@@ -53,20 +58,15 @@ const Friends = ({ user }) => {
     }).then((r) => {
       if (r.ok) {
         r.json().then((friendship) => {
-          console.log(friendship);
-          console.log(followingList);
-          setFollowingList([...followingList, [id]]);
+          setOpenSnackBar(true);
+          setFollowingList([...followingList, id]);
         });
       } else {
         r.json().then((err) => {
-          console.log(err);
-          console.log(id);
-          let removeFollow = [...followingList].filter(
-            (follow) => follow[0] === id
+          setOpenSnackBar(true);
+          setFollowingList(() =>
+            [...followingList].filter((follow) => follow !== id)
           );
-          console.log(followingList);
-          console.log(removeFollow);
-          //setFollowingList(removeFollow)
         });
       }
     });
@@ -76,8 +76,8 @@ const Friends = ({ user }) => {
     fetch("api/users").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
-          console.log(data);
           setFriendList(data);
+          setSearchList(data);
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -86,8 +86,7 @@ const Friends = ({ user }) => {
     fetch("api/following").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
-          console.log(data);
-          setFollowingList(data);
+          setFollowingList(data.flat());
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -116,17 +115,12 @@ const Friends = ({ user }) => {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            placeholder="Follow other Treadlite-rs"
+            placeholder="Search for Treadliters"
             inputProps={{ "aria-label": "search treadlite" }}
             onChange={(e) => handleSearch(e)}
           />
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-          <IconButton
-            type="submit"
-            sx={{ p: "10px" }}
-            aria-label="search"
-            // onClick={handleSearch}
-          >
+          <IconButton sx={{ p: "10px" }} aria-label="search">
             <SearchIcon />
           </IconButton>
         </Paper>
@@ -155,12 +149,6 @@ const Friends = ({ user }) => {
           />
           <Chip
             clickable
-            label="Followers"
-            color={chipClick === "Followers" ? "primary" : "default"}
-            onClick={() => setChipClick("Followers")}
-          />
-          <Chip
-            clickable
             label="Top Users"
             color={chipClick === "Top" ? "primary" : "default"}
             onClick={() => setChipClick("Top")}
@@ -178,16 +166,14 @@ const Friends = ({ user }) => {
         }}
       >
         <List>
-          {[...friendList]
+          {[...searchList]
             .filter((f) => {
               if (chipClick === "All") {
                 return true;
-              } else if (chipClick === "Followers") {
-                return false;
               } else if (chipClick === "Top") {
                 return f.score >= 90;
               } else {
-                return followingList.toString().includes(f.id);
+                return followingList.includes(f.id);
               }
             })
             .map((friend, index) => {
@@ -237,7 +223,7 @@ const Friends = ({ user }) => {
                       <IconButton
                         onClick={() => followFunc(friend.username, friend.id)}
                       >
-                        {[...followingList].toString().includes(friend.id) ? (
+                        {[...followingList].includes(friend.id) ? (
                           <ClearRoundedIcon color="error" />
                         ) : (
                           <AddRoundedIcon color="primary" />
@@ -245,7 +231,7 @@ const Friends = ({ user }) => {
                       </IconButton>
 
                       <ListItemAvatar>
-                        <Avatar>{friend.avatar}</Avatar>
+                        <Avatar sx={{ color: "#e040fb" }}>{friend.avatar}</Avatar>
                       </ListItemAvatar>
                       <ListItemText edge="end" primary={friend.username} />
                     </ListItem>
@@ -255,6 +241,12 @@ const Friends = ({ user }) => {
             })}
         </List>
       </Box>
+      <Snackbar
+        open={openSnackBar}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Success"
+      />
     </Container>
   );
 };

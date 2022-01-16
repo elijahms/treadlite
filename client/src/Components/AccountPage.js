@@ -31,15 +31,15 @@ const AccountPage = ({ user, setUser }) => {
     if (value === 0) {
       return <Transportation />;
     } else {
-      return <h1>Sorry...Working on this</h1>
+      return <h1>Sorry...Working on this</h1>;
     }
   }
 
   return (
     <Container maxWidth="md">
       <Paper>
-        <Box sx={{ marginTop: "7%", minHeight: '90vh' }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider"}}>
+        <Box sx={{ marginTop: "7%", minHeight: "90vh" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
               onChange={handleChange}

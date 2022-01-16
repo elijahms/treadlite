@@ -18,15 +18,13 @@ const Transportation = () => {
   };
 
   const handleSubmit = (e) => {
-    
     e.preventDefault();
     const form = {
       miles_per_gallon: MPG,
       miles_per_week: milesDriven,
     };
     console.log(form);
-    
-    
+
     fetch("/api/userrecords", {
       method: "POST",
       headers: {
@@ -42,9 +40,8 @@ const Transportation = () => {
         r.json().then((err) => console.log(err));
       }
     });
-    setOpenSnackBar(true)
-  }
-
+    setOpenSnackBar(true);
+  };
 
   const marks = [
     {
@@ -88,11 +85,11 @@ const Transportation = () => {
         max={700}
         onChange={(e) => setMilesDriven(e.target.value)}
       />
-      <Button 
-      type="submit"
-      variant="contained"
-      sx={{ mt: 3, mb: 2 }}
-      onClick={handleSubmit}
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        onClick={handleSubmit}
       >
         Submit
       </Button>

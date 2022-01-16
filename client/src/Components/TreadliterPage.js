@@ -32,7 +32,6 @@ const TreadliterPage = ({ user }) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnackBar(false);
   };
 

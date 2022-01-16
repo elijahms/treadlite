@@ -45,7 +45,11 @@ const DashboardPage = () => {
               mt: 0.6,
             }}
           >
-            <CircularProgress size='300px'variant="determinate" value={user.score} />
+            <CircularProgress
+              size="300px"
+              variant="determinate"
+              value={user.score}
+            />
             <Box
               sx={{
                 top: 1,
@@ -68,7 +72,9 @@ const DashboardPage = () => {
               </Typography>
             </Box>
           </Box>
-          <h3>{"YOUR IN THE"} {"PERCENTILE OF TREADLITERS"}</h3>
+          <h3>
+            {"YOUR IN THE"} {"PERCENTILE OF TREADLITERS"}
+          </h3>
         </Box>
       </Paper>
     </Container>
