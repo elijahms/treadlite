@@ -9,6 +9,11 @@ import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
 
 const TreadliterPage = ({ user }) => {
+  const [databaseScore, setDatabaseScore] = useState(0);
+  const [busTaken, setBusTaken] = useState(0);
+  const [bikeTaken, setBikeTaken] = useState(0);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
   useEffect(() => {
     fetch(`/api/dashboard`).then((r) => {
       if (r.ok) {
@@ -22,12 +27,6 @@ const TreadliterPage = ({ user }) => {
     });
   }, []);
 
-  const [openSnackBar, setOpenSnackBar] = useState(false);
-
-  // const handleClick = () => {
-  //   setOpen(true);
-  // };
-
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -35,9 +34,9 @@ const TreadliterPage = ({ user }) => {
     setOpenSnackBar(false);
   };
 
-  const [databaseScore, setDatabaseScore] = useState(0);
-  const [busTaken, setBusTaken] = useState(0);
-  const [bikeTaken, setBikeTaken] = useState(0);
+  const loweredScore = () => {
+    return busTaken + bikeTaken * 2;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,18 +53,16 @@ const TreadliterPage = ({ user }) => {
       body: JSON.stringify(form),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((userdatum) => {
-          console.log(userdatum);
+        r.json().then((userrecord) => {
+          console.log(userrecord);
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          console.log(err);
+        });
       }
     });
     setOpenSnackBar(true);
-  };
-
-  const loweredScore = () => {
-    return busTaken + bikeTaken * 2;
   };
 
   return (
@@ -73,20 +70,15 @@ const TreadliterPage = ({ user }) => {
       <Paper>
         <Box
           sx={{
-            // marginTop: 8,
             display: "flex",
             flexDirection: "column",
-            // alignItems: "center",
-            // height: "50vh",
             m: 3,
           }}
         >
           <Typography
             sx={{
               mt: 3,
-              // border: "2px solid red",
               textAlign: "center",
-              // fontFamily: "Raleway",
             }}
             variant="h4"
           >
@@ -97,7 +89,6 @@ const TreadliterPage = ({ user }) => {
             container
             spacing={0}
             sx={{
-              // border: "2px solid blue",
               mt: 2,
             }}
           >
@@ -140,19 +131,11 @@ const TreadliterPage = ({ user }) => {
             container
             spacing={0}
             sx={{
-              // border: "2px solid blue",
               mt: 2,
             }}
           >
             <Grid item xs={8} sm={10} md={10} lg={10}>
-              <Box
-                sx={{
-                  // border: "2px solid blue",
-                  display: "flex",
-                  // justifyContent: 'right'
-                  // fontSize: '1vw'
-                }}
-              >
+              <Box sx={{ display: "flex" }}>
                 <h3>Upped your score by: {loweredScore()} </h3>
               </Box>
             </Grid>

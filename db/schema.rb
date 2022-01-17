@@ -22,15 +22,6 @@ ActiveRecord::Schema.define(version: 2022_01_12_231538) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "userdata", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "miles_per_gallon"
-    t.integer "miles_per_week"
-    t.integer "score"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "userrecords", force: :cascade do |t|
     t.integer "user_id"
     t.integer "miles_per_gallon"

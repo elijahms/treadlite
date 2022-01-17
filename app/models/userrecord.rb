@@ -8,14 +8,12 @@ class Userrecord < ApplicationRecord
         self.save
     end
 
-    def self.order_by_score(user)
-        curr_user = Userrecord.find_by(user_id: user.id )
-        # binding.pry
-        orderedrecords = self.all.order(:score)
-        # binding.pry
-        index = orderedrecords.pluck(:user_id).index(curr_user.id)
-        index
-    end
+    # def self.order_by_score(user)
+    #     curr_user = Userrecord.find_by(user_id: user.id )
+    #     orderedrecords = self.all.order(:score)
+    #     index = orderedrecords.pluck(:user_id).index(curr_user.id)
+    #     index
+    # end
 end
 
 

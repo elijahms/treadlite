@@ -8,10 +8,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Paper } from "@mui/material";
 import Transportation from "./Transportation";
-
-// import Home from "./Home";
-// import Food from "./Food";
-// import Shopping from "./Shopping";
+//import Home from "./Home";
+import Food from "./Food";
+import Shopping from "./Shopping";
 
 const AccountPage = ({ user, setUser }) => {
   const handleLogout = (event) => {
@@ -30,18 +29,23 @@ const AccountPage = ({ user, setUser }) => {
   function handleTabsView() {
     if (value === 0) {
       return <Transportation />;
-    } else {
+    } else if (value === 1) {
       return <h1>Sorry...Working on this</h1>;
+    } else if (value === 2) {
+      return <Shopping />;
+    } else {
+      return <Food />;
     }
   }
 
   return (
     <Container maxWidth="md">
       <Paper>
-        <Box sx={{ marginTop: "7%", minHeight: "90vh" }}>
+        <Box sx={{ marginTop: "7%", minHeight: "70vh" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={value}
+              scrollButtons ='auto'
               onChange={handleChange}
               aria-label="input example"
             >

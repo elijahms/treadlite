@@ -1,10 +1,11 @@
 class Api::UsersController < ApplicationController
-  skip_before_action :authorize, only: %i[create show index]
+  skip_before_action :authorize, only: %i[create show]
 
   def create
     user = User.create!(user_params)
     if user.valid?
       session[:user_id] = user.id
+      Userrecord.create!(user_id: user.id, score: 0)
       render json: user, status: :created
     end
   end

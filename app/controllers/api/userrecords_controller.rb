@@ -1,29 +1,11 @@
 class Api::UserrecordsController < ApplicationController
     
     def create
-        user = User.find_by(id: session[:user_id])
-        if Userrecord.find_by(user_id: user)
-            userrecord = Userrecord.find_by(user_id: user)
-            userrecord.update!(userrecord_params)
-            userrecord.calc_score
-            # weekly_co_em = params[:miles_per_week] / params[:miles_per_gallon]
-            ## zi = (xi – min(x)) / (max(x) – min(x)) * 100
-            # score = 100 - ((weekly_co_em - 0.35) / (48 - 0.35) * 100)
-            # userrecord.update(score: score)
-            # user
-            render json: userrecord, status: :created
-        else
-            userrecord = Userrecord.create!(userrecord_params)
-            userrecord.update!(user_id: user.id)
-            userrecord.calc_score
-            # weekly_co_em = params[:miles_per_week] / params[:miles_per_gallon]
-            # ## zi = (xi – min(x)) / (max(x) – min(x)) * 100
-            # score = 100 - ((weekly_co_em - 0.35) / (48 - 0.35) * 100)
-            # userrecord.update(score: score)
-            # user
-            render json: userrecord, status: :created
-        end
-
+      user = User.find_by(id: session[:user_id])
+      userrecord = user.userrecord
+      userrecord.update!(userrecord_params)
+      userrecord.calc_score
+      render json: userrecord, status: :accepted
     end
 
     def show

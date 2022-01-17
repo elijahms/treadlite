@@ -43,10 +43,10 @@ const Transportation = () => {
     setOpenSnackBar(true);
   };
 
-  const marks = [
+  const mpgMarks = [
     {
-      value: 35,
-      label: "35MPG",
+      value: 24.2,
+      label: "US Average",
     },
     {
       value: 80,
@@ -54,11 +54,17 @@ const Transportation = () => {
     },
   ];
 
+  const mpwMarks = [
+    {
+      value: 275,
+      label: "US Average",
+    },
+  ];
+
   return (
     <Box
       sx={{
-        // border: "2px solid black",
-        height: "60vh",
+        // minHeight: "50vh",
         paddingLeft: "5%",
         paddingRight: "5%",
       }}
@@ -70,19 +76,21 @@ const Transportation = () => {
         defaultValue={20}
         step={1}
         min={15}
+        max={100}
         valueLabelDisplay="auto"
-        marks={marks}
+        marks={mpgMarks}
         onChange={(e) => setMPG(e.target.value)}
       />
       <h3>How Many Miles Do You Drive Per Week</h3>
       <Slider
         aria-label="Custom marks"
         size="medium"
-        defaultValue={70}
+        defaultValue={275}
         step={1}
         valueLabelDisplay="auto"
         min={0}
         max={700}
+        marks={mpwMarks}
         onChange={(e) => setMilesDriven(e.target.value)}
       />
       <Button
