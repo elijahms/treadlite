@@ -48,8 +48,8 @@ const Food = () => {
     "Vegan",
     "Vegetarian",
     "Flexitarian",
-    "Meat-Eater (1-2) per week",
-    "Meat-Eater (3+) per week",
+    "Meat (1-2) /week",
+    "Meat (3+) /week",
   ];
   const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
 

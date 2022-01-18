@@ -38,7 +38,7 @@ const App = () => {
       type: "light",
       mode: prefersDarkMode ? "dark" : "light",
       primary: {
-        main: "rgba(9,138,90,0.79)",
+        main: "rgba(9,138,90)",
       },
       secondary: {
         main: "#e040fb",

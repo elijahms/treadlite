@@ -10,7 +10,7 @@ import ButtonGroup from "@mui/material/ButtonGroup";
 
 const Living = ({ setTabValue }) => {
   const [livingHabit, setLivingHabit] = useState({
-    household_size: 1,
+    household_size: 2,
     zip_code: "00001",
     elec_cost: 0,
     water_cost: 0,
@@ -100,7 +100,7 @@ const Living = ({ setTabValue }) => {
       </Stack>
 
       <Typography id="non-linear-slider" gutterBottom>
-        WHat do you pay for every month?:
+        What do you pay for every month?
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ButtonGroup fullWidth>

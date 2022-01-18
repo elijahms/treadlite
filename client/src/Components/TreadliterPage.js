@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 const TreadliterPage = ({ user }) => {
   // const [databaseScore, setDatabaseScore] = useState(0);
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  let today = new Date()
+  let today = new Date();
 
   const [tlHabit, setTlHabit] = useState({
     less_transport: 2,
@@ -41,24 +41,32 @@ const TreadliterPage = ({ user }) => {
   };
 
   const trend = () => {
-    let trendnum = tlHabit.less_meat + tlHabit.less_transport + tlHabit.turned_off_lights + tlHabit.bought_less
+    let trendnum =
+      tlHabit.less_meat +
+      tlHabit.less_transport +
+      tlHabit.turned_off_lights +
+      tlHabit.bought_less;
     if (trendnum > 8) {
-      return "Up"
+      return "Going Up";
     } else if (trendnum === 8) {
-      return 'Same'
+      return "The Same";
     } else {
-      return 'Down'
+      return "Going Down";
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(tlHabit)
+    console.log(tlHabit);
     const form = {
-      trend_num: tlHabit.less_meat + tlHabit.less_transport + tlHabit.turned_off_lights + tlHabit.bought_less,
+      trend_num:
+        tlHabit.less_meat +
+        tlHabit.less_transport +
+        tlHabit.turned_off_lights +
+        tlHabit.bought_less,
       trend_update: today,
     };
-    console.log(form)
+    console.log(form);
     fetch("/api/userrecords", {
       method: "POST",
       headers: {
@@ -93,7 +101,7 @@ const TreadliterPage = ({ user }) => {
           p: 2,
         }}
       >
-        <Typography sx={{ textAlign: "center", mb: 6, fontFamily: 'LatoR'}} variant="h4">
+        <Typography sx={{ textAlign: "center", mb: 6 }} variant="h4">
           Move Your Trends – Treadliter!
         </Typography>
 
@@ -196,7 +204,6 @@ const TreadliterPage = ({ user }) => {
             step={1}
             min={0}
             max={4}
-            // valueLabelDisplay="auto"
             onChange={(e) =>
               setTlHabit({
                 ...tlHabit,
@@ -205,24 +212,19 @@ const TreadliterPage = ({ user }) => {
             }
           />
         </Stack>
+        <Stack spacing={10} direction="row" sx={{ mb: 3 }} alignItems="center">
         <Typography id="non-linear-slider" gutterBottom>
-          It looks like your trends are moving:{" "}
-          <span
-            style={{
-              color: 'red',
-            }}
-          >
-            {trend()}
-          </span>
+          It looks like your trends are:{" "}
+          <span style={{ color: "#a2d4c4" }}>{trend()}</span>
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             height: "100%",
             alignItems: "center",
             justifyContent: "right",
           }}
-        >
+        > */}
           <Button
             variant="contained"
             onClick={handleSubmit}
@@ -230,8 +232,9 @@ const TreadliterPage = ({ user }) => {
           >
             Submit
           </Button>
+          </Stack>
         </Box>
-      </Box>
+      {/* </Box> */}
       {/* </Paper> */}
       <Snackbar
         open={openSnackBar}
