@@ -5,66 +5,56 @@ import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import ComputerIcon from "@mui/icons-material/Computer";
-import StoreMallDirectoryIcon from "@mui/icons-material/StoreMallDirectory";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
-import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import TextField from "@mui/material/TextField";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
-const Living = () => {
-  const [shoppingHabit, setShoppingHabit] = useState(2);
+const Living = ({ setTabValue }) => {
+  const [livingHabit, setLivingHabit] = useState({
+    household_size: 1,
+    zip_code: "00001",
+    elec_cost: 0,
+    water_cost: 0,
+    gas_cost: 0,
+    oil_cost: 0,
+  });
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [elec, setElec] = useState(false);
+  const [water, setWater] = useState(false);
+  const [gas, setGas] = useState(false);
+  const [oil, setOil] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnackBar(false);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = {
-      shopping_habits: shoppingHabit,
-    };
+    console.log(livingHabit);
+    //const form = [...livingHabit]
 
-    // fetch("/api/userrecords", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     r.json().then((userrecord) => {
-    //       console.log(userrecord);
-    //     });
-    //   } else {
-    //     r.json().then((err) => console.log(err));
-    //   }
-    // });
-    setOpenSnackBar(true);
+    fetch("/api/userrecords", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(livingHabit),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          console.log(userrecord);
+        });
+      } else {
+        r.json().then((err) => console.log(err));
+      }
+    });
+    //setOpenSnackBar(true);
+    setTabValue(2);
   };
 
-  const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
-  const colorarr = ["red", "green", "blue", "orange", "pink"];
-
-  const marks = [
-    {
-      value: 1,
-      label: "Vegetarian",
-    },
-    {
-      value: 2,
-      label: "Flexitarian",
-    },
-    {
-      value: 3,
-      label: "Meat-Eater (1-2) per week",
-    },
-  ];
+  const livingarr = ["One", "Two", "Three", "Four", "Five"];
 
   return (
     <Box
@@ -72,18 +62,16 @@ const Living = () => {
         height: "auto",
         paddingLeft: "5%",
         paddingRight: "5%",
-        minHeight: "65vh",
         mt: 3,
       }}
     >
       <Typography id="non-linear-slider" gutterBottom>
-        I shop for clothing:{" "}
-        <span style={{ color: `${colorarr[shoppingHabit]}` }}>
-          {shoppingarr[shoppingHabit]}
+        Household Size:{" "}
+        <span style={{ color: "#86adae" }}>
+          {livingarr[livingHabit.household_size]}
         </span>
       </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <UnfoldLessIcon />
+      <Stack spacing={4} direction="row" sx={{ mb: 3 }} alignItems="center">
         <Slider
           aria-label="Custom marks"
           size="medium"
@@ -91,65 +79,106 @@ const Living = () => {
           step={1}
           min={0}
           max={4}
-          valueLabelDisplay="auto"
-          // marks={marks}
-          onChange={(e) => setShoppingHabit(e.target.value)}
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              household_size: e.target.value,
+            })
+          }
         />
-        <ShoppingBagIcon />
+        <TextField
+          id="outlined-basic"
+          label="Zipcode"
+          variant="outlined"
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              zip_code: e.target.value,
+            })
+          }
+        />
       </Stack>
+
       <Typography id="non-linear-slider" gutterBottom>
-        I buy in-store:
+        WHat do you pay for every month?:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <ComputerIcon />
-        <Slider
-          aria-label="Custom marks"
-          size="medium"
-          defaultValue={2}
-          step={1}
-          min={0}
-          max={4}
-          valueLabelDisplay="auto"
-          // marks={marks}
-          // onChange={(e) => setFoodHabit(e.target.value)}
-        />
-        <StoreMallDirectoryIcon />
+        <ButtonGroup fullWidth>
+          <Button
+            onClick={() => setElec(() => !elec)}
+            variant={elec ? "contained" : "outlined"}
+          >
+            Elec
+          </Button>
+          <Button
+            onClick={() => setWater(() => !water)}
+            variant={water ? "contained" : "outlined"}
+          >
+            Water
+          </Button>
+          <Button
+            onClick={() => setGas(() => !gas)}
+            variant={gas ? "contained" : "outlined"}
+          >
+            Gas
+          </Button>
+          <Button
+            onClick={() => setOil(() => !oil)}
+            variant={oil ? "contained" : "outlined"}
+          >
+            Oil
+          </Button>
+        </ButtonGroup>
       </Stack>
-      <Typography id="non-linear-slider" gutterBottom>
-        I return:
-      </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <SentimentSatisfiedAltIcon />
-        <Slider
-          aria-label="Custom marks"
-          size="medium"
-          defaultValue={2}
-          step={1}
-          min={0}
-          max={4}
-          valueLabelDisplay="auto"
-          // marks={marks}
-          // onChange={(e) => setFoodHabit(e.target.value)}
+        <TextField
+          disabled={elec ? false : true}
+          id="outlined-basic"
+          label="Elec"
+          variant="outlined"
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              elec_cost: parseInt(e.target.value),
+            })
+          }
         />
-        <ArrowBackIosIcon />
-      </Stack>
-      <Typography id="non-linear-slider" gutterBottom>
-        I buy new:
-      </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        {/* <SpaIcon /> */}
-        <Slider
-          aria-label="Custom marks"
-          size="medium"
-          defaultValue={2}
-          step={1}
-          min={0}
-          max={4}
-          valueLabelDisplay="auto"
-          // marks={marks}
-          // onChange={(e) => setFoodHabit(e.target.value)}
+        <TextField
+          disabled={water ? false : true}
+          id="outlined-basic"
+          label="Water"
+          variant="outlined"
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              water_cost: parseInt(e.target.value),
+            })
+          }
         />
-        {/* <FastfoodIcon /> */}
+        <TextField
+          disabled={gas ? false : true}
+          id="outlined-basic"
+          label="Gas"
+          variant="outlined"
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              gas_cost: parseInt(e.target.value),
+            })
+          }
+        />
+        <TextField
+          disabled={oil ? false : true}
+          id="outlined-basic"
+          label="Oil"
+          variant="outlined"
+          onChange={(e) =>
+            setLivingHabit({
+              ...livingHabit,
+              oil_cost: parseInt(e.target.value),
+            })
+          }
+        />
       </Stack>
       <Button
         type="submit"
@@ -157,7 +186,7 @@ const Living = () => {
         sx={{ mt: 3, mb: 2 }}
         onClick={handleSubmit}
       >
-        Submit
+        Next (2/4)
       </Button>
       <Snackbar
         open={openSnackBar}
@@ -170,7 +199,6 @@ const Living = () => {
 };
 
 export default Living;
-
 
 //https://api.eia.gov/series/?api_key=8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8&series_id=ELEC.PRICE.NY-RES.A
 

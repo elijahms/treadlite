@@ -44,7 +44,7 @@ const App = () => {
         main: "#e040fb",
       },
       background: {
-        default: "#756d6c",
+        default: "#f7f5ee",
       },
     },
     typography: {
@@ -106,7 +106,6 @@ const App = () => {
             <HomePage />
           </Route>
         </Switch>
-      {/* </Container> */}
     </ThemeProvider>
   );
 };

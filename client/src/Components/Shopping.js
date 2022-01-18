@@ -17,10 +17,13 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
+import FiberNewIcon from "@mui/icons-material/FiberNew";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
-const Shopping = () => {
+const Shopping = ({setTabValue}) => {
   const [shoppingHabit, setShoppingHabit] = useState({
     total_shop_freq: 2,
+    shop_time_freq: 52,
     online_shop_freq: 1,
     return_shop_freq: 3,
     new_shop_freq: 2,
@@ -38,24 +41,25 @@ const Shopping = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(shoppingHabit);
-    const form = [...shoppingHabit];
+    //const form = [...shoppingHabit];
 
-    // fetch("/api/userrecords", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     r.json().then((userrecord) => {
-    //       console.log(userrecord);
-    //     });
-    //   } else {
-    //     r.json().then((err) => console.log(err));
-    //   }
-    // });
-    setOpenSnackBar(true);
+    fetch("/api/userrecords", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(shoppingHabit),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          console.log(userrecord);
+        });
+      } else {
+        r.json().then((err) => console.log(err));
+      }
+    });
+    //setOpenSnackBar(true);
+    setTabValue(3)
   };
 
   const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
@@ -68,7 +72,7 @@ const Shopping = () => {
         height: "auto",
         pl: 2,
         pr: 2,
-        minHeight: "65vh",
+        // minHeight: "65vh",
         mt: 3,
       }}
     >
@@ -98,10 +102,40 @@ const Shopping = () => {
         <ShoppingBagIcon />
       </Stack>
       <FormControl sx={{ ml: 4.5 }} component="fieldset">
-        <RadioGroup row aria-label="freq" name="row-radio-buttons-group">
-          <FormControlLabel value="week" control={<Radio />} label="Week" />
-          <FormControlLabel value="month" control={<Radio />} label="Month" />
-          <FormControlLabel value="year" control={<Radio />} label="Year" />
+        <RadioGroup row aria-label="freq" defaultValue='week' name="row-radio-buttons-group">
+          <FormControlLabel
+            onClick={(e) =>
+              setShoppingHabit({
+                ...shoppingHabit,
+                shop_time_freq: 52,
+              })
+            }
+            value="week"
+            control={<Radio />}
+            label="Week"
+          />
+          <FormControlLabel
+            onClick={(e) =>
+              setShoppingHabit({
+                ...shoppingHabit,
+                shop_time_freq: 12,
+              })
+            }
+            value="month"
+            control={<Radio />}
+            label="Month"
+          />
+          <FormControlLabel
+            onClick={(e) =>
+              setShoppingHabit({
+                ...shoppingHabit,
+                shop_time_freq: 1,
+              })
+            }
+            value="year"
+            control={<Radio />}
+            label="Year"
+          />
         </RadioGroup>
       </FormControl>
       <Divider sx={{ mb: 4, ml: 4 }} />
@@ -120,7 +154,7 @@ const Shopping = () => {
           step={1}
           min={0}
           max={4}
-          valueLabelDisplay="auto"
+          // valueLabelDisplay="auto"
           onChange={(e) =>
             setShoppingHabit({
               ...shoppingHabit,
@@ -145,7 +179,7 @@ const Shopping = () => {
           step={1}
           min={0}
           max={4}
-          valueLabelDisplay="auto"
+          // valueLabelDisplay="auto"
           onChange={(e) =>
             setShoppingHabit({
               ...shoppingHabit,
@@ -162,11 +196,7 @@ const Shopping = () => {
         </span>
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <Avatar
-          sx={{ width: 28, height: 28 }}
-          alt="recycle"
-          src="recycle.png"
-        />
+        <ShoppingBasketRoundedIcon />
         <Slider
           aria-label="Custom marks"
           size="medium"
@@ -174,7 +204,7 @@ const Shopping = () => {
           step={1}
           min={0}
           max={4}
-          valueLabelDisplay="auto"
+          // valueLabelDisplay="auto"
           onChange={(e) =>
             setShoppingHabit({
               ...shoppingHabit,
@@ -182,7 +212,7 @@ const Shopping = () => {
             })
           }
         />
-        <Avatar sx={{ width: 28, height: 28 }} alt="newitem" src="new.png" />
+        <FiberNewIcon />
       </Stack>
       <Button
         type="submit"
@@ -190,7 +220,7 @@ const Shopping = () => {
         sx={{ mt: 3, mb: 2 }}
         onClick={handleSubmit}
       >
-        Submit
+         Next (3/4)
       </Button>
       <Snackbar
         open={openSnackBar}

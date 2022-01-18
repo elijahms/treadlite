@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_12_231538) do
+ActiveRecord::Schema.define(version: 2022_01_18_202106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,23 @@ ActiveRecord::Schema.define(version: 2022_01_12_231538) do
     t.integer "score"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "food_habit"
+    t.integer "household_size"
+    t.string "zip_code"
+    t.float "elec_cost"
+    t.float "water_cost"
+    t.float "gas_cost"
+    t.float "oil_cost"
+    t.integer "total_shop_freq"
+    t.integer "shop_time_freq"
+    t.integer "online_shop_freq"
+    t.integer "return_shop_freq"
+    t.integer "new_shop_freq"
+    t.boolean "own_ev"
+    t.boolean "own_car"
+    t.integer "public_transport"
+    t.integer "trend_num"
+    t.datetime "trend_update", precision: 6
   end
 
   create_table "users", force: :cascade do |t|

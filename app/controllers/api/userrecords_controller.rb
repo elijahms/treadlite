@@ -29,7 +29,24 @@ class Api::UserrecordsController < ApplicationController
     params.permit(
       :miles_per_week,
       :miles_per_gallon,
-      :score
+      :score,
+      :household_size,
+      :zip_code,
+      :elec_cost,
+      :water_cost,
+      :gas_cost,
+      :oil_cost,
+      :total_shop_freq,
+      :shop_time_freq,
+      :online_shop_freq,
+      :return_shop_freq,
+      :new_shop_freq,
+      :food_habit,
+      :own_ev,
+      :own_car,
+      :public_transport,
+      :trend_num,
+      :trend_update
     )
   end 
 end

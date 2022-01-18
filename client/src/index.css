@@ -23,22 +23,27 @@ a:active {
   text-decoration: none;
   /* color: black; */
 }
-/* 
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./Images/footprint.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-} */
 
-.hero-image { 
-  background: url("./Images/footprint.jpg") no-repeat center center fixed; 
+.hero-image {
+  background: url("./Images/footprint.jpg") no-repeat center center fixed;
+  /* filter: brightness(80%); */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+@media only screen and (max-width: 600px) {
+  h1.homescreen-tagline {
+    margin-top: 20%;
+    font-size: 60pt;
+  }
+}
+
+.homescreen-tagline {
+  color: #f7f5ee;
+  text-align: center;
+  font-size: 10vw;
 }
 
 .logo {
@@ -47,8 +52,6 @@ a:active {
   background-size: cover;
   position: relative;
   max-width: 150px;
-  /* width: 500px; */
-  /* margin-left: 12%; */
 }
 
 .navlinks {
@@ -63,22 +66,4 @@ a:active {
 @font-face {
   font-family: "LatoR";
   src: local("LatoR"), url(./Fonts/Lato-Regular.ttf) format("truetype");
-}
-
-#bg {
-  position: fixed; 
-  top: -50%; 
-  left: -50%; 
-  width: 200%; 
-  height: 200%;
-}
-#bg img {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  margin: auto; 
-  min-width: 50%;
-  min-height: 50%;
 }

@@ -17,11 +17,11 @@ const AccountPage = () => {
 
   function handleTabsView() {
     if (tabValue === 0) {
-      return <Transportation />;
+      return <Transportation setTabValue={setTabValue} />;
     } else if (tabValue === 1) {
-      return <Living />;
+      return <Living setTabValue={setTabValue} />;
     } else if (tabValue === 2) {
-      return <Shopping />;
+      return <Shopping setTabValue={setTabValue} />;
     } else {
       return <Food />;
     }

@@ -9,7 +9,7 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Typography from "@mui/material/Typography";
 
 const Food = () => {
-  const [foodHabit, setFoodHabit] = useState(2);
+  const [foodHabit, setFoodHabit] = useState(3);
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -21,25 +21,26 @@ const Food = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(foodHabit)
     const form = {
-      food_habits: foodHabit,
+      food_habit: foodHabit,
     };
 
-    // fetch("/api/userrecords", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(form),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     r.json().then((userrecord) => {
-    //       console.log(userrecord);
-    //     });
-    //   } else {
-    //     r.json().then((err) => console.log(err));
-    //   }
-    // });
+    fetch("/api/userrecords", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    }).then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          console.log(userrecord);
+        });
+      } else {
+        r.json().then((err) => console.log(err));
+      }
+    });
     setOpenSnackBar(true);
   };
 
@@ -72,7 +73,7 @@ const Food = () => {
         <Slider
           aria-label="Custom marks"
           size="medium"
-          defaultValue={2}
+          defaultValue={3}
           step={1}
           min={0}
           max={4}

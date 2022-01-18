@@ -3,10 +3,20 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
+import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
 
-const Transportation = () => {
-  const [MPG, setMPG] = useState(20);
-  const [milesDriven, setMilesDriven] = useState(70);
+const Transportation = ({ setTabValue }) => {
+  const [transportationHabit, setTransportationHabit] = useState({
+    miles_per_gallon: 20,
+    miles_per_week: 275,
+    own_ev: false,
+    own_car: true,
+    public_transport: 2,
+  });
+
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -19,38 +29,33 @@ const Transportation = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const form = {
-      miles_per_gallon: MPG,
-      miles_per_week: milesDriven,
-    };
-    console.log(form);
-
     fetch("/api/userrecords", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify(transportationHabit),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((userdatum) => {
-          console.log(userdatum);
+        r.json().then((userrecord) => {
+          console.log(userrecord);
         });
       } else {
         r.json().then((err) => console.log(err));
       }
     });
-    setOpenSnackBar(true);
+    //setOpenSnackBar(true);
+    setTabValue(1);
   };
 
   const mpgMarks = [
     {
       value: 24.2,
-      label: "US Average",
+      label: "US Avg",
     },
     {
-      value: 80,
-      label: "80 MPG",
+      value: 45,
+      label: "45 MPG",
     },
   ];
 
@@ -61,43 +66,131 @@ const Transportation = () => {
     },
   ];
 
+  const transportarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
+  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+
   return (
     <Box
       sx={{
-        p: 2,
+        height: "auto",
+        pl: 2,
+        pr: 2,
+        mt: 3,
       }}
     >
-      <h3> What is your Car's Average Fuel Economy?</h3>
+      <Grid container spacing={0} sx={{ mb: 1, mt: 4 }}>
+        <Grid item xs={6} sm={6} md={2} lg={2} >
+          <Typography id="non-linear-slider" gutterBottom>
+            I use a car
+          </Typography>
+          <Switch
+            checked={transportationHabit.own_car}
+            onChange={(e) =>
+              setTransportationHabit({
+                ...transportationHabit,
+                own_car: !transportationHabit.own_car,
+              })
+            }
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </Grid >
+        <Grid item xs={6} sm={6} md={2} lg={2}>
+          <Typography id="non-linear-slider" gutterBottom>
+            I drive an EV
+          </Typography>
+          <Switch
+            checked={transportationHabit.own_ev}
+            disabled={!transportationHabit.own_car ? true : false}
+            onChange={(e) =>
+              setTransportationHabit({
+                ...transportationHabit,
+                own_ev: !transportationHabit.own_ev,
+              })
+            }
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        </Grid>
+        <Grid item xs={12} sm={12} md={8} lg={8} >
+          <Typography id="non-linear-slider" gutterBottom>
+            What is your Car's MPG?
+          </Typography>
+          <Slider
+            aria-label="Custom marks"
+            size="medium"
+            defaultValue={20}
+            step={1}
+            min={15}
+            max={60}
+            disabled={
+              transportationHabit.own_ev || !transportationHabit.own_car
+                ? true
+                : false
+            }
+            valueLabelDisplay="auto"
+            marks={mpgMarks}
+            onChange={(e) =>
+              setTransportationHabit({
+                ...transportationHabit,
+                miles_per_gallon: e.target.value,
+              })
+            }
+          />
+        </Grid>
+      </Grid>
+
+      <Typography id="non-linear-slider" gutterBottom>
+        How Many Miles Do You Drive Per Week
+      </Typography>
       <Slider
-        aria-label="Custom marks"
-        size="medium"
-        defaultValue={20}
-        step={1}
-        min={15}
-        max={100}
-        valueLabelDisplay="auto"
-        marks={mpgMarks}
-        onChange={(e) => setMPG(e.target.value)}
-      />
-      <h3>How Many Miles Do You Drive Per Week</h3>
-      <Slider
-        aria-label="Custom marks"
+        sx={{ mb: 8 }}
+        aria-label="miles in a week"
         size="medium"
         defaultValue={275}
+        disabled={!transportationHabit.own_car ? true : false}
         step={1}
         valueLabelDisplay="auto"
         min={0}
         max={700}
         marks={mpwMarks}
-        onChange={(e) => setMilesDriven(e.target.value)}
+        onChange={(e) =>
+          setTransportationHabit({
+            ...transportationHabit,
+            miles_per_week: e.target.value,
+          })
+        }
       />
+      <Typography id="non-linear-slider" gutterBottom>
+        I take public transportation:{" "}
+        <span
+          style={{ color: `${colorarr[transportationHabit.public_transport]}` }}
+        >
+          {transportarr[transportationHabit.public_transport]}
+        </span>
+      </Typography>
+      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+        <Slider
+          aria-label="Custom marks"
+          size="medium"
+          defaultValue={2}
+          step={1}
+          min={0}
+          max={4}
+          // valueLabelDisplay="auto"
+          onChange={(e) =>
+            setTransportationHabit({
+              ...transportationHabit,
+              public_transport: e.target.value,
+            })
+          }
+        />
+      </Stack>
       <Button
         type="submit"
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         onClick={handleSubmit}
       >
-        Submit
+        Next (1/4)
       </Button>
       <Snackbar
         open={openSnackBar}

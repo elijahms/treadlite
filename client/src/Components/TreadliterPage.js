@@ -7,25 +7,31 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
 
 const TreadliterPage = ({ user }) => {
-  const [databaseScore, setDatabaseScore] = useState(0);
-  const [busTaken, setBusTaken] = useState(0);
-  const [bikeTaken, setBikeTaken] = useState(0);
+  // const [databaseScore, setDatabaseScore] = useState(0);
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  let today = new Date()
 
-  useEffect(() => {
-    fetch(`/api/dashboard`).then((r) => {
-      if (r.ok) {
-        r.json().then((data) => {
-          console.log(data);
-          setDatabaseScore(data);
-        });
-      } else {
-        r.json().then((err) => console.log(err));
-      }
-    });
-  }, []);
+  const [tlHabit, setTlHabit] = useState({
+    less_transport: 2,
+    less_meat: 2,
+    turned_off_lights: 2,
+    bought_less: 2,
+  });
+
+  // useEffect(() => {
+  //   fetch(`/api/dashboard`).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((data) => {
+  //         setDatabaseScore(data);
+  //       });
+  //     } else {
+  //       r.json().then((err) => console.log(err));
+  //     }
+  //   });
+  // }, []);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -34,19 +40,27 @@ const TreadliterPage = ({ user }) => {
     setOpenSnackBar(false);
   };
 
-  const loweredScore = () => {
-    return busTaken + bikeTaken * 2;
+  const trend = () => {
+    let trendnum = tlHabit.less_meat + tlHabit.less_transport + tlHabit.turned_off_lights + tlHabit.bought_less
+    if (trendnum > 8) {
+      return "Up"
+    } else if (trendnum === 8) {
+      return 'Same'
+    } else {
+      return 'Down'
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(tlHabit)
     const form = {
-      score: databaseScore.score + (busTaken + bikeTaken * 2),
-      id: databaseScore.id,
+      trend_num: tlHabit.less_meat + tlHabit.less_transport + tlHabit.turned_off_lights + tlHabit.bought_less,
+      trend_update: today,
     };
-    console.log(form);
-    fetch("/api/treadliter", {
-      method: "PATCH",
+    console.log(form)
+    fetch("/api/userrecords", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -57,96 +71,168 @@ const TreadliterPage = ({ user }) => {
           console.log(userrecord);
         });
       } else {
-        r.json().then((err) => {
-          console.log(err);
-        });
+        r.json().then((err) => console.log(err));
       }
     });
     setOpenSnackBar(true);
   };
 
+  const tlarr = ["Not at All", "Less Often", "Same", "More", "Exclusively!"];
+  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+
   return (
-    <Container component="main" maxWidth="md">
-      <Paper>
+    <Container component="main" maxWidth="md" sx={{ minHeight: "105vh" }}>
+      {/* <Paper> */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          mt: 8,
+          ml: 2,
+          mr: 2,
+          p: 2,
+        }}
+      >
+        <Typography sx={{ textAlign: "center", mb: 6, fontFamily: 'LatoR'}} variant="h4">
+          Move Your Trends – Treadliter!
+        </Typography>
+
+        <Typography id="non-linear-slider" gutterBottom>
+          I took public transportation:{" "}
+          <span
+            style={{
+              color: `${colorarr[tlHabit.less_transport]}`,
+            }}
+          >
+            {tlarr[tlHabit.less_transport]}
+          </span>
+        </Typography>
+        <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+          <Slider
+            aria-label="Custom marks"
+            size="medium"
+            defaultValue={2}
+            step={1}
+            min={0}
+            max={4}
+            // valueLabelDisplay="auto"
+            onChange={(e) =>
+              setTlHabit({
+                ...tlHabit,
+                less_transport: e.target.value,
+              })
+            }
+          />
+        </Stack>
+        <Typography id="non-linear-slider" gutterBottom>
+          I ate plant-based foods:{" "}
+          <span
+            style={{
+              color: `${colorarr[tlHabit.less_meat]}`,
+            }}
+          >
+            {tlarr[tlHabit.less_meat]}
+          </span>
+        </Typography>
+        <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+          <Slider
+            aria-label="Custom marks"
+            size="medium"
+            defaultValue={2}
+            step={1}
+            min={0}
+            max={4}
+            // valueLabelDisplay="auto"
+            onChange={(e) =>
+              setTlHabit({
+                ...tlHabit,
+                less_meat: e.target.value,
+              })
+            }
+          />
+        </Stack>
+        <Typography id="non-linear-slider" gutterBottom>
+          I shopped sustainably:{" "}
+          <span
+            style={{
+              color: `${colorarr[tlHabit.bought_less]}`,
+            }}
+          >
+            {tlarr[tlHabit.bought_less]}
+          </span>
+        </Typography>
+        <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+          <Slider
+            aria-label="Custom marks"
+            size="medium"
+            defaultValue={2}
+            step={1}
+            min={0}
+            max={4}
+            // valueLabelDisplay="auto"
+            onChange={(e) =>
+              setTlHabit({
+                ...tlHabit,
+                bought_less: e.target.value,
+              })
+            }
+          />
+        </Stack>
+        <Typography id="non-linear-slider" gutterBottom>
+          I turn off lights:{" "}
+          <span
+            style={{
+              color: `${colorarr[tlHabit.turned_off_lights]}`,
+            }}
+          >
+            {tlarr[tlHabit.turned_off_lights]}
+          </span>
+        </Typography>
+        <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+          <Slider
+            aria-label="Custom marks"
+            size="medium"
+            defaultValue={2}
+            step={1}
+            min={0}
+            max={4}
+            // valueLabelDisplay="auto"
+            onChange={(e) =>
+              setTlHabit({
+                ...tlHabit,
+                turned_off_lights: e.target.value,
+              })
+            }
+          />
+        </Stack>
+        <Typography id="non-linear-slider" gutterBottom>
+          It looks like your trends are moving:{" "}
+          <span
+            style={{
+              color: 'red',
+            }}
+          >
+            {trend()}
+          </span>
+        </Typography>
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
-            mt: 8,
-            ml: 2,
-            mr: 2,
-            p: 2,
+            height: "100%",
+            alignItems: "center",
+            justifyContent: "right",
           }}
         >
-          <Typography sx={{ textAlign: "center" }} variant="h4">
-            Up Your Score! ....What did you do this week?
-          </Typography>
-
-          <Grid
-            container
-            spacing={0}
-            sx={{
-              mt: 2,
-            }}
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            disabled={!user ? true : false}
           >
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Typography sx={{ alignText: "left" }} variant="p">
-                Took the bus instead of driving to work?
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={12} md={8} lg={8}>
-              <Slider
-                aria-label="Bus Riding"
-                size="medium"
-                defaultValue={3}
-                step={1}
-                valueLabelDisplay="auto"
-                min={0}
-                max={5}
-                onChange={(e) => setBusTaken(e.target.value)}
-              />
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4}>
-              <Typography variant="p">
-                Rode your bike instead of driving to work?
-              </Typography>
-            </Grid>
-            <Grid item xs={12} sm={12} md={8} lg={8}>
-              <Slider
-                aria-label="Bike Riding"
-                size="medium"
-                defaultValue={2}
-                step={1}
-                valueLabelDisplay="auto"
-                min={0}
-                max={5}
-                onChange={(e) => setBikeTaken(e.target.value)}
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={0} sx={{ mt: 2 }}>
-            <Grid item xs={8} sm={10} md={10} lg={10}>
-              <Box sx={{ display: "flex" }}>
-                <h3>Upped your score by: {loweredScore()} </h3>
-              </Box>
-            </Grid>
-            <Grid item xs={4} sm={2} md={2} lg={2}>
-              <Box
-                sx={{
-                  display: "flex",
-                  height: "100%",
-                  alignItems: "center",
-                  justifyContent: "right",
-                }}
-              >
-                <Button variant="contained" onClick={handleSubmit}>
-                  Submit
-                </Button>
-              </Box>
-            </Grid>
-          </Grid>
+            Submit
+          </Button>
         </Box>
-      </Paper>
+      </Box>
+      {/* </Paper> */}
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}
