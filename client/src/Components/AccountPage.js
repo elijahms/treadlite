@@ -1,37 +1,26 @@
-import React from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import Transportation from "./Transportation";
-//import Home from "./Home";
+import Living from "./Living";
 import Food from "./Food";
 import Shopping from "./Shopping";
 
-const AccountPage = ({ user, setUser }) => {
-  const handleLogout = (event) => {
-    fetch("/api/logout", { method: "DELETE" }).then((data) =>
-      console.log(data)
-    );
-    setUser(null);
-  };
-
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+const AccountPage = () => {
+  const [tabValue, setTabValue] = useState(0);
+  const handleChange = (event, newTabValue) => {
+    setTabValue(newTabValue);
   };
 
   function handleTabsView() {
-    if (value === 0) {
+    if (tabValue === 0) {
       return <Transportation />;
-    } else if (value === 1) {
-      return <h1>Sorry...Working on this</h1>;
-    } else if (value === 2) {
+    } else if (tabValue === 1) {
+      return <Living />;
+    } else if (tabValue === 2) {
       return <Shopping />;
     } else {
       return <Food />;
@@ -41,11 +30,12 @@ const AccountPage = ({ user, setUser }) => {
   return (
     <Container maxWidth="md">
       <Paper>
-        <Box sx={{ marginTop: "7%", minHeight: "70vh" }}>
+        <Box sx={{ mt: 7, pb: 4 }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
-              value={value}
-              scrollButtons ='auto'
+              value={tabValue}
+              variant="scrollable"
+              indicatorColor="secondary"
               onChange={handleChange}
               aria-label="input example"
             >
@@ -58,18 +48,6 @@ const AccountPage = ({ user, setUser }) => {
           {handleTabsView()}
         </Box>
       </Paper>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch
-              checked={user}
-              onChange={handleLogout}
-              aria-label="login switch"
-            />
-          }
-          label={user ? "Logout" : "Login"}
-        />
-      </FormGroup>
     </Container>
   );
 };

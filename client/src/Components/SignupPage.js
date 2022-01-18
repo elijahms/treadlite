@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink, useHistory } from "react-router-dom";
+import Paper from "@mui/material/Paper"
 
 const SignUpPage = ({ setUser }) => {
   const history = useHistory();
@@ -14,7 +15,7 @@ const SignUpPage = ({ setUser }) => {
   function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
-        {"Copyright © "}
+        {/* {"Copyright © "} */}
         <Link
           className="login-link"
           color="inherit"
@@ -60,10 +61,15 @@ const SignUpPage = ({ setUser }) => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
+      <Paper>
       <Box
         sx={{
-          marginTop: 8,
+          mt: 8,
+          pl: 5,
+          pr: 5,
+          pb: 2,
+          mb: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -154,10 +160,10 @@ const SignUpPage = ({ setUser }) => {
             </Grid>
           </Grid>
         </Box>
+        
       </Box>
-      <br />
-
-      <Copyright sx={{ mt: 5 }} />
+      </Paper>
+      <Copyright />
     </Container>
   );
 };

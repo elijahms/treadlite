@@ -4,8 +4,9 @@ import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
-import SpaIcon from '@mui/icons-material/Spa';
-import FastfoodIcon from '@mui/icons-material/Fastfood';
+import SpaIcon from "@mui/icons-material/Spa";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import Typography from "@mui/material/Typography";
 
 const Food = () => {
   const [foodHabit, setFoodHabit] = useState(2);
@@ -15,7 +16,6 @@ const Food = () => {
     if (reason === "clickaway") {
       return;
     }
-
     setOpenSnackBar(false);
   };
 
@@ -43,30 +43,30 @@ const Food = () => {
     setOpenSnackBar(true);
   };
 
-  const marks = [
-    {
-      value: 1,
-      label: "Vegetarian",
-    },
-    {
-      value: 2,
-      label: "Flexitarian",
-    },
-    {
-      value: 3,
-      label: "Meat-Eater (1-2) per week",
-    }
+  const foodarr = [
+    "Vegan",
+    "Vegetarian",
+    "Flexitarian",
+    "Meat-Eater (1-2) per week",
+    "Meat-Eater (3+) per week",
   ];
+  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
 
   return (
     <Box
       sx={{
-        height: "60vh",
-        paddingLeft: "5%",
-        paddingRight: "5%",
+        height: "auto",
+        pl: 2,
+        pr: 2,
+        mt: 3,
       }}
     >
-      <h3> What are your eating habits?</h3>
+      <Typography id="eating-habits" gutterBottom>
+        My eating habits:{" "}
+        <span style={{ color: `${colorarr[foodHabit]}` }}>
+          {foodarr[foodHabit]}
+        </span>
+      </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
         <SpaIcon />
         <Slider
@@ -76,8 +76,6 @@ const Food = () => {
           step={1}
           min={0}
           max={4}
-          valueLabelDisplay="auto"
-          marks={marks}
           onChange={(e) => setFoodHabit(e.target.value)}
         />
         <FastfoodIcon />

@@ -95,7 +95,7 @@ const Friends = ({ user }) => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="md" sx={{minHeight: '105vh'}}>
+    <Container component="main" maxWidth="md" sx={{ minHeight: "105vh" }}>
       <Box
         sx={{
           marginTop: 8,
@@ -179,7 +179,7 @@ const Friends = ({ user }) => {
             .map((friend, index) => {
               return (
                 <div key={index}>
-                  <Paper elevation={index}>
+                  <Paper elevation={parseInt(index)}>
                     <ListItem
                       secondaryAction={
                         <Box
@@ -231,7 +231,9 @@ const Friends = ({ user }) => {
                       </IconButton>
 
                       <ListItemAvatar>
-                        <Avatar sx={{ color: "#e040fb" }}>{friend.avatar}</Avatar>
+                        <Avatar sx={{ color: "#e040fb" }}>
+                          {friend.avatar}
+                        </Avatar>
                       </ListItemAvatar>
                       <ListItemText edge="end" primary={friend.username} />
                     </ListItem>

@@ -1,21 +1,21 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
 
 const AboutPage = () => {
   return (
-    <Container component="main" maxWidth="lg">
-      <Paper elevation="12">
+    <Container component="main" maxWidth="md">
+      <Paper elevation={12}>
         <Box
           sx={{
-            marginTop: 8,
+            mt: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             ml: 2,
             mr: 2,
+            p: 2,
             whiteSpace: "pre-line",
-            minHeight: "70vh",
           }}
         >
           <h3>

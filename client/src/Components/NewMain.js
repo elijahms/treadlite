@@ -47,7 +47,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <img src="logo_transparent.png" alt="logo" className='logo' /> */}
@@ -91,7 +91,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               }}
             >
               {pages.map((page) => (
-                <NavLink className="navlinks" key={page} exact to={`/${page}`}>
+                <NavLink className="navlinks" key={page} exact to={`/${page.toLowerCase()}`}>
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -111,7 +111,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <NavLink key={page} exact to={`/${page}`}>
+              <NavLink key={page} exact to={`/${page.toLowerCase()}`}>
                 <Button
                   onClick={handleCloseNavMenu}
                   sx={{
@@ -153,7 +153,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink className="navlinks" exact to={`/${setting}`}>
+                    <NavLink className="navlinks" exact to={`/${setting.toLowerCase()}`}>
                       {setting}
                     </NavLink>
                   </Typography>

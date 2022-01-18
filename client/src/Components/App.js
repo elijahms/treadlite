@@ -32,21 +32,6 @@ const App = () => {
   }, []);
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  // const theme = createTheme({
-  //   palette: {
-  //     type: "light",
-  //     mode: prefersDarkMode ? "dark" : "light",
-  //     primary: {
-  //       main: "rgba(0,245,109,0.79)",
-  //     },
-  //     secondary: {
-  //       main: "#0090f5",
-  //     },
-  //     background: {
-  //       default: "#eee2dc",
-  //     },
-  //   },
-  // });
 
   const theme = createTheme({
     palette: {
@@ -85,12 +70,12 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NewMain user={user} setUser={setUser} />
-      <Container
+      {/* <Container
         sx={{
           mt: 14,
         }}
         maxWidth="false"
-      >
+      > */}
         <Switch>
           <Route exact path="/about">
             <AboutPage />
@@ -121,7 +106,7 @@ const App = () => {
             <HomePage />
           </Route>
         </Switch>
-      </Container>
+      {/* </Container> */}
     </ThemeProvider>
   );
 };

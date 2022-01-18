@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink } from "react-router-dom";
@@ -15,7 +16,7 @@ const LoginPage = ({ setUser }) => {
   function Copyright() {
     return (
       <Typography variant="body2" color="text.secondary" align="center">
-        {"Copyright © "}
+        {/* {"Copyright © "} */}
         <Link
           className="login-link"
           color="inherit"
@@ -57,11 +58,15 @@ const LoginPage = ({ setUser }) => {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      {/* <CssBaseline /> */}
+    <Container component="main" maxWidth="sm">
+      <Paper>
       <Box
         sx={{
-          marginTop: 8,
+          mt: 8,
+          pl: 5,
+          pr: 5,
+          pb: 2,
+          mb: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -76,6 +81,7 @@ const LoginPage = ({ setUser }) => {
             <Grid item xs={12}>
               <TextField
                 required
+                autoFocus
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -117,8 +123,8 @@ const LoginPage = ({ setUser }) => {
           </Grid>
         </Box>
       </Box>
-      <br />
-      <Copyright sx={{ mt: 5 }} />
+      </Paper>
+      <Copyright />
     </Container>
   );
 };

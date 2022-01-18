@@ -11,20 +11,9 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import Divider from "@mui/material/Divider";
-import Avatar from "@mui/material/Avatar";
 
-const Shopping = () => {
-  const [shoppingHabit, setShoppingHabit] = useState({
-    total_shop_freq: 2,
-    online_shop_freq: 1,
-    return_shop_freq: 3,
-    new_shop_freq: 2,
-  });
+const Living = () => {
+  const [shoppingHabit, setShoppingHabit] = useState(2);
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const handleClose = (event, reason) => {
@@ -37,8 +26,9 @@ const Shopping = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(shoppingHabit);
-    const form = [...shoppingHabit];
+    const form = {
+      shopping_habits: shoppingHabit,
+    };
 
     // fetch("/api/userrecords", {
     //   method: "POST",
@@ -59,26 +49,40 @@ const Shopping = () => {
   };
 
   const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
-  const shopping_freq_arr = ["Once", "Twice", "x Three", "x Four", "x Five"];
-  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+  const colorarr = ["red", "green", "blue", "orange", "pink"];
+
+  const marks = [
+    {
+      value: 1,
+      label: "Vegetarian",
+    },
+    {
+      value: 2,
+      label: "Flexitarian",
+    },
+    {
+      value: 3,
+      label: "Meat-Eater (1-2) per week",
+    },
+  ];
 
   return (
     <Box
       sx={{
         height: "auto",
-        pl: 2,
-        pr: 2,
+        paddingLeft: "5%",
+        paddingRight: "5%",
         minHeight: "65vh",
         mt: 3,
       }}
     >
       <Typography id="non-linear-slider" gutterBottom>
         I shop for clothing:{" "}
-        <span style={{ color: `${colorarr[shoppingHabit.total_shop_freq]}` }}>
-          {shopping_freq_arr[shoppingHabit.total_shop_freq]}
+        <span style={{ color: `${colorarr[shoppingHabit]}` }}>
+          {shoppingarr[shoppingHabit]}
         </span>
       </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <UnfoldLessIcon />
         <Slider
           aria-label="Custom marks"
@@ -87,86 +91,17 @@ const Shopping = () => {
           step={1}
           min={0}
           max={4}
-          // valueLabelDisplay="auto"
-          onChange={(e) =>
-            setShoppingHabit({
-              ...shoppingHabit,
-              total_shop_freq: e.target.value,
-            })
-          }
+          valueLabelDisplay="auto"
+          // marks={marks}
+          onChange={(e) => setShoppingHabit(e.target.value)}
         />
         <ShoppingBagIcon />
       </Stack>
-      <FormControl sx={{ ml: 4.5 }} component="fieldset">
-        <RadioGroup row aria-label="freq" name="row-radio-buttons-group">
-          <FormControlLabel value="week" control={<Radio />} label="Week" />
-          <FormControlLabel value="month" control={<Radio />} label="Month" />
-          <FormControlLabel value="year" control={<Radio />} label="Year" />
-        </RadioGroup>
-      </FormControl>
-      <Divider sx={{ mb: 4, ml: 4 }} />
       <Typography id="non-linear-slider" gutterBottom>
-        I buy in-store:{" "}
-        <span style={{ color: `${colorarr[shoppingHabit.online_shop_freq]}` }}>
-          {shoppingarr[shoppingHabit.online_shop_freq]}
-        </span>
+        I buy in-store:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ComputerIcon />
-        <Slider
-          aria-label="Custom marks"
-          size="medium"
-          defaultValue={1}
-          step={1}
-          min={0}
-          max={4}
-          valueLabelDisplay="auto"
-          onChange={(e) =>
-            setShoppingHabit({
-              ...shoppingHabit,
-              online_shop_freq: e.target.value,
-            })
-          }
-        />
-        <StoreMallDirectoryIcon />
-      </Stack>
-      <Typography id="non-linear-slider" gutterBottom>
-        I return:{" "}
-        <span style={{ color: `${colorarr[shoppingHabit.return_shop_freq]}` }}>
-          {shoppingarr[shoppingHabit.return_shop_freq]}
-        </span>
-      </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <SentimentSatisfiedAltIcon />
-        <Slider
-          aria-label="Custom marks"
-          size="medium"
-          defaultValue={3}
-          step={1}
-          min={0}
-          max={4}
-          valueLabelDisplay="auto"
-          onChange={(e) =>
-            setShoppingHabit({
-              ...shoppingHabit,
-              return_shop_freq: e.target.value,
-            })
-          }
-        />
-        <ArrowBackIosIcon />
-      </Stack>
-      <Typography id="non-linear-slider" gutterBottom>
-        I buy new:{" "}
-        <span style={{ color: `${colorarr[shoppingHabit.new_shop_freq]}` }}>
-          {shoppingarr[shoppingHabit.new_shop_freq]}
-        </span>
-      </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <Avatar
-          sx={{ width: 28, height: 28 }}
-          alt="recycle"
-          src="recycle.png"
-        />
         <Slider
           aria-label="Custom marks"
           size="medium"
@@ -175,14 +110,46 @@ const Shopping = () => {
           min={0}
           max={4}
           valueLabelDisplay="auto"
-          onChange={(e) =>
-            setShoppingHabit({
-              ...shoppingHabit,
-              new_shop_freq: e.target.value,
-            })
-          }
+          // marks={marks}
+          // onChange={(e) => setFoodHabit(e.target.value)}
         />
-        <Avatar sx={{ width: 28, height: 28 }} alt="newitem" src="new.png" />
+        <StoreMallDirectoryIcon />
+      </Stack>
+      <Typography id="non-linear-slider" gutterBottom>
+        I return:
+      </Typography>
+      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+        <SentimentSatisfiedAltIcon />
+        <Slider
+          aria-label="Custom marks"
+          size="medium"
+          defaultValue={2}
+          step={1}
+          min={0}
+          max={4}
+          valueLabelDisplay="auto"
+          // marks={marks}
+          // onChange={(e) => setFoodHabit(e.target.value)}
+        />
+        <ArrowBackIosIcon />
+      </Stack>
+      <Typography id="non-linear-slider" gutterBottom>
+        I buy new:
+      </Typography>
+      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+        {/* <SpaIcon /> */}
+        <Slider
+          aria-label="Custom marks"
+          size="medium"
+          defaultValue={2}
+          step={1}
+          min={0}
+          max={4}
+          valueLabelDisplay="auto"
+          // marks={marks}
+          // onChange={(e) => setFoodHabit(e.target.value)}
+        />
+        {/* <FastfoodIcon /> */}
       </Stack>
       <Button
         type="submit"
@@ -202,4 +169,9 @@ const Shopping = () => {
   );
 };
 
-export default Shopping;
+export default Living;
+
+
+//https://api.eia.gov/series/?api_key=8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8&series_id=ELEC.PRICE.NY-RES.A
+
+//8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8

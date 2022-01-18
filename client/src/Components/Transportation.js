@@ -64,9 +64,7 @@ const Transportation = () => {
   return (
     <Box
       sx={{
-        // minHeight: "50vh",
-        paddingLeft: "5%",
-        paddingRight: "5%",
+        p: 2,
       }}
     >
       <h3> What is your Car's Average Fuel Economy?</h3>

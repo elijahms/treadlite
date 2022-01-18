@@ -72,16 +72,13 @@ const TreadliterPage = ({ user }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            m: 3,
+            mt: 8,
+            ml: 2,
+            mr: 2,
+            p: 2,
           }}
         >
-          <Typography
-            sx={{
-              mt: 3,
-              textAlign: "center",
-            }}
-            variant="h4"
-          >
+          <Typography sx={{ textAlign: "center" }} variant="h4">
             Up Your Score! ....What did you do this week?
           </Typography>
 
@@ -127,13 +124,7 @@ const TreadliterPage = ({ user }) => {
               />
             </Grid>
           </Grid>
-          <Grid
-            container
-            spacing={0}
-            sx={{
-              mt: 2,
-            }}
-          >
+          <Grid container spacing={0} sx={{ mt: 2 }}>
             <Grid item xs={8} sm={10} md={10} lg={10}>
               <Box sx={{ display: "flex" }}>
                 <h3>Upped your score by: {loweredScore()} </h3>

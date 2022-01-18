@@ -7,16 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* :root {
-  --white: #f7f5ee;
-  --green: #5cb55d;
-  --litegreen: #8cd08c;
-  --blue: #8dd1d3;
-  --purple: #f3d8ec;
-  --yellow: #f6ef73;
-  --off-black: #181818;
-} */
-
 a:link {
   text-decoration: none;
   /* color: black; */
@@ -33,20 +23,22 @@ a:active {
   text-decoration: none;
   /* color: black; */
 }
-
+/* 
 .hero-image {
-  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("./Images/footprint.jpg");
-
-  /* Set a specific height */
-  /* height: 50%; */
-
-  /* Position and center the image to scale nicely on all screens */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+} */
+
+.hero-image { 
+  background: url("./Images/footprint.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .logo {
@@ -60,33 +52,33 @@ a:active {
 }
 
 .navlinks {
-  color: rgba(9,138,90,0.79);
-}
-
-
-/* .MuiAvatar-root {
-  color: rgba(9,138,90,0.79);
-} */
-
-@font-face {
-  font-family: 'Raleway';
-  src: local('Raleway'), url(./Fonts/Raleway-ExtraBold.ttf) format('truetype');
+  color: rgba(9, 138, 90, 0.79);
 }
 
 @font-face {
-  font-family: 'LatoR';
-  src: local('LatoR'), url(./Fonts/Lato-Regular.ttf) format('truetype');
+  font-family: "Raleway";
+  src: local("Raleway"), url(./Fonts/Raleway-ExtraBold.ttf) format("truetype");
 }
 
-
-
-@media (min-width: 600px){
-.css-t2zrls-MuiContainer-root {
-    padding-left: 0px;
-    padding-right: 0px;
+@font-face {
+  font-family: "LatoR";
+  src: local("LatoR"), url(./Fonts/Lato-Regular.ttf) format("truetype");
 }
+
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
 }
-.css-t2zrls-MuiContainer-root {
-  padding-left: 0px;
-  padding-right: 0px;
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
 }
