@@ -26,7 +26,7 @@ const Food = () => {
       food_habit: foodHabit,
     };
 
-    fetch("/api/userrecords", {
+    fetch("/api/food", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

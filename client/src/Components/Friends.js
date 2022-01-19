@@ -74,11 +74,11 @@ const Friends = ({ user }) => {
 
   const trend = (trend) => {
     if (trend > 8) {
-      return "Up";
+      return "⭐";
     } else if (trend === 8) {
-      return "Flat";
+      return "󠀽😎";
     } else {
-      return "Down";
+      return "🤦‍♂";
     }
   };
 
@@ -247,8 +247,10 @@ const Friends = ({ user }) => {
                       </ListItemAvatar>
                       <ListItemText
                         edge="end"
-                        primary={friend.username}
-                        secondary={`trending: ${trend(friend.trend)}`}
+                        primary={
+                          `${friend.username}` + " " + `${trend(friend.trend)}`
+                        }
+                        // secondary={`${trend(friend.trend)}`}
                       />
                     </ListItem>
                   </Paper>

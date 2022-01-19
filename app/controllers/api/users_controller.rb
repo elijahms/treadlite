@@ -5,7 +5,7 @@ class Api::UsersController < ApplicationController
     user = User.create!(user_params)
     if user.valid?
       session[:user_id] = user.id
-      Userrecord.create!(user_id: user.id, score: 0, trend_num: 8, trend_update: Time.new.prev_month)
+      Userrecord.create!(user_id: user.id, score: 0, trend_num: 8, trend_update: Time.new.prev_month, primary_heating: 'elec', gas_cost: 1, oil_cost: 1, elec_cost: 1)
       render json: user, status: :created
     end
   end

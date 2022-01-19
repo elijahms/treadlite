@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     get '/following', to: 'users#following'
     post '/newfollow', to: 'friendships#create'
     post '/trendupdate', to: 'userrecords#trendupdate'
+    post '/transport', to: 'userrecords#transport'
+    post '/living', to: 'userrecords#living'
+    post '/shopping', to: 'userrecords#shopping'
+    post '/food', to: 'userrecords#food'
   end
 
   get '*path',

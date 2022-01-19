@@ -4,7 +4,42 @@ class Api::UserrecordsController < ApplicationController
       user = User.find_by(id: session[:user_id])
       userrecord = user.userrecord
       userrecord.update!(userrecord_params)
-      userrecord.calc_score
+      userrecord.calc_transportation_score
+      userrecord.calc_living_score
+      userrecord.calc_total_score
+      render json: userrecord, status: :accepted
+    end
+
+    def transport
+      user = User.find_by(id: session[:user_id])
+      userrecord = user.userrecord
+      userrecord.update!(userrecord_params)
+      userrecord.calc_transportation_score
+      render json: userrecord, status: :accepted
+    end
+
+    def living
+      user = User.find_by(id: session[:user_id])
+      userrecord = user.userrecord
+      userrecord.update!(userrecord_params)
+      userrecord.calc_living_score
+      render json: userrecord, status: :accepted
+    end
+
+    def shopping
+      user = User.find_by(id: session[:user_id])
+      userrecord = user.userrecord
+      userrecord.update!(userrecord_params)
+      userrecord.calc_shopping_score
+      render json: userrecord, status: :accepted
+    end
+
+    def food
+      user = User.find_by(id: session[:user_id])
+      userrecord = user.userrecord
+      userrecord.update!(userrecord_params)
+      userrecord.calc_food_score
+      userrecord.calc_total_score
       render json: userrecord, status: :accepted
     end
 
@@ -59,7 +94,9 @@ class Api::UserrecordsController < ApplicationController
       :own_car,
       :public_transport,
       :trend_num,
-      :trend_update
+      :trend_update,
+      :primary_heating,
     )
-  end 
+  end
+
 end

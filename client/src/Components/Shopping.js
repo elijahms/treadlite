@@ -42,7 +42,7 @@ const Shopping = ({setTabValue}) => {
     console.log(shoppingHabit);
     //const form = [...shoppingHabit];
 
-    fetch("/api/userrecords", {
+    fetch("/api/shopping", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -12,14 +12,13 @@ const Living = ({ setTabValue }) => {
   const [livingHabit, setLivingHabit] = useState({
     household_size: 2,
     zip_code: "00001",
-    elec_cost: 0,
-    water_cost: 0,
-    gas_cost: 0,
-    oil_cost: 0,
+    elec_cost: 1,
+    gas_cost: 1,
+    oil_cost: 1,
+    primary_heating: 'elec',
   });
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [elec, setElec] = useState(false);
-  const [water, setWater] = useState(false);
   const [gas, setGas] = useState(false);
   const [oil, setOil] = useState(false);
 
@@ -35,7 +34,7 @@ const Living = ({ setTabValue }) => {
     console.log(livingHabit);
     //const form = [...livingHabit]
 
-    fetch("/api/userrecords", {
+    fetch("/api/living", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,37 +99,34 @@ const Living = ({ setTabValue }) => {
       </Stack>
 
       <Typography id="non-linear-slider" gutterBottom>
-        My bills:
+        My living space is heated primarily with:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ButtonGroup fullWidth>
           <Button
             onClick={() => setElec(() => !elec)}
             variant={elec ? "contained" : "outlined"}
+            disabled={gas || oil ? true : false}
           >
             Elec
           </Button>
           <Button
-            onClick={() => setWater(() => !water)}
-            variant={water ? "contained" : "outlined"}
-          >
-            Water
-          </Button>
-          <Button
             onClick={() => setGas(() => !gas)}
             variant={gas ? "contained" : "outlined"}
+            disabled={elec || oil ? true : false}
           >
             Gas
           </Button>
           <Button
             onClick={() => setOil(() => !oil)}
             variant={oil ? "contained" : "outlined"}
+            disabled={elec || gas ? true : false}
           >
             Oil
           </Button>
         </ButtonGroup>
       </Stack>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+      <Stack spacing={6} direction="row" sx={{ mb: 3 }} alignItems="center">
         <TextField
           disabled={elec ? false : true}
           id="outlined-basic"
@@ -140,18 +136,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               elec_cost: parseInt(e.target.value),
-            })
-          }
-        />
-        <TextField
-          disabled={water ? false : true}
-          id="outlined-basic"
-          label="Water"
-          variant="outlined"
-          onChange={(e) =>
-            setLivingHabit({
-              ...livingHabit,
-              water_cost: parseInt(e.target.value),
+              primary_heating: 'elec',
             })
           }
         />
@@ -164,6 +149,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               gas_cost: parseInt(e.target.value),
+              primary_heating: 'gas',
             })
           }
         />
@@ -176,6 +162,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               oil_cost: parseInt(e.target.value),
+              primary_heating: 'oil',
             })
           }
         />

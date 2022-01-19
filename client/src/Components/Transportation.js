@@ -29,7 +29,7 @@ const Transportation = ({ setTabValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/userrecords", {
+    fetch("/api/transport", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +120,7 @@ const Transportation = ({ setTabValue }) => {
             defaultValue={20}
             step={1}
             min={15}
-            max={60}
+            max={55}
             disabled={
               transportationHabit.own_ev || !transportationHabit.own_car
                 ? true
@@ -149,8 +149,8 @@ const Transportation = ({ setTabValue }) => {
         disabled={!transportationHabit.own_car ? true : false}
         step={1}
         valueLabelDisplay="auto"
-        min={0}
-        max={700}
+        min={20}
+        max={450}
         marks={mpwMarks}
         onChange={(e) =>
           setTransportationHabit({
