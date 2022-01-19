@@ -16,7 +16,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import Divider from "@mui/material/Divider";
-import Avatar from "@mui/material/Avatar";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
@@ -63,7 +62,7 @@ const Shopping = ({setTabValue}) => {
   };
 
   const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
-  const shopping_freq_arr = ["Once", "Twice", "x Three", "x Four", "x Five"];
+  const shopping_freq_arr = ["Once", "Twice", "xThree", "xFour", "xFive"];
   const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
 
   return (

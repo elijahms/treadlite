@@ -20,14 +20,17 @@ const AboutPage = () => {
         >
           <h3>
             {
-              "Treadliter is project aimed at informing people about their Carbon Footprint by seeing how they compare to people around them"
+              "Treadliter aims to inform people about their carbon footprint by seeing how they compare to people around them."
             }
           </h3>
           <h5>
             {
-              "Users input information about their habits and recieve a score. The score is normailized to be out of 100, so as to make it more accesable and understandable.\n \n A zero is the largest footprint a reasonable person in the US produces. Lets say the 95th percentile and up.\n \n An 100 is the smallest footprint. The 5th percentile on the other end of the spectrum."
+              "How does it work? \n \n On the 'account' page a user inputs information about their habits inf four categories - 'transporation', 'home', 'food', 'shopping' - once inputted a users score is calculated. To view ones score, head over to the 'dashboard' page. \n\n The score is normailized to be on a scale of 1 - 100, to be more accessable, understandable, and comparable.\n \n A zero represents the largest (worst) carbon footprint a reasonable person in the US outputs (approx. 95th + percentile). \n \n A score of 100 represents the smallest reasonable carbon footprint (approx. 5th percentile and lower). \n\n The 'friend' page is a resource for users to see other treadliters' scores and trends. If one wishes they can follow other users, or see top users. \n\n Finally, the 'treadliter' page is a resource to encourage healthy carbon footprint habits, and each week a user can input their weekly activites and see how they trend that week."
             }
           </h5>
+          <p>Image credit on the homepage: <cite>George Evans</cite> </p>
+          <p>Thank you to the team behind MUI for making this project beautiful.</p>
+          <a href="https://github.com/elijahms/treadlite">Check out Github for more details</a>
         </Box>
       </Paper>
     </Container>

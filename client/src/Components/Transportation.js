@@ -112,7 +112,7 @@ const Transportation = ({ setTabValue }) => {
         </Grid>
         <Grid item xs={12} sm={12} md={8} lg={8} >
           <Typography id="non-linear-slider" gutterBottom>
-            What is your Car's MPG?
+            My car's MPG is:
           </Typography>
           <Slider
             aria-label="Custom marks"
@@ -139,7 +139,7 @@ const Transportation = ({ setTabValue }) => {
       </Grid>
 
       <Typography id="non-linear-slider" gutterBottom>
-        How Many Miles Do You Drive Per Week
+        I drive this many miles per week:
       </Typography>
       <Slider
         sx={{ mb: 8 }}

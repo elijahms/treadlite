@@ -6,7 +6,7 @@ class User < ApplicationRecord
             :password_confirmation,
             :email,
             presence: true
-  validates :email, uniqueness: true
+  validates :email, :username, uniqueness: true
   has_one :userrecord, dependent: :destroy
 
   has_many :received_follows, foreign_key: :followed_user_id, class_name: "Friendship"

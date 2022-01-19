@@ -20,7 +20,20 @@ class Api::UserrecordsController < ApplicationController
     def update
       userrecord = Userrecord.find_by(id: params[:id])
       userrecord.update!(userrecord_params)
+      userrecord.save!
       render json: userrecord, status: :ok
+    end
+
+    def trendupdate
+      userrecord = Userrecord.find_by(user_id: session[:user_id])
+      userrecord.trend_update = params[:trend_update]
+      userrecord.trend_num = params[:trend_num]
+      if userrecord.calc_update_permission
+        userrecord.save!
+        render json: userrecord, status: :ok
+      else 
+        render json: { errors: ['Sorry, You recently updated your trend. See FAQ for more details.'] }, status: :unauthorized
+      end
     end
 
   private

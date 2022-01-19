@@ -66,7 +66,7 @@ const Living = ({ setTabValue }) => {
       }}
     >
       <Typography id="non-linear-slider" gutterBottom>
-        Household Size:{" "}
+        Household size:{" "}
         <span style={{ color: "#86adae" }}>
           {livingarr[livingHabit.household_size]}
         </span>
@@ -88,7 +88,7 @@ const Living = ({ setTabValue }) => {
         />
         <TextField
           id="outlined-basic"
-          label="Zipcode"
+          label="zipcode"
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({
@@ -100,7 +100,7 @@ const Living = ({ setTabValue }) => {
       </Stack>
 
       <Typography id="non-linear-slider" gutterBottom>
-        What do you pay for every month?
+        My bills:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ButtonGroup fullWidth>

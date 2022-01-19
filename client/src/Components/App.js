@@ -11,7 +11,6 @@ import HomePage from "./HomePage";
 import { Route, Switch } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SignUpPage from "./SignupPage";
-import Container from "@mui/material/Container";
 import DashboardPage from "./DashboardPage";
 import RalewayReg from "../Fonts/Raleway-Medium.ttf";
 
@@ -41,7 +40,7 @@ const App = () => {
         main: "rgba(9,138,90)",
       },
       secondary: {
-        main: "#e040fb",
+        main: "#7558cc",
       },
       background: {
         default: "#f7f5ee",

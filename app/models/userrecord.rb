@@ -14,6 +14,17 @@ class Userrecord < ApplicationRecord
     #     index = orderedrecords.pluck(:user_id).index(curr_user.id)
     #     index
     # end
+
+    def calc_update_permission
+        today = Time.new
+        last_update = self.trend_update
+        difference = (today - last_update) / 3600
+        if difference >= 168
+            true
+        else
+            false
+        end
+    end
 end
 
 

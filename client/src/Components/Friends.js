@@ -21,10 +21,10 @@ import Snackbar from "@mui/material/Snackbar";
 
 const Friends = ({ user }) => {
   const [friendList, setFriendList] = useState([
-    { username: "The Greenest", score: 100, avatar: "T", id: 0 },
+    { username: "The Greenest", score: 100, avatar: "T", id: 0, trend: 8 },
   ]);
   const [searchList, setSearchList] = useState([
-    { username: "The Greenest", score: 100, avatar: "T", id: 0 },
+    { username: "The Greenest", score: 100, avatar: "T", id: 0, trend: 8 },
   ]);
   const [chipClick, setChipClick] = useState("All");
   const [followingList, setFollowingList] = useState([""]);
@@ -72,6 +72,16 @@ const Friends = ({ user }) => {
     });
   }
 
+  const trend = (trend) => {
+    if (trend > 8) {
+      return "Up";
+    } else if (trend === 8) {
+      return "Flat";
+    } else {
+      return "Down";
+    }
+  };
+
   useEffect(() => {
     fetch("api/users").then((r) => {
       if (r.ok) {
@@ -115,7 +125,7 @@ const Friends = ({ user }) => {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            placeholder="Search for Treadliters"
+            placeholder="search for other treadliters"
             inputProps={{ "aria-label": "search treadlite" }}
             onChange={(e) => handleSearch(e)}
           />
@@ -138,19 +148,19 @@ const Friends = ({ user }) => {
           <Chip
             clickable
             label="All"
-            color={chipClick === "All" ? "primary" : "default"}
+            color={chipClick === "All" ? "primary" : "secondary"}
             onClick={() => setChipClick("All")}
           />
           <Chip
             clickable
             label="Following"
-            color={chipClick === "Following" ? "primary" : "default"}
+            color={chipClick === "Following" ? "primary" : "secondary"}
             onClick={() => setChipClick("Following")}
           />
           <Chip
             clickable
             label="Top Users"
-            color={chipClick === "Top" ? "primary" : "default"}
+            color={chipClick === "Top" ? "primary" : "secondary"}
             onClick={() => setChipClick("Top")}
           />
         </Stack>
@@ -179,7 +189,7 @@ const Friends = ({ user }) => {
             .map((friend, index) => {
               return (
                 <div key={index}>
-                  <Paper elevation={parseInt(index)}>
+                  <Paper elevation={index < 20 ? parseInt(index) : 20}>
                     <ListItem
                       secondaryAction={
                         <Box
@@ -231,11 +241,15 @@ const Friends = ({ user }) => {
                       </IconButton>
 
                       <ListItemAvatar>
-                        <Avatar sx={{ color: "#e040fb" }}>
+                        <Avatar sx={{ color: "#7558cc" }}>
                           {friend.avatar}
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText edge="end" primary={friend.username} />
+                      <ListItemText
+                        edge="end"
+                        primary={friend.username}
+                        secondary={`trending: ${trend(friend.trend)}`}
+                      />
                     </ListItem>
                   </Paper>
                 </div>

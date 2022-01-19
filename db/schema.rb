@@ -15,12 +15,12 @@ ActiveRecord::Schema.define(version: 2022_01_18_202106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "friendships", force: :cascade do |t|
+ create_table "friendships", force: :cascade do |t|
     t.integer "followed_user_id"
     t.integer "follower_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
+  end 
 
   create_table "userrecords", force: :cascade do |t|
     t.integer "user_id"

@@ -8,9 +8,9 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#create'
     get '/me', to: 'users#show'
     get '/dashboard', to: 'userrecords#show'
-    patch '/treadliter', to: 'userrecords#update'
     get '/following', to: 'users#following'
     post '/newfollow', to: 'friendships#create'
+    post '/trendupdate', to: 'userrecords#trendupdate'
   end
 
   get '*path',

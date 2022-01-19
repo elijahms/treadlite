@@ -73,7 +73,7 @@ const DashboardPage = () => {
             </Box>
           </Box>
           <h3>
-            {"YOUR IN THE"} {"PERCENTILE OF TREADLITERS"}
+            {"YOU'RE IN THE"} {" XX PERCENTILE OF TREADLITERS"}
           </h3>
         </Box>
       </Paper>
