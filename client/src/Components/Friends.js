@@ -18,6 +18,7 @@ import Stack from "@mui/material/Stack";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import Snackbar from "@mui/material/Snackbar";
+import Footprint from '../Images/footprint.jpg'
 
 const Friends = ({ user }) => {
   const [friendList, setFriendList] = useState([
@@ -76,7 +77,7 @@ const Friends = ({ user }) => {
     if (trend > 8) {
       return "⭐";
     } else if (trend === 8) {
-      return "󠀽😎";
+      return "😎";
     } else {
       return "🤦‍♂";
     }

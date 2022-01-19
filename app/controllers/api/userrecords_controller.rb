@@ -61,10 +61,8 @@ class Api::UserrecordsController < ApplicationController
 
     def trendupdate
       userrecord = Userrecord.find_by(user_id: session[:user_id])
-      userrecord.trend_update = params[:trend_update]
-      userrecord.trend_num = params[:trend_num]
       if userrecord.calc_update_permission
-        userrecord.save!
+        userrecord.update!(userrecord_params)
         render json: userrecord, status: :ok
       else 
         render json: { errors: ['Sorry, You recently updated your trend. See FAQ for more details.'] }, status: :unauthorized

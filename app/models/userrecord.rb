@@ -43,26 +43,49 @@ class Userrecord < ApplicationRecord
         self.food_score = food_score.clamp(0, 100)
     end
 
+    def calc_range(avg)
+        range = avg * 1.5 - avg * 0.5
+        range
+    end
+
     def calc_living_score
+        gas_cost = 10.68
+        oil_cost = 4.02
+        oil_avg = 404
+        gas_avg = 255
+        
+        ##updated
+        avg_family = 2.53
+        ## Average annual elec comsumption
+        avg_m_kwh = 7340 / 12
+        multiple_house_size_2 = 1.45
+        multiple_house_size_3 = 1.55
+        multiple_house_size_4 = 1.82
+        multiple_house_size_5 = 1.98
+        ##Annual CO2 output rate in (lb/MWh) / 1000 - EGrid see source below
+        elec_em_f = 0.88921
+        elec_cost = 0.1359
+        elec_avg_pp = avg_m_kwh * elec_em_f / avg_family
+
         if self.primary_heating == 'oil'
-            lbs_co2 = (self.oil_cost / 4.02) * 22.61
+            lbs_co2 = (self.oil_cost / oil_cost) * 22.61
             lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - 2424) / (7272 - 2424) * 100)
+            living_score = 100 - ((lbs_co2 - 202) / (606 - 202) * 100)
         elsif self.primary_heating == 'gas'
-            lbs_co2 = (self.gas_cost / 10.68 ) * 119.58
+            lbs_co2 = (self.gas_cost / gas_cost ) * 119.58
             lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - 1535) / (4606 - 1535 ) * 100)
+            living_score = 100 - ((lbs_co2 - 127.5) / (382.5 - 127.5) * 100)
         else 
-            lbs_co2 = (self.elec_cost / 0.1188 ) * 1.238516
+            lbs_co2 = (self.elec_cost / elec_cost ) * elec_em_f
             lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - 2727) / (8182 - 2727) * 100)
+            living_score = 100 - ((lbs_co2 - (elec_avg_pp * 0.5)) / (calc_range(elec_avg_pp)) * 100)
         end
         self.living_score = living_score.clamp(0, 100)
         self.save
     end
 
     def calc_shopping_score
-        calc_shopping_freq = self.shop_time_freq * self.total_shop_freq
+        calc_shopping_freq = self.shop_time_freq * (self.total_shop_freq + 1)
         new_shop = self.new_shop_freq + 1
         return_shop = self.return_shop_freq + 1
         online_shop = self.online_shop_freq + 1
@@ -109,26 +132,33 @@ end
 ## Natural Gas
 
 ##(average monthly gas bill per month / price per thousand cubic feet) pounds of CO2 per thousand cubic feet of natural gas 
-
 ##($$per month /Natural_gas_cost_1000CF)*EF_natural_gas == pounds of co2 per month
-
 ##($$per month /$10.68 )*119.58
-
 ##Price per thousand cubic feet of natural gas	$10.68 -- source: Energy Information Administration: US Residential Natural Gas Prices.  2013. 2012 annual average. http://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm 
-
 ##Emission factor (natural gas/thousand cubic feet)	119.58 -- source: Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38. http://www.epa.gov/climatechange/ghgemissions/usinventoryreport.html
 
-##3,071 pounds is about average for a household of one person over a year.
-##Range - 1535 - 4606
+##Average annual CO2 emissions from natural gas per household	7,892
+##Average household size 2.53 -- https://www.statista.com/statistics/183648/average-size-of-households-in-the-us/#:~:text=The%20average%20American%20household%20consisted%20of%202.53%20people%20in%202020.&text=As%20shown%20in%20the%20statistic,their%20usual%20place%20of%20residence.
+##255 pounds is about average for a household of one person per month.
+##Range - 382.5 - 127.5
+
+
 
 ## Electricity
 
 ##($$ price per month /cost_per_kWh)* e_factor_value
-##($$ price per month /$0.1188)* 1.238516 == pounds of co2 per month
+##($$ price per month /$0.1359)* 1.238516 == pounds of co2 per month
 ## e-factor -- source EPA. eGRID 9th edition Version 1.0 Subregion File (Year 2010 Data), 2014. http://www.epa.gov/cleanenergy/energy-resources/egrid/index.html
-##cost per hwh -- source U.S. Energy Information Administration, Electric Power Monthly-September 2013, Table 5.3 (Average Retail Price of Electricity to Ultimate Customers, Residential Sector). http://www.eia.gov/electricity/monthly/epm_table_grapher.cfm?t=epmt_5_3
-## 5,455 pounds is about average in the U.S. for a household of one person over a year.
-## range - 2727- 8182
+##cost per kwh -- source U.S. Energy Information Administration, Electric Power Monthly-September 2013, Table 5.3 (Average Retail Price of Electricity to Ultimate Customers, Residential Sector). http://www.eia.gov/electricity/monthly/epm_table_grapher.cfm?t=epmt_5_3
+##U.S. Energy Information Administration 2012. A Look at Residential Energy Consumption in 2009-Table CE2.1. http://www.eia.gov/consumption/residential/data/2009/indecfm?view=consumption
+## UPDATED --- https://www.eia.gov/consumption/residential/data/2015/c&e/pdf/ce2.1.pdf
+
+
+##Average annual CO2e emissions from electricity per household 13284
+##454 pounds is about average for a household of one person per month.
+##Range - 682 - 227
+
+
 
 ##Fuel Oil
 
@@ -136,9 +166,13 @@ end
 ##($$ price per month/$4.02)*22.61
 ## ef_fuel_oil_gallon --source Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38. http://www.epa.gov/climatechange/ghgemissions/usinventoryreport.html.
 ## fuel oil cost --source Energy Information Administration, 2013. US No. 2 Heating Oil Residential Prices - 2012 annual average. http://www.eia.gov/petroleum/heatingoilpropane/, http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=M_EPD2F_PRS_NUS_DPG&f=M
-## 4,848 pounds is about average for a household of one person over a year. 
-## 2424 - 7272
 
+##Average annual CO2 emissions from fuel oil per household	12,460
+##404 pounds is about average for a household of one person per month.
+## 606 - 202
+
+
+##Transportation
 
 ## miles driven per year -- https://www.fhwa.dot.gov/ohim/onh00/bar8.htm
 ##13476 / 52 = 260m/week 
