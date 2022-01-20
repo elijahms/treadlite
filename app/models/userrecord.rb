@@ -48,52 +48,81 @@ class Userrecord < ApplicationRecord
         range
     end
 
+
+    def calc_elec_score(elec_cost_input, household_size)
+        ##Annual US average electric emissions factor CO2 output rate in (lb/MWh) / 1000 - EGrid see source below
+        elec_em_f = 0.88921
+        ##Annual US average electric cost per kwh in cents
+        elec_cost = 0.1359
+        ## Average annual elec comsumption for a family
+        avg_m_kwh = 7340 / 12
+        ##average multiple for different sized households
+        multiple_house_size_2 = 1.45
+        multiple_house_size_3 = 1.55
+        multiple_house_size_4 = 1.82
+        multiple_house_size_5 = 1.98
+
+        if household_size == 1
+            avg_m_kwh = avg_m_kwh * multiple_house_size_2
+        elsif household_size == 2
+            avg_m_kwh = avg_m_kwh * multiple_house_size_3
+        elsif household_size == 3
+            avg_m_kwh = avg_m_kwh * multiple_house_size_4
+        elsif household_size == 4
+            avg_m_kwh = avg_m_kwh * multiple_house_size_5
+        else
+            avg_m_kwh
+        end 
+
+        # Elec average per person based on household size
+        elec_avg_pp = avg_m_kwh * elec_em_f
+
+        lbs_co2 = (elec_cost_input / elec_cost ) * elec_em_f
+        living_score = 100 - ((lbs_co2 - (elec_avg_pp * 0.5)) / (calc_range(elec_avg_pp)) * 100)
+        living_score
+
+    end
+
     def calc_living_score
         gas_cost = 10.68
         oil_cost = 4.02
         oil_avg = 404
         gas_avg = 255
-        
-        ##updated
-        avg_family = 2.53
-        ## Average annual elec comsumption
-        avg_m_kwh = 7340 / 12
-        multiple_house_size_2 = 1.45
-        multiple_house_size_3 = 1.55
-        multiple_house_size_4 = 1.82
-        multiple_house_size_5 = 1.98
-        ##Annual CO2 output rate in (lb/MWh) / 1000 - EGrid see source below
-        elec_em_f = 0.88921
-        elec_cost = 0.1359
-        elec_avg_pp = avg_m_kwh * elec_em_f / avg_family
+        oil_em_f = 22.61
+        gas_em_f = 119.58
 
         if self.primary_heating == 'oil'
-            lbs_co2 = (self.oil_cost / oil_cost) * 22.61
+            lbs_co2 = (self.oil_cost / oil_cost) * oil_em_f
             lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - 202) / (606 - 202) * 100)
+            living_score = 100 - ((lbs_co2 - (oil_avg * 0.5)) / (calc_range(oil_avg)) * 100)
         elsif self.primary_heating == 'gas'
-            lbs_co2 = (self.gas_cost / gas_cost ) * 119.58
+            lbs_co2 = (self.gas_cost / gas_cost ) * gas_em_f
             lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - 127.5) / (382.5 - 127.5) * 100)
+            living_score = 100 - ((lbs_co2 - (gas_avg * 0.5)) / (calc_range(gas_avg)) * 100)
         else 
-            lbs_co2 = (self.elec_cost / elec_cost ) * elec_em_f
-            lbs_co2 = lbs_co2 / (self.household_size + 1)
-            living_score = 100 - ((lbs_co2 - (elec_avg_pp * 0.5)) / (calc_range(elec_avg_pp)) * 100)
+            living_score = calc_elec_score(self.elec_cost, self.household_size)
         end
         self.living_score = living_score.clamp(0, 100)
         self.save
     end
 
+
+
     def calc_shopping_score
         calc_shopping_freq = self.shop_time_freq * (self.total_shop_freq + 1)
-        new_shop = self.new_shop_freq + 1
-        return_shop = self.return_shop_freq + 1
-        online_shop = self.online_shop_freq + 1
+        # new_shop = self.new_shop_freq + 1
+        # return_shop = self.return_shop_freq + 1
+        # online_shop = self.online_shop_freq + 1
+
         amount_shop_score = 100 - ((calc_shopping_freq - 12) / (52 - 12) * 100)
+        ##clamp so that extremes are not included
         amount_shop_score = amount_shop_score.clamp(0, 100)
-        new_shop_score = 100 - ((new_shop - 1) / (4) * 100)
-        online_shop_score = 100 - ((return_shop - 1) / (4) * 100)
-        return_shop_score = 100 - ((online_shop - 1) / (4) * 100)
+        ##normalize the 0-4 range to a score out of 100
+        new_shop_score = 100 - ((self.new_shop_freq) / (4) * 100)
+        online_shop_score = 100 - ((self.return_shop_freq) / (4) * 100)
+        return_shop_score = 100 - ((self.online_shop_freq) / (4) * 100)
+        
+        ##weighted average of each activity
         shopping_score = amount_shop_score * 0.2 + new_shop_score * 0.4 + online_shop_score * 0.3 + return_shop_score * 0.1
         self.shopping_score = shopping_score.clamp(0, 100)
         self.save

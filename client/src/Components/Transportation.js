@@ -30,7 +30,7 @@ const Transportation = ({ setTabValue }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/api/transport", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

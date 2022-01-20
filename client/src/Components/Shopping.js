@@ -43,7 +43,7 @@ const Shopping = ({setTabValue}) => {
     //const form = [...shoppingHabit];
 
     fetch("/api/shopping", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },

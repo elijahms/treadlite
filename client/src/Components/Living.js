@@ -35,7 +35,7 @@ const Living = ({ setTabValue }) => {
     //const form = [...livingHabit]
 
     fetch("/api/living", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
