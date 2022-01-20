@@ -210,7 +210,7 @@ const Friends = ({ user }) => {
       </Box>
       <Paper
         sx={{
-          backgroundColor: "text.secondary",
+          backgroundColor: "primary.main",
           borderRadius: "12px",
           alignItems: "center",
           ml: 10,
@@ -222,17 +222,17 @@ const Friends = ({ user }) => {
           <ListItem
             dense
             secondaryAction={
-              <CircularProgress variant="determinate" value={userData.score} />
+              <CircularProgress sx={{color: 'text.secondary'}} variant="determinate" value={userData.score} />
             }
           >
             <ListItemAvatar>
               <Avatar sx={{ color: "#7558cc" }}>
-                {user ? user.username[0] : "U"}
+                {user ? user.first_name[0] + user.last_name[0] : "U"}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
               edge="end"
-              primary={user ? user.username : "User"}
+              // primary={user ? user.username : "User"}
               secondary={trend(userData.trend_num)}
             />
           </ListItem>

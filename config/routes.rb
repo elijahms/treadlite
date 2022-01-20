@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     delete '/logout', to: 'sessions#destroy'
     post '/signup', to: 'users#create'
     get '/me', to: 'users#show'
-    get '/dashboard', to: 'userrecords#show'
+    get '/dashboard', to: 'userrecords#dashboard'
     get '/following', to: 'users#following'
     get '/getfollowers', to: 'users#get_followers'
     post '/newfollow', to: 'friendships#create'

@@ -39,13 +39,14 @@ class Userrecord < ApplicationRecord
             food_score = 10
         elsif self.food_habit == 4
             food_score = 0
-        end 
+        end
+        # food_score = 100 - ((self.food_habit) / (4) * 100)
         self.food_score = food_score.clamp(0, 100)
+        self.save
     end
 
     def calc_range(avg)
-        range = avg * 1.5 - avg * 0.5
-        range
+        avg * 1.5 - avg * 0.5
     end
 
 
@@ -79,8 +80,6 @@ class Userrecord < ApplicationRecord
 
         lbs_co2 = (elec_cost_input / elec_cost ) * elec_em_f
         living_score = 100 - ((lbs_co2 - (elec_avg_pp * 0.5)) / (calc_range(elec_avg_pp)) * 100)
-        living_score
-
     end
 
     def calc_living_score
@@ -149,6 +148,11 @@ class Userrecord < ApplicationRecord
             false
         end
     end
+
+    def self.get_average_score
+        self.all.sum(:score) / self.all.count
+    end
+
 end
 
  ##http://shrinkthatfootprint.com/food-carbon-footprint-diet --- eating breakdown

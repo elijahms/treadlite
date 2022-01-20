@@ -43,15 +43,29 @@ class Api::UserrecordsController < ApplicationController
       render json: userrecord, status: :accepted
     end
 
-    def show
+    # def show
+    #   userrecord = Userrecord.find_by(user_id: session[:user_id])
+    #   if userrecord
+    #     render json: userrecord, status: :ok
+    #   else
+    #     render json: { errors: ['No user found'] }, status: :not_found
+    #   end 
+    # end
+
+    def dashboard
+      user = User.find_by(id: session[:user_id])
       userrecord = Userrecord.find_by(user_id: session[:user_id])
       if userrecord
-        render json: userrecord, status: :ok
+        rank = user.user_rank
+        avg_score = Userrecord.get_average_score
+        score = userrecord.score
+        render json: {score: score, rank: rank, avg_score: avg_score}, status: :ok
       else
         render json: { errors: ['No user found'] }, status: :not_found
-      end 
-    end
+    end 
 
+
+  end 
     def update
       userrecord = Userrecord.find_by(id: params[:id])
       userrecord.update!(userrecord_params)

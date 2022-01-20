@@ -6,14 +6,17 @@ import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 
 const DashboardPage = () => {
-  const [user, setUser] = useState({ score: 0 });
+  const [userStats, setUserStats] = useState({
+    score: 0,
+    rank: 0,
+    avg_score: 0,
+  });
 
   useEffect(() => {
     fetch("/api/dashboard").then((r) => {
       if (r.ok) {
-        r.json().then((user) => {
-          // console.log(user);
-          setUser(user);
+        r.json().then((userstats) => {
+          setUserStats(userstats);
         });
       } else {
         r.json().then(() => {
@@ -25,7 +28,11 @@ const DashboardPage = () => {
 
   return (
     <Container component="main" maxWidth="md">
-      <Paper>
+      <Paper
+      sx={{
+        borderRadius: "12px",
+      }}
+      >
         <Box
           sx={{
             marginTop: 8,
@@ -38,7 +45,13 @@ const DashboardPage = () => {
             whiteSpace: "pre-line",
           }}
         >
-          <h3>{"YOUR SCORE"}</h3>
+          <Typography
+            component="h2"
+            color="text.primary"
+            sx={{ fontSize: "3rem", mt: 2, mb: 2}}
+          >
+            {"YOUR SCORE"}
+          </Typography>
           <Box
             sx={{
               position: "relative",
@@ -49,7 +62,7 @@ const DashboardPage = () => {
             <CircularProgress
               size="300px"
               variant="determinate"
-              value={user.score}
+              value={userStats.score}
             />
             <Box
               sx={{
@@ -69,13 +82,27 @@ const DashboardPage = () => {
                 color="text.secondary"
                 sx={{ fontSize: "8rem" }}
               >
-                {`${user.score}`}
+                {`${userStats.score}`}
               </Typography>
             </Box>
           </Box>
-          <h3>
-            {"YOU'RE IN THE"} {" XX PERCENTILE OF TREADLITERS"}
-          </h3>
+          <Typography
+            component="h3"
+            color="text.secondary"
+            sx={{ fontSize: "2rem", mt: 2 }}
+          >
+            {"YOU'RE RANKED #"}{" "}
+            <span style={{ color: "#7558cc" }}>{userStats.rank}</span>{" "}
+            {"  OUT OF ALL TREADLITERS"}
+          </Typography>
+          <Typography
+            component="h3"
+            color="text.secondary"
+            sx={{ fontSize: "2rem", mt: 2 }}
+          >
+            {"The average Treadliter score is: "}{" "}
+            <span style={{ color: "#7558cc" }}>{userStats.avg_score}</span>
+          </Typography>
         </Box>
       </Paper>
     </Container>
