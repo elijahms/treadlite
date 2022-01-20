@@ -7,12 +7,14 @@ Rails.application.routes.draw do
     get '/me', to: 'users#show'
     get '/dashboard', to: 'userrecords#show'
     get '/following', to: 'users#following'
+    get '/getfollowers', to: 'users#get_followers'
     post '/newfollow', to: 'friendships#create'
     patch '/trendupdate', to: 'userrecords#trendupdate'
     patch '/transport', to: 'userrecords#transport'
     patch '/living', to: 'userrecords#living'
     patch '/shopping', to: 'userrecords#shopping'
     patch '/food', to: 'userrecords#food'
+    get '/userscore', to: 'userrecords#userscore'
   end
 
   get '*path',

@@ -40,7 +40,6 @@ const SignUpPage = ({ setUser }) => {
       first_name: data.get("firstName"),
       last_name: data.get("lastName"),
     };
-    console.log(form);
     fetch("/api/signup", {
       method: "POST",
       headers: {

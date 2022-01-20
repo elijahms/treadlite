@@ -69,6 +69,11 @@ class Api::UserrecordsController < ApplicationController
       end
     end
 
+    def userscore
+      userrecord = Userrecord.find_by(user_id: session[:user_id])
+      render json: userrecord, status: :ok
+    end
+
   private
 
   def userrecord_params

@@ -22,9 +22,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
   const history = useHistory();
 
   const handleLogout = (event) => {
-    fetch("/api/logout", { method: "DELETE" }).then((data) =>
-      console.log(data)
-    );
+    fetch("/api/logout", { method: "DELETE" }).then(() => {});
     setUser(null);
     handleCloseUserMenu();
     history.push("/");

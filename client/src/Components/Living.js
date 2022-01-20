@@ -21,6 +21,9 @@ const Living = ({ setTabValue }) => {
   const [elec, setElec] = useState(false);
   const [gas, setGas] = useState(false);
   const [oil, setOil] = useState(false);
+  const [err, setErr] = useState("");
+  const [snackMsg, setSnackMsg] = useState("");
+
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -39,9 +42,7 @@ const Living = ({ setTabValue }) => {
       body: JSON.stringify(livingHabit),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((userrecord) => {
-          console.log(userrecord);
-        });
+        r.json().then(() => {console.log('Updated')});
       } else {
         r.json().then((err) => console.log(err));
       }
@@ -60,7 +61,7 @@ const Living = ({ setTabValue }) => {
         mt: 3,
       }}
     >
-      <Typography id="non-linear-slider" gutterBottom>
+      <Typography id="house-size-label" gutterBottom>
         Household size:{" "}
         <span style={{ color: "#86adae" }}>
           {livingarr[livingHabit.household_size]}
@@ -68,7 +69,7 @@ const Living = ({ setTabValue }) => {
       </Typography>
       <Stack spacing={4} direction="row" sx={{ mb: 3 }} alignItems="center">
         <Slider
-          aria-label="Custom marks"
+          aria-label="Household Size"
           size="medium"
           defaultValue={2}
           step={1}
@@ -82,7 +83,7 @@ const Living = ({ setTabValue }) => {
           }
         />
         <TextField
-          id="outlined-basic"
+          id="zipcode-input"
           label="zipcode"
           variant="outlined"
           onChange={(e) =>
@@ -94,8 +95,8 @@ const Living = ({ setTabValue }) => {
         />
       </Stack>
 
-      <Typography id="non-linear-slider" gutterBottom>
-        My living space is heated primarily with:
+      <Typography id="primary-heating-text" gutterBottom>
+        My living space is heated <span style={{textDecoration: 'underline'}}>primarily</span> with:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ButtonGroup fullWidth>
@@ -122,11 +123,14 @@ const Living = ({ setTabValue }) => {
           </Button>
         </ButtonGroup>
       </Stack>
+      <Typography id="average-bill-text" gutterBottom>
+        My average monthly bill:
+      </Typography>
       <Stack spacing={6} direction="row" sx={{ mb: 3 }} alignItems="center">
         <TextField
           disabled={elec ? false : true}
-          id="outlined-basic"
-          label="Elec"
+          id="elec-input"
+          label="$$/month"
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({
@@ -138,8 +142,8 @@ const Living = ({ setTabValue }) => {
         />
         <TextField
           disabled={gas ? false : true}
-          id="outlined-basic"
-          label="Gas"
+          id="gas-input"
+          label="$$/month"
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({
@@ -151,8 +155,8 @@ const Living = ({ setTabValue }) => {
         />
         <TextField
           disabled={oil ? false : true}
-          id="outlined-basic"
-          label="Oil"
+          id="oil-input"
+          label="$$/month"
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({

@@ -11,4 +11,5 @@ class Api::FriendshipsController < ApplicationController
             render json: friendship, status: :created
         end
     end
+
 end

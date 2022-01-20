@@ -30,6 +30,17 @@ class Api::UsersController < ApplicationController
     end 
   end
 
+  def get_followers
+    user = User.find_by(id: session[:user_id])
+    if user
+      followers = user.followers.map {|f| f.id}
+      render json: followers, status: :ok
+    else 
+      render json: { errors: ['No user found'] }, status: :not_found
+    end
+end
+
+
   def index
     user = User.find_by(id: session[:user_id])
     users = User.all.where.not(id: user.id)

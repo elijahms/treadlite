@@ -30,7 +30,14 @@ const Friends = ({ user }) => {
   const [followingList, setFollowingList] = useState([""]);
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [err, setErr] = useState("");
+  const [followerList, setFollowerList] = useState([""]);
   const [snackMsg, setSnackMsg] = useState("");
+  const [userData, setUserData] = useState({
+    username: "User",
+    score: 0,
+    avatar: "U",
+    trend: 8,
+  });
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -59,14 +66,14 @@ const Friends = ({ user }) => {
       body: JSON.stringify(form),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(() => {
+        r.json().then((mess) => {
           setSnackMsg("Followed");
           setOpenSnackBar(true);
           setFollowingList([...followingList, id]);
         });
       } else {
-        r.json().then(() => {
-          setSnackMsg("Unfollowed");
+        r.json().then((err) => {
+          setSnackMsg(err.errors);
           setOpenSnackBar(true);
           setFollowingList(() =>
             [...followingList].filter((follow) => follow !== id)
@@ -78,9 +85,9 @@ const Friends = ({ user }) => {
 
   const trend = (trend) => {
     if (trend > 8) {
-      return "⭐";
+      return "⭐⭐⭐";
     } else if (trend === 8) {
-      return "😎";
+      return "😎😎";
     } else {
       return "🤦‍♂";
     }
@@ -95,7 +102,7 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err);
+          setErr(err.errors);
         });
       }
     });
@@ -106,7 +113,29 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err);
+          setErr(err.errors);
+        });
+      }
+    });
+    fetch("api/userscore").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          setUserData(data);
+        });
+      } else {
+        r.json().then((err) => {
+          setErr(err.errors);
+        });
+      }
+    });
+    fetch("api/getfollowers").then((r) => {
+      if (r.ok) {
+        r.json().then((data) => {
+          setFollowerList(data);
+        });
+      } else {
+        r.json().then((err) => {
+          setErr(err.errors);
         });
       }
     });
@@ -167,12 +196,48 @@ const Friends = ({ user }) => {
           />
           <Chip
             clickable
+            label="Followers"
+            color={chipClick === "Followers" ? "primary" : "secondary"}
+            onClick={() => setChipClick("Followers")}
+          />
+          <Chip
+            clickable
             label="Top Users"
             color={chipClick === "Top" ? "primary" : "secondary"}
             onClick={() => setChipClick("Top")}
           />
         </Stack>
       </Box>
+      <Paper
+        sx={{
+          backgroundColor: "text.secondary",
+          borderRadius: "12px",
+          alignItems: "center",
+          ml: 10,
+          mt: 2,
+          mr: 10,
+        }}
+      >
+        <List dense>
+          <ListItem
+            dense
+            secondaryAction={
+              <CircularProgress variant="determinate" value={userData.score} />
+            }
+          >
+            <ListItemAvatar>
+              <Avatar sx={{ color: "#7558cc" }}>
+                {user ? user.username[0] : "U"}
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText
+              edge="end"
+              primary={user ? user.username : "User"}
+              secondary={trend(userData.trend_num)}
+            />
+          </ListItem>
+        </List>
+      </Paper>
       <Box
         sx={{
           marginTop: 1,
@@ -190,8 +255,10 @@ const Friends = ({ user }) => {
                 return true;
               } else if (chipClick === "Top") {
                 return f.score >= 90;
-              } else {
+              } else if (chipClick == "Following") {
                 return followingList.includes(f.id);
+              } else {
+                return followerList.includes(f.id)
               }
             })
             .map((friend, index) => {

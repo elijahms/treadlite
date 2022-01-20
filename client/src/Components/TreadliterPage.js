@@ -53,7 +53,6 @@ const TreadliterPage = ({ user }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(tlHabit);
     const form = {
       trend_num:
         tlHabit.less_meat +
@@ -62,7 +61,6 @@ const TreadliterPage = ({ user }) => {
         tlHabit.bought_less,
       trend_update: today,
     };
-    console.log(form);
     fetch("/api/trendupdate", {
       method: "PATCH",
       headers: {
@@ -71,8 +69,8 @@ const TreadliterPage = ({ user }) => {
       body: JSON.stringify(form),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((userrecord) => {
-          setSnackMessage("Success");
+        r.json().then(() => {
+          setSnackMessage("Updated");
         });
       } else {
         r.json().then((err) => {

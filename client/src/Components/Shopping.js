@@ -32,6 +32,8 @@ const Shopping = ({ setTabValue }) => {
     new_shop_freq: 2,
   });
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [err, setErr] = useState("");
+  const [snackMsg, setSnackMsg] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

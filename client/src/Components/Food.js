@@ -7,11 +7,14 @@ import Stack from "@mui/material/Stack";
 import SpaIcon from "@mui/icons-material/Spa";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Typography from "@mui/material/Typography";
+import { useHistory } from "react-router-dom";
 
 const Food = () => {
   const [foodHabit, setFoodHabit] = useState(3);
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [err, setErr] = useState("");
+  const [snackMsg, setSnackMsg] = useState("");
+  const history = useHistory();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -22,7 +25,7 @@ const Food = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //console.log(foodHabit)
+    let error = false;
     const form = {
       food_habit: foodHabit,
     };
@@ -35,15 +38,19 @@ const Food = () => {
       body: JSON.stringify(form),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((userrecord) => {
-          //console.log(userrecord);
+        r.json().then(() => {
+          history.push("/dashboard");
         });
       } else {
         r.json().then((err) => {
-          setErr(err);
+          error = true;
+          setErr(err.error);
         });
       }
     });
+    if (error) {
+      setSnackMsg([...err]);
+    }
     setOpenSnackBar(true);
   };
 

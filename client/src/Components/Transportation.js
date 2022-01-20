@@ -13,6 +13,8 @@ const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
 
 const Transportation = ({ setTabValue }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [err, setErr] = useState("");
+  const [snackMsg, setSnackMsg] = useState("");
   const [transportationHabit, setTransportationHabit] = useState({
     miles_per_gallon: 20,
     miles_per_week: 275,
@@ -30,6 +32,7 @@ const Transportation = ({ setTabValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    let error = false;
     fetch("/api/transport", {
       method: "PATCH",
       headers: {
@@ -40,10 +43,17 @@ const Transportation = ({ setTabValue }) => {
       if (r.ok) {
         r.json().then((userrecord) => {});
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          error = true;
+          setErr(err.error);
+        });
       }
     });
-    setTabValue(1);
+    if (error) {
+      setSnackMsg([...err]);
+    } else {
+      setTabValue(1);
+    }
   };
 
   const mpgMarks = [
