@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -7,7 +7,7 @@ import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import useMediaQuery from "@mui/material/useMediaQuery";
+//import useMediaQuery from "@mui/material/useMediaQuery";
 import Paper from "@mui/material/Paper";
 
 const TreadliterPage = ({ user }) => {
@@ -64,7 +64,7 @@ const TreadliterPage = ({ user }) => {
     };
     console.log(form);
     fetch("/api/trendupdate", {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -135,7 +135,6 @@ const TreadliterPage = ({ user }) => {
               step={1}
               min={0}
               max={4}
-              // valueLabelDisplay="auto"
               onChange={(e) =>
                 setTlHabit({
                   ...tlHabit,
@@ -162,7 +161,6 @@ const TreadliterPage = ({ user }) => {
               step={1}
               min={0}
               max={4}
-              // valueLabelDisplay="auto"
               onChange={(e) =>
                 setTlHabit({
                   ...tlHabit,
@@ -189,7 +187,6 @@ const TreadliterPage = ({ user }) => {
               step={1}
               min={0}
               max={4}
-              // valueLabelDisplay="auto"
               onChange={(e) =>
                 setTlHabit({
                   ...tlHabit,

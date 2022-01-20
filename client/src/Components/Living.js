@@ -15,7 +15,7 @@ const Living = ({ setTabValue }) => {
     elec_cost: 1,
     gas_cost: 1,
     oil_cost: 1,
-    primary_heating: 'elec',
+    primary_heating: "elec",
   });
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [elec, setElec] = useState(false);
@@ -31,9 +31,6 @@ const Living = ({ setTabValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(livingHabit);
-    //const form = [...livingHabit]
-
     fetch("/api/living", {
       method: "PATCH",
       headers: {
@@ -49,7 +46,6 @@ const Living = ({ setTabValue }) => {
         r.json().then((err) => console.log(err));
       }
     });
-    //setOpenSnackBar(true);
     setTabValue(2);
   };
 
@@ -136,7 +132,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               elec_cost: parseInt(e.target.value),
-              primary_heating: 'elec',
+              primary_heating: "elec",
             })
           }
         />
@@ -149,7 +145,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               gas_cost: parseInt(e.target.value),
-              primary_heating: 'gas',
+              primary_heating: "gas",
             })
           }
         />
@@ -162,7 +158,7 @@ const Living = ({ setTabValue }) => {
             setLivingHabit({
               ...livingHabit,
               oil_cost: parseInt(e.target.value),
-              primary_heating: 'oil',
+              primary_heating: "oil",
             })
           }
         />
@@ -186,7 +182,3 @@ const Living = ({ setTabValue }) => {
 };
 
 export default Living;
-
-//https://api.eia.gov/series/?api_key=8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8&series_id=ELEC.PRICE.NY-RES.A
-
-//8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8

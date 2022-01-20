@@ -37,7 +37,6 @@ const LoginPage = ({ setUser }) => {
       email: data.get("email"),
       password: data.get("password"),
     };
-    console.log(form);
     fetch("/api/login", {
       method: "POST",
       headers: {
@@ -48,7 +47,6 @@ const LoginPage = ({ setUser }) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
-          console.log(user);
           history.push("/account");
         });
       } else {
@@ -60,69 +58,74 @@ const LoginPage = ({ setUser }) => {
   return (
     <Container component="main" maxWidth="sm">
       <Paper>
-      <Box
-        sx={{
-          mt: 8,
-          pl: 5,
-          pr: 5,
-          pb: 2,
-          mb: 4,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
-        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                autoFocus
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="new-password"
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+        <Box
+          sx={{
+            mt: 8,
+            pl: 5,
+            pr: 5,
+            pb: 2,
+            mb: 4,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
+          <Typography component="h1" variant="h5">
+            Login
+          </Typography>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
           >
-            Sign In
-          </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <NavLink
-                className="login-link"
-                exact
-                to="/signup"
-                variant="body2"
-              >
-                Dont have an account? Sign Up
-              </NavLink>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  autoFocus
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="new-password"
+                />
+              </Grid>
             </Grid>
-          </Grid>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <NavLink
+                  className="login-link"
+                  exact
+                  to="/signup"
+                  variant="body2"
+                >
+                  Dont have an account? Sign Up
+                </NavLink>
+              </Grid>
+            </Grid>
+          </Box>
         </Box>
-      </Box>
       </Paper>
       <Copyright />
     </Container>

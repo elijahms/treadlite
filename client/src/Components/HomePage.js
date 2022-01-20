@@ -20,7 +20,6 @@ const HomePage = () => {
           }}
         >
           <Box sx={{ mt: "6vh", pl: 2, pr: 2, alignItems: "center" }}>
-            {/* <img className='home-treadlite' style={{ width: "80vw", border: '3px solid white'}} src="logo_transparent.png" /> */}
             <h1
               className="homescreen-tagline"
               style={{ filter: "brightness(200%)" }}

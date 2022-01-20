@@ -212,3 +212,15 @@ end
 ##weekly range low 20.47 - 1.15
 ## using public transport also + 1 or 2 or - 1 or 2 ????
 ## no car max 20% - 0%
+
+
+# https://api.eia.gov/series/?api_key=8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8&series_id=ELEC.PRICE.NY-RES.A
+
+# 8To42WkSnf9HLZxGPuUPGNyH0sJYZZxbCDeJgPP8
+
+#  Pounds of CO2 emitted per gallon 	18.74/gallon	lbs CO2/gallon -- https:www.eia.gov/environment/emissions/co2_vol_mass.php
+#  Ratio of emissions of greenhouse gases other than CO2 	1.01	lbCO2e/lbCO2
+#  Passenger Vehicle Fuel Economy	21.6	miles per gallon (mpg)
+#  Average miles traveled per year per vehicle	https:www.fhwa.dot.gov/ohim/onh00/bar8.htm	miles per year 13,476
+#  Average emissions for a typical vehicle	 10,484 	lbs CO2e/vehicle
+#  (1/21.6 mpg)*11,398 miles/year*19.6 lbs CO2/gallon*CO2e / CO2

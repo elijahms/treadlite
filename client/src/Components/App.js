@@ -21,11 +21,13 @@ const App = () => {
     fetch("/api/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user);
+          // console.log(user);
           setUser(user);
         });
       } else {
-        r.json().then(console.log("no user"));
+        r.json().then(() => {
+          console.log("Not Signed In");
+        });
       }
     });
   }, []);
@@ -69,42 +71,36 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NewMain user={user} setUser={setUser} />
-      {/* <Container
-        sx={{
-          mt: 14,
-        }}
-        maxWidth="false"
-      > */}
-        <Switch>
-          <Route exact path="/about">
-            <AboutPage />
-          </Route>
-          <Route exact path="/treadliter">
-            <TreadliterPage user={user} />
-          </Route>
-          <Route exact path="/friends">
-            <Friends user={user} />
-          </Route>
-          <Route exact path="/account">
-            {!user ? (
-              <SignUpPage setUser={setUser} />
-            ) : (
-              <AccountPage setUser={setUser} user={user} />
-            )}
-          </Route>
-          <Route exact path="/login">
-            <LoginPage setUser={setUser} />
-          </Route>
-          <Route exact path="/dashboard">
-            <DashboardPage />
-          </Route>
-          <Route path="/signup">
+      <Switch>
+        <Route exact path="/about">
+          <AboutPage />
+        </Route>
+        <Route exact path="/treadliter">
+          <TreadliterPage user={user} />
+        </Route>
+        <Route exact path="/friends">
+          <Friends user={user} />
+        </Route>
+        <Route exact path="/account">
+          {!user ? (
             <SignUpPage setUser={setUser} />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
+          ) : (
+            <AccountPage setUser={setUser} user={user} />
+          )}
+        </Route>
+        <Route exact path="/login">
+          <LoginPage setUser={setUser} />
+        </Route>
+        <Route exact path="/dashboard">
+          <DashboardPage />
+        </Route>
+        <Route path="/signup">
+          <SignUpPage setUser={setUser} />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
     </ThemeProvider>
   );
 };

@@ -18,7 +18,6 @@ import Stack from "@mui/material/Stack";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import Snackbar from "@mui/material/Snackbar";
-import Footprint from '../Images/footprint.jpg'
 
 const Friends = ({ user }) => {
   const [friendList, setFriendList] = useState([
@@ -30,6 +29,8 @@ const Friends = ({ user }) => {
   const [chipClick, setChipClick] = useState("All");
   const [followingList, setFollowingList] = useState([""]);
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [err, setErr] = useState("");
+  const [snackMsg, setSnackMsg] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -58,12 +59,14 @@ const Friends = ({ user }) => {
       body: JSON.stringify(form),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((friendship) => {
+        r.json().then(() => {
+          setSnackMsg("Followed");
           setOpenSnackBar(true);
           setFollowingList([...followingList, id]);
         });
       } else {
-        r.json().then((err) => {
+        r.json().then(() => {
+          setSnackMsg("Unfollowed");
           setOpenSnackBar(true);
           setFollowingList(() =>
             [...followingList].filter((follow) => follow !== id)
@@ -91,7 +94,9 @@ const Friends = ({ user }) => {
           setSearchList(data);
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          setErr(err);
+        });
       }
     });
     fetch("api/following").then((r) => {
@@ -100,7 +105,9 @@ const Friends = ({ user }) => {
           setFollowingList(data.flat());
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          setErr(err);
+        });
       }
     });
   }, []);
@@ -248,10 +255,7 @@ const Friends = ({ user }) => {
                       </ListItemAvatar>
                       <ListItemText
                         edge="end"
-                        primary={
-                          `${friend.username}` + " " + `${trend(friend.trend)}`
-                        }
-                        // secondary={`${trend(friend.trend)}`}
+                        primary={friend.username + " " + trend(friend.trend)}
                       />
                     </ListItem>
                   </Paper>
@@ -264,7 +268,7 @@ const Friends = ({ user }) => {
         open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Success"
+        message={snackMsg}
       />
     </Container>
   );

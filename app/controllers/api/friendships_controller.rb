@@ -5,7 +5,7 @@ class Api::FriendshipsController < ApplicationController
         is_following = Friendship.find_by(follower_id: user.id, followed_user_id: followed_user.id)
         if is_following
             is_following.destroy!
-            render json: { errors: ['User unfollowed'] }, status: :gone
+            render json: { error: 'Unfollowed' }, status: :gone
         else
             friendship = Friendship.create!(follower_id: user.id, followed_user_id: followed_user.id)
             render json: friendship, status: :created

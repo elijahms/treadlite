@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,7 +12,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { useHistory } from "react-router-dom";
 
 const pages = ["Friends", "Treadliter", "About"];
 const settings = ["Dashboard", "Account"];
@@ -50,7 +49,6 @@ const ResponsiveAppBar = ({ user, setUser }) => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <img src="logo_transparent.png" alt="logo" className='logo' /> */}
           <Box
             noWrap
             component="div"
@@ -91,7 +89,12 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               }}
             >
               {pages.map((page) => (
-                <NavLink className="navlinks" key={page} exact to={`/${page.toLowerCase()}`}>
+                <NavLink
+                  className="navlinks"
+                  key={page}
+                  exact
+                  to={`/${page.toLowerCase()}`}
+                >
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page}</Typography>
                   </MenuItem>
@@ -153,7 +156,11 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <NavLink className="navlinks" exact to={`/${setting.toLowerCase()}`}>
+                    <NavLink
+                      className="navlinks"
+                      exact
+                      to={`/${setting.toLowerCase()}`}
+                    >
                       {setting}
                     </NavLink>
                   </Typography>

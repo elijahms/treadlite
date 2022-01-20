@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import Paper from "@mui/material/Paper";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
@@ -12,11 +12,13 @@ const DashboardPage = () => {
     fetch("/api/dashboard").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          console.log(user);
+          // console.log(user);
           setUser(user);
         });
       } else {
-        r.json().then(console.log("no user"));
+        r.json().then(() => {
+          console.log("Not Signed In");
+        });
       }
     });
   }, []);
@@ -34,7 +36,6 @@ const DashboardPage = () => {
             mr: 2,
             pb: 5,
             whiteSpace: "pre-line",
-            // border: '2px solid red'
           }}
         >
           <h3>{"YOUR SCORE"}</h3>

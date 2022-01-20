@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 const Food = () => {
   const [foodHabit, setFoodHabit] = useState(3);
   const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [err, setErr] = useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -21,7 +22,7 @@ const Food = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(foodHabit)
+    //console.log(foodHabit)
     const form = {
       food_habit: foodHabit,
     };
@@ -35,10 +36,12 @@ const Food = () => {
     }).then((r) => {
       if (r.ok) {
         r.json().then((userrecord) => {
-          console.log(userrecord);
+          //console.log(userrecord);
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          setErr(err);
+        });
       }
     });
     setOpenSnackBar(true);
