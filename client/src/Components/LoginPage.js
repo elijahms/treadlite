@@ -100,7 +100,8 @@ const LoginPage = ({ setUser }) => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  error = {err && true}
+                  error = {err ? true : false}
+                  helperText = {err ? err : ""}
                   onFocus={() => setErr('')}
                 />
               </Grid>
@@ -113,8 +114,7 @@ const LoginPage = ({ setUser }) => {
                   type={showPassword ? 'text' : 'password'}
                   id="password"
                   autoComplete="new-password"
-                  error = {err && true}
-                  helperText = {err && err}
+                  error = {err ? true : false}
                   onFocus={() => setErr('')}
                   endAdornment={
                     <InputAdornment position="end">
