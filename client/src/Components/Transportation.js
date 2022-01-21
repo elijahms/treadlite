@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 
 const transportarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
-const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#3e5369"];
 
 const Transportation = ({ setTabValue }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);

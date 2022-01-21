@@ -21,7 +21,7 @@ import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded
 
 const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 const shopping_freq_arr = ["Once", "Twice", "xThree", "xFour", "xFive"];
-const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#3e5369"];
 
 const Shopping = ({ setTabValue }) => {
   const [shoppingHabit, setShoppingHabit] = useState({
@@ -44,9 +44,9 @@ const Shopping = ({ setTabValue }) => {
   };
 
   const shoppingRadioDefault = () => {
-    if (shoppingHabit.shop_time_freq == 52) {
+    if (shoppingHabit.shop_time_freq === 52) {
       return 52
-    } else if (shoppingHabit.shop_time_freq == 12) {
+    } else if (shoppingHabit.shop_time_freq === 12) {
       return 12
     } else {
       return 1

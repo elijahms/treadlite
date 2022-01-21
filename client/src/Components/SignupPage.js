@@ -8,9 +8,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink, useHistory } from "react-router-dom";
 import Paper from "@mui/material/Paper";
+import { useState } from 'react'
 
 const SignUpPage = ({ setUser }) => {
   const history = useHistory();
+  const [err, setErr] = useState('')
 
   function Copyright() {
     return (
@@ -27,6 +29,36 @@ const SignUpPage = ({ setUser }) => {
         {"."}
       </Typography>
     );
+  }
+
+  const emailHelper = () => {
+    if (err.includes("Email can't be blank")) {
+      return "Email can't be blank"
+    } else if (err.includes("Email has already been taken")) {
+      return "Email has already been taken"
+    } else {
+      return null
+    }
+  }
+
+  const passwordHelper = () => {
+    if (err.includes("Password confirmation doesn't match Password")) {
+      return "Passwords do not match"
+    } else if (err.includes("Password confirmation can't be blank")) {
+      return "Password confirmation can't be blank"
+    } else {
+      return null
+    }
+  }
+
+  const usernameHelper = () => {
+    if (err.includes("Username can't be blank")) {
+      return "Username can't be blank"
+    } else if (err.includes("Username has already been taken")) {
+      return "Username has already been taken"
+    } else {
+      return null
+    }
   }
 
   function handleSubmit(e) {
@@ -50,10 +82,14 @@ const SignUpPage = ({ setUser }) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
+          setErr('')
           history.push("/account");
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          setErr(err.errors)
+          console.log(err.errors)
+        });
       }
     });
   }
@@ -80,6 +116,8 @@ const SignUpPage = ({ setUser }) => {
           <Box
             component="form"
             noValidate
+            autoComplete="off"
+            onFocus={() => setErr('')}
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
@@ -93,6 +131,8 @@ const SignUpPage = ({ setUser }) => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  error={err.includes("First name can't be blank") ? true : false}
+                  helperText={err.includes("First name can't be blank") && "First name can't be blank"}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -103,6 +143,8 @@ const SignUpPage = ({ setUser }) => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  error={err.includes("Last name can't be blank") ? true : false}
+                  helperText={err.includes("Last name can't be blank") && "Last name can't be blank"}
                 />
               </Grid>
               <Grid item xs={12} sm={12}>
@@ -112,6 +154,8 @@ const SignUpPage = ({ setUser }) => {
                   id="username"
                   label="Username"
                   name="username"
+                  error={err.includes("Username can't be blank") || err.includes("Username has already been taken")  ? true : false}
+                  helperText={usernameHelper()}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -122,6 +166,8 @@ const SignUpPage = ({ setUser }) => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  error={err.includes("Email can't be blank") || err.includes("Email has already been taken")  ? true : false}
+                  helperText={emailHelper()}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,6 +179,8 @@ const SignUpPage = ({ setUser }) => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  error={err.includes("Password can't be blank") ? true : false}
+                  helperText={err.includes("Password can't be blank") && "Password can't be blank"}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -144,6 +192,8 @@ const SignUpPage = ({ setUser }) => {
                   type="password"
                   id="confirm-password"
                   autoComplete="new-password"
+                  error={err.includes("Password confirmation doesn't match Password") || err.includes("Password confirmation can't be blank")  ? true : false}
+                  helperText={passwordHelper()}
                 />
               </Grid>
             </Grid>

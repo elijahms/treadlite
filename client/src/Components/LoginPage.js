@@ -8,9 +8,18 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink, useHistory } from "react-router-dom";
+import { useState } from "react";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from '@mui/material/InputLabel';
 
 const LoginPage = ({ setUser }) => {
   const history = useHistory();
+  const [err, setErr] = useState("");
+  const [showPassword, setShowPassword] = useState(false)
 
   function Copyright() {
     return (
@@ -49,7 +58,9 @@ const LoginPage = ({ setUser }) => {
           history.push("/account");
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => {
+          setErr(err.error);
+        });
       }
     });
   }
@@ -89,17 +100,35 @@ const LoginPage = ({ setUser }) => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  error = {err && true}
+                  onFocus={() => setErr('')}
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
+              <InputLabel htmlFor="password">Password</InputLabel>
+                <OutlinedInput
                   required
                   fullWidth
                   name="password"
-                  label="Password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   autoComplete="new-password"
+                  error = {err && true}
+                  helperText = {err && err}
+                  onFocus={() => setErr('')}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword(() => !showPassword)}
+                        onMouseDown={(e) => e.preventDefault()}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  // label="Password"
                 />
               </Grid>
             </Grid>

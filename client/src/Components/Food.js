@@ -61,7 +61,7 @@ const Food = () => {
     "Meat (1-2) /week",
     "Meat (3+) /week",
   ];
-  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+  const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#3e5369"];
 
   useEffect(() => {
     fetch("/api/userrecord").then((r) => {

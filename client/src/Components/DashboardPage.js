@@ -10,6 +10,8 @@ const DashboardPage = () => {
     score: 0,
     rank: 0,
     avg_score: 0,
+    best_cat: "n/a",
+    worst_cat: 'n/a'
   });
 
   useEffect(() => {
@@ -104,6 +106,21 @@ const DashboardPage = () => {
             {"The average Treadliter score is: "}{" "}
             <span style={{ color: "#7558cc" }}>{userStats.avg_score}</span>
           </Typography>
+          {/* <Typography
+            component="h3"
+            color="text.secondary"
+            sx={{ fontSize: "1.5rem", mt: 2 }}
+          >
+            {"You're totally rocking the "}<span style={{ color: "#7558cc" }}>{userStats.best_cat}</span>{" category."}
+            
+          </Typography>
+          <Typography
+            component="h3"
+            color="text.secondary"
+            sx={{ fontSize: "1.5rem", mt: 2 }}
+          >
+            {"It looks like you have room to improve in the "}<span style={{ color: "#7558cc" }}>{userStats.worst_cat}</span>{" category."}
+          </Typography> */}
         </Box>
       </Paper>
     </Container>

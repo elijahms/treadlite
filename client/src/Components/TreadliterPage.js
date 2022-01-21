@@ -18,7 +18,7 @@ const TreadliterPage = ({ user }) => {
     "#86adae",
     "	#667f92",
     "#3e5369",
-    "#162640",
+    "#3e5369",
   ]);
   let today = new Date();
 

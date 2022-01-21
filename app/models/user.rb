@@ -5,6 +5,7 @@ class User < ApplicationRecord
             :last_name,
             :password_confirmation,
             :email,
+            :username,
             presence: true
   validates :email, :username, uniqueness: true
   has_one :userrecord, dependent: :destroy

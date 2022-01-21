@@ -68,19 +68,18 @@ const Friends = ({ user }) => {
       if (r.ok) {
         r.json().then((mess) => {
           setSnackMsg("Followed");
-          setOpenSnackBar(true);
           setFollowingList([...followingList, id]);
         });
       } else {
         r.json().then((err) => {
           setSnackMsg(err.errors);
-          setOpenSnackBar(true);
           setFollowingList(() =>
             [...followingList].filter((follow) => follow !== id)
           );
         });
       }
     });
+    setOpenSnackBar(true);
   }
 
   const trend = (trend) => {
@@ -292,7 +291,7 @@ const Friends = ({ user }) => {
                 return true;
               } else if (chipClick === "Top") {
                 return f.score >= 90;
-              } else if (chipClick == "Following") {
+              } else if (chipClick === "Following") {
                 return followingList.includes(f.id);
               } else {
                 return followerList.includes(f.id)
