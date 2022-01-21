@@ -150,7 +150,9 @@ class Userrecord < ApplicationRecord
     end
 
     def self.get_average_score
-        self.all.sum(:score) / self.all.count
+        without_zero = self.all.pluck(:score)
+        without_zero.filter! {|u| u > 0}
+        without_zero.sum / without_zero.count
     end
 
 end

@@ -43,14 +43,14 @@ class Api::UserrecordsController < ApplicationController
       render json: userrecord, status: :accepted
     end
 
-    # def show
-    #   userrecord = Userrecord.find_by(user_id: session[:user_id])
-    #   if userrecord
-    #     render json: userrecord, status: :ok
-    #   else
-    #     render json: { errors: ['No user found'] }, status: :not_found
-    #   end 
-    # end
+    def show
+      userrecord = Userrecord.find_by(user_id: session[:user_id])
+      if userrecord
+        render json: userrecord, status: :ok
+      else
+        render json: { errors: ['No user found'] }, status: :not_found
+      end 
+    end
 
     def dashboard
       user = User.find_by(id: session[:user_id])

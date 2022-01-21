@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
@@ -43,6 +43,36 @@ const Shopping = ({ setTabValue }) => {
     setOpenSnackBar(false);
   };
 
+  const shoppingRadioDefault = () => {
+    if (shoppingHabit.shop_time_freq == 52) {
+      return 52
+    } else if (shoppingHabit.shop_time_freq == 12) {
+      return 12
+    } else {
+      return 1
+    }
+  }
+
+  useEffect(() => {
+    fetch("/api/userrecord").then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          setShoppingHabit({
+            total_shop_freq: userrecord.total_shop_freq,
+            shop_time_freq: userrecord.shop_time_freq,
+            online_shop_freq: userrecord.online_shop_freq,
+            return_shop_freq: userrecord.return_shop_freq,
+            new_shop_freq: userrecord.new_shop_freq,
+          });
+        });
+      } else {
+        r.json().then((err) => {
+          console.log("error");
+        });
+      }
+    });
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetch("/api/shopping", {
@@ -81,7 +111,7 @@ const Shopping = ({ setTabValue }) => {
         <Slider
           aria-label="Custom marks"
           size="medium"
-          defaultValue={2}
+          value={shoppingHabit.total_shop_freq}
           step={1}
           min={0}
           max={4}
@@ -98,8 +128,8 @@ const Shopping = ({ setTabValue }) => {
         <RadioGroup
           row
           aria-label="freq"
-          defaultValue="week"
-          name="row-radio-buttons-group"
+          value={shoppingRadioDefault()}
+          name="month-week-year-shop-freq"
         >
           <FormControlLabel
             onClick={(e) =>
@@ -108,7 +138,7 @@ const Shopping = ({ setTabValue }) => {
                 shop_time_freq: 52,
               })
             }
-            value="week"
+            value={52}
             control={<Radio />}
             label="Week"
           />
@@ -119,7 +149,7 @@ const Shopping = ({ setTabValue }) => {
                 shop_time_freq: 12,
               })
             }
-            value="month"
+            value={12}
             control={<Radio />}
             label="Month"
           />
@@ -130,7 +160,7 @@ const Shopping = ({ setTabValue }) => {
                 shop_time_freq: 1,
               })
             }
-            value="year"
+            value={1}
             control={<Radio />}
             label="Year"
           />
@@ -146,9 +176,9 @@ const Shopping = ({ setTabValue }) => {
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ComputerIcon />
         <Slider
-          aria-label="Custom marks"
+          aria-label="Online Shopping Freq"
           size="medium"
-          defaultValue={1}
+          value={shoppingHabit.online_shop_freq}
           step={1}
           min={0}
           max={4}
@@ -170,9 +200,9 @@ const Shopping = ({ setTabValue }) => {
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <SentimentSatisfiedAltIcon />
         <Slider
-          aria-label="Custom marks"
+          aria-label="Return Shop Freq"
           size="medium"
-          defaultValue={3}
+          value={shoppingHabit.return_shop_freq}
           step={1}
           min={0}
           max={4}
@@ -196,7 +226,7 @@ const Shopping = ({ setTabValue }) => {
         <Slider
           aria-label="Custom marks"
           size="medium"
-          defaultValue={2}
+          value={shoppingHabit.new_shop_freq}
           step={1}
           min={0}
           max={4}

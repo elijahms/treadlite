@@ -28,7 +28,7 @@ const AccountPage = () => {
   }
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ height: "105vh" }}>
       <Paper>
         <Box sx={{ mt: 7, pb: 4 }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

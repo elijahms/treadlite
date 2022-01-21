@@ -216,13 +216,50 @@ const Friends = ({ user }) => {
           ml: 10,
           mt: 2,
           mr: 10,
+          pt: 0,
+          pb: 0
         }}
       >
-        <List dense>
+        <List dense
+        sx={{pb: 0.2, pt: 0.2}}
+        >
           <ListItem
             dense
             secondaryAction={
-              <CircularProgress sx={{color: 'text.secondary'}} variant="determinate" value={userData.score} />
+              <Box
+                sx={{
+                  position: "relative",
+                  display: "inline-flex",
+                  mt: 0.6,
+                }}
+              >
+                <CircularProgress
+                  variant="determinate"
+                  sx={{color: "#7558cc"}}
+                  value={userData.score}
+                />
+                <Box
+                  sx={{
+                    top: 1,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography
+                    variant="caption"
+                    component="div"
+                    color="text.secondary"
+                    sx={{ fontSize: "14pt" }}
+                  >
+                    {`${userData.score}`}
+                  </Typography>
+                </Box>
+              </Box>
             }
           >
             <ListItemAvatar>

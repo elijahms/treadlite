@@ -27,7 +27,7 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="md">
+    <Container component="main" maxWidth="md" sx={{mb: 5}}>
       <Paper
       sx={{
         borderRadius: "12px",
@@ -35,7 +35,7 @@ const DashboardPage = () => {
       >
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 5,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -48,7 +48,7 @@ const DashboardPage = () => {
           <Typography
             component="h2"
             color="text.primary"
-            sx={{ fontSize: "3rem", mt: 2, mb: 2}}
+            sx={{ fontSize: "2.5rem", mt: 2, mb: 2}}
           >
             {"YOUR SCORE"}
           </Typography>
@@ -57,10 +57,11 @@ const DashboardPage = () => {
               position: "relative",
               display: "inline-flex",
               mt: 0.6,
+              mb: 2
             }}
           >
             <CircularProgress
-              size="300px"
+              size="9rem"
               variant="determinate"
               value={userStats.score}
             />
@@ -80,7 +81,7 @@ const DashboardPage = () => {
                 variant="caption"
                 component="div"
                 color="text.secondary"
-                sx={{ fontSize: "8rem" }}
+                sx={{ fontSize: "4rem" }}
               >
                 {`${userStats.score}`}
               </Typography>
@@ -89,7 +90,7 @@ const DashboardPage = () => {
           <Typography
             component="h3"
             color="text.secondary"
-            sx={{ fontSize: "2rem", mt: 2 }}
+            sx={{ fontSize: "1.5rem", mt: 2 }}
           >
             {"YOU'RE RANKED #"}{" "}
             <span style={{ color: "#7558cc" }}>{userStats.rank}</span>{" "}
@@ -98,7 +99,7 @@ const DashboardPage = () => {
           <Typography
             component="h3"
             color="text.secondary"
-            sx={{ fontSize: "2rem", mt: 2 }}
+            sx={{ fontSize: "1.5rem", mt: 2 }}
           >
             {"The average Treadliter score is: "}{" "}
             <span style={{ color: "#7558cc" }}>{userStats.avg_score}</span>

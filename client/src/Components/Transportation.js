@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
@@ -29,6 +29,26 @@ const Transportation = ({ setTabValue }) => {
     }
     setOpenSnackBar(false);
   };
+
+  useEffect(() => {
+    fetch("/api/userrecord").then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          setTransportationHabit({
+            miles_per_gallon: userrecord.miles_per_gallon,
+            miles_per_week: userrecord.miles_per_week,
+            own_ev: userrecord.own_ev,
+            own_car: userrecord.own_car,
+            public_transport: userrecord.public_transport,
+          });
+        });
+      } else {
+        r.json().then((err) => {
+          console.log("error");
+        });
+      }
+    });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -122,7 +142,8 @@ const Transportation = ({ setTabValue }) => {
           <Slider
             aria-label="Custom marks"
             size="medium"
-            defaultValue={20}
+            // defaultValue={20}
+            value={transportationHabit.miles_per_gallon}
             step={1}
             min={15}
             max={55}
@@ -150,7 +171,8 @@ const Transportation = ({ setTabValue }) => {
         sx={{ mb: 8 }}
         aria-label="miles in a week"
         size="medium"
-        defaultValue={275}
+        // defaultValue={275}
+        value={transportationHabit.miles_per_week}
         disabled={!transportationHabit.own_car ? true : false}
         step={1}
         valueLabelDisplay="auto"
@@ -176,7 +198,7 @@ const Transportation = ({ setTabValue }) => {
         <Slider
           aria-label="Custom marks"
           size="medium"
-          defaultValue={2}
+          value={transportationHabit.public_transport}
           step={1}
           min={0}
           max={4}

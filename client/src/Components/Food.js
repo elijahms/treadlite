@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
@@ -44,7 +44,7 @@ const Food = () => {
       } else {
         r.json().then((err) => {
           error = true;
-          setErr(err.error);
+          setErr(err.errors);
         });
       }
     });
@@ -62,6 +62,20 @@ const Food = () => {
     "Meat (3+) /week",
   ];
   const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"];
+
+  useEffect(() => {
+    fetch("/api/userrecord").then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          setFoodHabit(userrecord.food_habit);
+        });
+      } else {
+        r.json().then((err) => {
+          console.log("error");
+        });
+      }
+    });
+  }, []);
 
   return (
     <Box
@@ -83,7 +97,7 @@ const Food = () => {
         <Slider
           aria-label="Custom marks"
           size="medium"
-          defaultValue={3}
+          value={foodHabit}
           step={1}
           min={0}
           max={4}

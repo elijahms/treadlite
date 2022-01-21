@@ -18,8 +18,8 @@ class User < ApplicationRecord
   has_many :followings, through: :given_follows, source: :followed_user
 
   def user_rank
-    #Userrecord.order(:score).pluck(:user_id).index(self.id)
-    Userrecord.order(:score).index{ |u| u.user_id == self.id }
+    rank = Userrecord.order(score: :desc).pluck(:user_id).index(self.id)
+    rank + 1
   end
 
 end

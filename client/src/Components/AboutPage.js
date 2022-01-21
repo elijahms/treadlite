@@ -1,11 +1,13 @@
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+
 
 const AboutPage = () => {
   return (
-    <Container component="main" maxWidth="md">
-      <Paper elevation={12}>
+    <Container component="main" maxWidth="md" sx={{mb: 5}}>
+      <Paper elevation={2}>
         <Box
           sx={{
             mt: 8,
@@ -31,6 +33,9 @@ const AboutPage = () => {
           <p>Image credit on the homepage: <cite>George Evans</cite> </p>
           <p>Thank you to the team behind MUI for making this project beautiful.</p>
           <a href="https://github.com/elijahms/treadlite">Check out Github for more details</a>
+          <Typography>
+            FAQ
+          </Typography>
         </Box>
       </Paper>
     </Container>

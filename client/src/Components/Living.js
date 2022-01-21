@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Button from "@mui/material/Button";
@@ -23,6 +23,27 @@ const Living = ({ setTabValue }) => {
   const [oil, setOil] = useState(false);
   const [err, setErr] = useState("");
   const [snackMsg, setSnackMsg] = useState("");
+
+  useEffect(() => {
+    fetch("/api/userrecord").then((r) => {
+      if (r.ok) {
+        r.json().then((userrecord) => {
+          setLivingHabit({
+            household_size: userrecord.household_size,
+            zip_code: userrecord.zip_code,
+            elec_cost: 1,
+            gas_cost: 1,
+            oil_cost: 1,
+            primary_heating: userrecord.primary_heating,
+          });
+        });
+      } else {
+        r.json().then((err) => {
+          console.log("error");
+        });
+      }
+    });
+  }, []);
 
 
   const handleClose = (event, reason) => {
@@ -71,7 +92,7 @@ const Living = ({ setTabValue }) => {
         <Slider
           aria-label="Household Size"
           size="medium"
-          defaultValue={2}
+          value={livingHabit.household_size}
           step={1}
           min={0}
           max={4}
@@ -85,6 +106,7 @@ const Living = ({ setTabValue }) => {
         <TextField
           id="zipcode-input"
           label="zipcode"
+          value={livingHabit.zip_code}
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({
