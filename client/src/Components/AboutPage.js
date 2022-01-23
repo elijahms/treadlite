@@ -10,8 +10,16 @@ import Stack from "@mui/material/Stack";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import EmailOutlined from "@mui/icons-material/EmailOutlined";
+import { useEffect } from "react";
 
 const AboutPage = () => {
+
+useEffect(() => {
+  window.scrollTo(0, 0)
+
+}, []);
+
+
   let faq = [
     {
       faq_title: "How does 'trends' work?",

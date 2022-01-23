@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
@@ -20,6 +20,11 @@ const LoginPage = ({ setUser }) => {
   const history = useHistory();
   const [err, setErr] = useState("");
   const [showPassword, setShowPassword] = useState(false)
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  
+  }, []);
 
   function Copyright() {
     return (

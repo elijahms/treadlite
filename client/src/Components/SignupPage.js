@@ -8,11 +8,16 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { NavLink, useHistory } from "react-router-dom";
 import Paper from "@mui/material/Paper";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const SignUpPage = ({ setUser }) => {
   const history = useHistory();
   const [err, setErr] = useState('')
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  
+  }, []);
 
   function Copyright() {
     return (

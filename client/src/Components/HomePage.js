@@ -2,7 +2,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { NavLink } from "react-router-dom";
 import { useSpring, animated, config } from '@react-spring/web'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FootprintTwo from '../Images/footprinttwo.jpg'
 
 const HomePage = () => {
@@ -19,6 +19,11 @@ const HomePage = () => {
     reverse: flip,
     onRest: () => set(!flip)
   })
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  
+  }, []);
 
   const MainDiv = useSpring({
     to: { filter: 'brightness(50%)' },
@@ -92,7 +97,7 @@ const HomePage = () => {
               {
                 "Treadliter is a tool to input, understand, track, and compare your estimated carbon footprint with youself and peers. \n \n If this is your first time here, head over to to the "
               }
-              <NavLink exact to="/account">
+              <NavLink exact to="/account/">
                 account
               </NavLink>
               {

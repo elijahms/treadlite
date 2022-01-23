@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -21,6 +21,11 @@ const TreadliterPage = ({ user }) => {
     "#3e5369",
   ]);
   let today = new Date();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  
+  }, []);
 
   const [tlHabit, setTlHabit] = useState({
     less_transport: 2,

@@ -93,6 +93,7 @@ const Friends = ({ user }) => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     fetch("api/users").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
