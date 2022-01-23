@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.9fb48626.css",
-    "main.js": "/static/js/main.bc9317a2.js",
+    "main.css": "/static/css/main.de93af7d.css",
+    "main.js": "/static/js/main.b5b7c3c3.js",
+    "static/media/footprinttwo.jpg": "/static/media/footprinttwo.123a73ef0a45a708d0db.jpg",
     "static/media/footprint.jpg": "/static/media/footprint.4120ed43949c417cfdc2.jpg",
     "static/media/Raleway-Medium.ttf": "/static/media/Raleway-Medium.1af9f1e9f3fd4766df83.ttf",
     "static/media/Raleway-ExtraBold.ttf": "/static/media/Raleway-ExtraBold.ac7bcb8a0f4abc1d6591.ttf",
-    "static/media/Lato-Regular.ttf": "/static/media/Lato-Regular.9919edff6283018571ad.ttf",
     "index.html": "/index.html",
-    "main.9fb48626.css.map": "/static/css/main.9fb48626.css.map",
-    "main.bc9317a2.js.map": "/static/js/main.bc9317a2.js.map"
+    "main.de93af7d.css.map": "/static/css/main.de93af7d.css.map",
+    "main.b5b7c3c3.js.map": "/static/js/main.b5b7c3c3.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fb48626.css",
-    "static/js/main.bc9317a2.js"
+    "static/css/main.de93af7d.css",
+    "static/js/main.b5b7c3c3.js"
   ]
 }
