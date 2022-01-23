@@ -29,7 +29,7 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="md" sx={{mb: 5}}>
+    <Container component="main" maxWidth="lg" sx={{mb: 15}}>
       <Paper
       sx={{
         borderRadius: "12px",

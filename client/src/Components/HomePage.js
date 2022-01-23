@@ -95,13 +95,13 @@ const HomePage = () => {
           <Box sx={{ mt: 7.5, mb: 10, pl: 3, pr: 3, alignItems: "center" }}>
             <Typography variant="h4" sx={{ color: "text.secondary" }}>
               {
-                "Treadliter is a tool to input, understand, track, and compare your estimated carbon footprint with youself and peers. \n \n If this is your first time here, head over to to the "
+                "Treadlite is a tool to input, understand, track, and compare your estimated carbon footprint with yourself and peers. \n \n If this is your first time here, head over to to the "
               }
               <NavLink exact to="/account/">
                 account
               </NavLink>
               {
-                " section to set up your profile. If you want to know more about what this project is about heading over to "
+                " section to set up your profile. If you want to know more about what this project is about, head over to the "
               }
               <NavLink exact to="/about">
                 about
