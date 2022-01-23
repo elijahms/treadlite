@@ -24,9 +24,9 @@ const TreadliterPage = ({ user }) => {
 
   const [tlHabit, setTlHabit] = useState({
     less_transport: 2,
-    less_meat: 2,
+    less_meat: 1,
     turned_off_lights: 2,
-    bought_less: 2,
+    bought_less: 3,
   });
 
   const handleClose = (event, reason) => {
@@ -99,8 +99,10 @@ const TreadliterPage = ({ user }) => {
   // }, []);
 
   return (
-    <Container component="main" maxWidth="md" sx={{ minHeight: "105vh" }}>
-      <Paper>
+    <Container component="main" maxWidth="lg" sx={{ minHeight: "105vh" }}>
+      <Paper elevation={2}
+      sx={{ borderRadius: "12px" }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -111,8 +113,8 @@ const TreadliterPage = ({ user }) => {
             p: 2,
           }}
         >
-          <Typography sx={{ textAlign: "center", mb: 6 }} variant="h4">
-            Move Your Trends – Treadliter!
+          <Typography sx={{ textAlign: "center", mb: 6,}} variant="h5">
+            Move Your Trends <span style={{color: 'grey'}} > - Treadliter </span>
           </Typography>
 
           <Typography id="non-linear-slider" gutterBottom>
@@ -155,7 +157,7 @@ const TreadliterPage = ({ user }) => {
             <Slider
               aria-label="Custom marks"
               size="medium"
-              defaultValue={2}
+              defaultValue={1}
               step={1}
               min={0}
               max={4}
@@ -181,7 +183,7 @@ const TreadliterPage = ({ user }) => {
             <Slider
               aria-label="Custom marks"
               size="medium"
-              defaultValue={2}
+              defaultValue={3}
               step={1}
               min={0}
               max={4}

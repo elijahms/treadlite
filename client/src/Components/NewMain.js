@@ -152,29 +152,23 @@ const ResponsiveAppBar = ({ user, setUser }) => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <NavLink
-                      className="navlinks"
-                      exact
-                      to={`/${setting.toLowerCase()}`}
-                    >
-                      {setting}
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
+                <NavLink
+                  className="navlinks"
+                  exact
+                  to={`/${setting.toLowerCase()}`}
+                  key={setting}
+                >
+                  <MenuItem onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                </NavLink>
               ))}
               {user && (
-                <MenuItem
-                  key="Logout"
-                  onClick={(handleCloseNavMenu, handleLogout)}
-                >
-                  <Typography textAlign="center">
-                    <NavLink className="navlinks" exact to="/logout">
-                      Logout
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
+                <NavLink className="navlinks" exact to="/logout" ley="Logout">
+                  <MenuItem onClick={(handleCloseNavMenu, handleLogout)}>
+                    <Typography textAlign="center"> Logout </Typography>
+                  </MenuItem>
+                </NavLink>
               )}
             </Menu>
           </Box>

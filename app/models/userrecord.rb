@@ -201,6 +201,7 @@ end
 ##($$ price per month/$4.02)*22.61
 ## ef_fuel_oil_gallon --source Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38. http://www.epa.gov/climatechange/ghgemissions/usinventoryreport.html.
 ## fuel oil cost --source Energy Information Administration, 2013. US No. 2 Heating Oil Residential Prices - 2012 annual average. http://www.eia.gov/petroleum/heatingoilpropane/, http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=M_EPD2F_PRS_NUS_DPG&f=M
+## e-grid https://www.epa.gov/egrid/data-explorer
 
 ##Average annual CO2 emissions from fuel oil per household	12,460
 ##404 pounds is about average for a household of one person per month.

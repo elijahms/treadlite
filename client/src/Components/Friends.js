@@ -141,7 +141,7 @@ const Friends = ({ user }) => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="md" sx={{ minHeight: "105vh" }}>
+    <Container component="main" maxWidth="lg" sx={{ minHeight: "105vh" }}>
       <Box
         sx={{
           marginTop: 8,

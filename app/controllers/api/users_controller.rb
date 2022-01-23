@@ -37,7 +37,7 @@ class Api::UsersController < ApplicationController
     else 
       render json: { errors: ['No user found'] }, status: :not_found
     end
-end
+  end
 
 
   def index

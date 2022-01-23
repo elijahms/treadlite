@@ -33,19 +33,6 @@ a:active {
   background-size: cover;
 }
 
-@media only screen and (max-width: 600px) {
-  h1.homescreen-tagline {
-    margin-top: 15%;
-    font-size: 60pt;
-  }
-}
-
-.homescreen-tagline {
-  color: #f7f5ee;
-  text-align: center;
-  font-size: 10vw;
-}
-
 .logo {
   background-position: center;
   background-repeat: no-repeat;
@@ -61,9 +48,4 @@ a:active {
 @font-face {
   font-family: "Raleway";
   src: local("Raleway"), url(./Fonts/Raleway-ExtraBold.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "LatoR";
-  src: local("LatoR"), url(./Fonts/Lato-Regular.ttf) format("truetype");
 }
