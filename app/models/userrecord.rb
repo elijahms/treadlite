@@ -231,3 +231,9 @@ end
 #  Average miles traveled per year per vehicle	https:www.fhwa.dot.gov/ohim/onh00/bar8.htm	miles per year 13,476
 #  Average emissions for a typical vehicle	 10,484 	lbs CO2e/vehicle
 #  (1/21.6 mpg)*11,398 miles/year*19.6 lbs CO2/gallon*CO2e / CO2
+
+# shopping data
+# https://quantis-intl.com/wp-content/uploads/2018/03/measuringfashion_globalimpactstudy_full-report_quantis_cwf_2018a.pdf
+
+# https://www.thezebra.com/resources/driving/average-miles-driven-per-year/#infographic
+# average miles per year
