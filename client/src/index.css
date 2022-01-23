@@ -33,6 +33,17 @@ a:active {
   background-size: cover;
 }
 
+@media only screen and (max-width: 600px){
+  .hero-image {
+    background: url("./Images/mobilesizefootprint.jpg") no-repeat center center fixed;
+    /* filter: brightness(80%); */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+}
+
 .logo {
   background-position: center;
   background-repeat: no-repeat;

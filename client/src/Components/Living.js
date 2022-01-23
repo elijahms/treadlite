@@ -30,7 +30,6 @@ const Living = ({ setTabValue }) => {
         r.json().then((userrecord) => {
           setLivingHabit({
             household_size: userrecord.household_size,
-            zip_code: userrecord.zip_code,
             elec_cost: 1,
             gas_cost: 1,
             oil_cost: 1,
@@ -106,7 +105,7 @@ const Living = ({ setTabValue }) => {
         <TextField
           id="zipcode-input"
           label="zipcode"
-          value={livingHabit.zip_code}
+          // value={livingHabit.zip_code}
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({

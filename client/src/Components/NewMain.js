@@ -50,7 +50,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
           <Box
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ mr: 2, mt: 0.5, display: { xs: "none", md: "flex" } }}
           >
             <NavLink exact to="/">
               <img src="logo_transparent.png" alt="logo" className="logo" />
@@ -104,7 +104,7 @@ const ResponsiveAppBar = ({ user, setUser }) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
+            sx={{ flexGrow: 1, mt: 1.2, display: { xs: "flex", md: "none" } }}
           >
             <NavLink exact to="/">
               <img src="logo_transparent.png" alt="logo" className="logo" />

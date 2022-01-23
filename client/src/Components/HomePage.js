@@ -70,7 +70,7 @@ const HomePage = () => {
           </Box>
         </Box>
       </animated.div>
-      <div style={{ height: "100vh", marginTop: "10vh" }}>
+      <div style={{ height: "110vh", marginTop: "10vh" }}>
         <Box
           sx={{
             display: "flex",
@@ -92,7 +92,7 @@ const HomePage = () => {
             src={FootprintTwo}
           >
           </Box> */}
-          <Box sx={{ mt: 17, pl: 5, pr: 5, alignItems: "center" }}>
+          <Box sx={{ mt: 7.5, mb: 10, pl: 3, pr: 3, alignItems: "center" }}>
             <Typography variant="h4" sx={{ color: "text.secondary" }}>
               {
                 "Treadliter is a tool to input, understand, track, and compare your estimated carbon footprint with youself and peers. \n \n If this is your first time here, head over to to the "
@@ -101,7 +101,7 @@ const HomePage = () => {
                 account
               </NavLink>
               {
-                " section to set up your profile. \n \n If you want to know more about what this project is about heading over to "
+                " section to set up your profile. If you want to know more about what this project is about heading over to "
               }
               <NavLink exact to="/about">
                 about
