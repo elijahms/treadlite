@@ -72,7 +72,7 @@ const LoginPage = ({ setUser }) => {
 
   return (
     <Container component="main" maxWidth="sm">
-      <Paper>
+      <Paper sx={{ borderRadius: "12px" }}>
         <Box
           sx={{
             mt: 8,
@@ -160,7 +160,9 @@ const LoginPage = ({ setUser }) => {
           </Box>
         </Box>
       </Paper>
-      <Copyright />
+      <Copyright 
+      sx={{mb: 5}}
+      />
     </Container>
   );
 };

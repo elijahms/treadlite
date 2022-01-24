@@ -21,7 +21,7 @@ const AboutPage = () => {
     {
       faq_title: "How do 'trends' work?",
       faq_content:
-        "Each week you have an opportunity to improve. Once a week input your activity from the previous week to see if your trends have moved, down, or stayed the same. In the 'friends' tab, other users' trends are denoted with emojis based on their trends: three stars for going up, two cool faces for staying the same, and one face-palm person for going down.",
+        "Each week you have an opportunity to improve. Once a week, input your activity from the previous week to see if your trends have moved up, down, or stayed the same. In the 'friends' tab, other users' trends are denoted with emojis based on their trends: three stars for going up, two cool faces for staying the same, and one face-palm person for going down.",
     },
     {
       faq_title: "How is my score calculated?",
@@ -30,7 +30,7 @@ const AboutPage = () => {
     {
       faq_title: "No really, how is my score calculated?",
       faq_content:
-        "It is an evolving calculation, but as of 1/23/2022, the four categories: transportation, living, shopping, and eating are weighted 32.5%, 39%, 10%, and 18.5%, respectfully. A user is given a score out of 100 in each of these categories and then their total score is calculated using these weighted averages. The exact calculation for each category can be viewed in the source code, but it ranges from the relatively complex 'living' calculation to the relatively simple 'eating' calculation. ",
+        "It is an evolving calculation, but as of 1/23/2022, the four categories of transportation, living, shopping, and eating are weighted 32.5%, 39%, 10%, and 18.5%, respectfully. A user is given a score out of 100 in each of these categories and then their total score is calculated using these weighted averages. The exact calculation for each category can be viewed in the source code, but it ranges from the relatively complex 'living' calculation to the relatively simple 'eating' calculation. ",
     },
   ];
 
@@ -39,24 +39,34 @@ const AboutPage = () => {
       <Paper elevation={2} sx={{ borderRadius: "12px" }}>
         <Box
           sx={{
-            mt: 8,
+            mt: 6,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             ml: 2,
             mr: 2,
-            p: 2,
+            p: 1.2,
             whiteSpace: "pre-line",
           }}
         >
-          <Typography variant="h4" sx={{ mb: 5, mt: 5 }}>
+          <Typography
+            variant="h4"
+            sx={{
+              mb: 5,
+              mt: 3,
+              fontSize: "2rem",
+              "@media only screen and (max-width: 600px)": {
+                fontSize: "1.3rem",
+              }
+            }}
+          >
             {
-              "Treadlite aims to inform people about their carbon footprint by seeing how they compare to others."
+              "Treadlite aims to inform people about their carbon footprint by showing how they compare to others."
             }
           </Typography>
           <Typography variant="h6" sx={{ mb: 5 }}>
             {
-              "So how does it work? \n \n On the 'account' page, you input information about your habits in four categories - 'transporation', 'home', 'food', and 'shopping'. Once inputted, your score is calculated. To view your score, head over to the 'dashboard' page. \n\n The score is converted to percentage in order to be more accessible, understandable, and comparable.\n \n A score of zero represents the largest (worst) carbon footprint a average person in the US outputs (approx. 95th + percentile). \n \n A score of 100 represents the smallest average carbon footprint (approx. 5th percentile and lower.) \n\n Finally, the 'treadliter' page is a resource to encourage healthy carbon footprint habits, and each week a user can input their activites and see how they trend that week. \n\n The 'friend' page is a resource for users to see other treadliters' scores and trends. If one wishes, they can follow other users or see top users."
+              "So how does it work? \n \n On the 'account' page, you input information about your habits in four categories - 'transporation', 'home', 'food', and 'shopping'. Once inputted, your score is calculated. To view your score, head over to the 'dashboard' page. \n\n That score is converted to a percentage in order to be more accessible, understandable, and comparable.\n \n A score of zero represents the largest (worst) carbon footprint an average person in the US outputs (approx. 95th + percentile). \n \n A score of 100 represents the smallest average carbon footprint (approx. 5th percentile and lower.) \n\n Finally, the 'treadliter' page is a resource to encourage healthy carbon footprint habits, and each week a user can input their activites and see how they trend that week. \n\n The 'friends' page is a resource for users to see other treadliters' scores and trends. If one wishes, they can follow other users or see top users."
             }
           </Typography>
           <Typography variant="h5" sx={{ mt: 4 }}>
@@ -80,13 +90,22 @@ const AboutPage = () => {
           })}
           <Typography
             variant="p"
-            sx={{ color: "text.secondary", fontSize: "0.8rem", mt: 5 }}
+            align="center"
+            sx={{
+              color: "text.secondary",
+              fontSize: "0.8rem",
+              mt: 5,
+            }}
           >
             Image credit on the homepage: <cite>George Evans</cite>{" "}
           </Typography>
           <Typography
             variant="p"
-            sx={{ color: "text.secondary", fontSize: "0.8rem" }}
+            align="center"
+            sx={{
+              color: "text.secondary",
+              fontSize: "0.8rem",
+            }}
           >
             Thank you to the team behind MUI for making this project beautiful.
           </Typography>

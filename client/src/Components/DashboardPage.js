@@ -91,6 +91,7 @@ const DashboardPage = () => {
           </Box>
           <Typography
             component="h3"
+            align='center'
             color="text.secondary"
             sx={{ fontSize: "1.5rem", mt: 2 }}
           >
@@ -100,6 +101,7 @@ const DashboardPage = () => {
           </Typography>
           <Typography
             component="h3"
+            align='center'
             color="text.secondary"
             sx={{ fontSize: "1.5rem", mt: 2 }}
           >
