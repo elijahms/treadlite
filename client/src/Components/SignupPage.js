@@ -93,7 +93,6 @@ const SignUpPage = ({ setUser }) => {
       } else {
         r.json().then((err) => {
           setErr(err.errors)
-          console.log(err.errors)
         });
       }
     });

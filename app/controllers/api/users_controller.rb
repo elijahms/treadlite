@@ -13,9 +13,6 @@ class Api::UsersController < ApplicationController
   def show
     user = User.find_by!(id: session[:user_id])
     render json: user, status: :ok
-    # else
-    #   render json: { errors: 'Your email and/or password are incorrect. Please try again.' }, status: :not_found
-    # end 
   end
 
   def following

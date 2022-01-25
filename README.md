@@ -49,6 +49,8 @@ Created by [@elijahsilverman](https://elijahsilverman.com/) - feel free to conta
 - [@George Evans](https://unsplash.com/@george_evans) for the cover image via Unsplash
 - MUI - thank you for the incredivle team behind this project! This was an invaluable resource
 - Heroku - thank you for a warm and cozy place to host the site!
+- [@Leizl Samano](https://betterprogramming.pub/how-to-create-a-follow-feature-in-rails-by-aliasing-associations-30d63edee284) for a great blog post on creating a 'following/follower' model
+- [@junjun](https://codepen.io/postor/pen/mskxI) for the awesome homepage scroll arrows
 
 ## Data Sources
 

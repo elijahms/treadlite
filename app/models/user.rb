@@ -24,5 +24,3 @@ class User < ApplicationRecord
   end
 
 end
-
-## https://betterprogramming.pub/how-to-create-a-follow-feature-in-rails-by-aliasing-associations-30d63edee284

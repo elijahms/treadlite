@@ -1,5 +1,5 @@
 class Api::UserrecordsController < ApplicationController
-    
+
     def create
       user = User.find_by(id: session[:user_id])
       userrecord = user.userrecord
@@ -62,6 +62,7 @@ class Api::UserrecordsController < ApplicationController
         render json: {score: score, rank: rank, avg_score: avg_score}, status: :ok
       else
         render json: { errors: ['No user found'] }, status: :not_found
+      end 
     end 
 
 
@@ -85,7 +86,11 @@ class Api::UserrecordsController < ApplicationController
 
     def userscore
       userrecord = Userrecord.find_by(user_id: session[:user_id])
-      render json: userrecord, status: :ok
+      if userrecord
+        render json: userrecord, status: :ok
+      else 
+        render json: { errors: ['No user found'] }, status: :unauthorized
+      end 
     end
 
   private

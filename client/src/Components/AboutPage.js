@@ -54,19 +54,19 @@ const AboutPage = () => {
             sx={{
               mb: 5,
               mt: 3,
-              fontSize: "2rem",
+              fontSize: "1.4rem",
               "@media only screen and (max-width: 600px)": {
                 fontSize: "1.3rem",
-              }
+              },
             }}
           >
             {
-              "Treadlite aims to inform people about their carbon footprint by showing how they compare to others."
+              "Understand your carbon footprint with Treadlite"
             }
           </Typography>
           <Typography variant="h6" sx={{ mb: 5 }}>
             {
-              "So how does it work? \n \n On the 'account' page, you input information about your habits in four categories - 'transporation', 'home', 'food', and 'shopping'. Once inputted, your score is calculated. To view your score, head over to the 'dashboard' page. \n\n That score is converted to a percentage in order to be more accessible, understandable, and comparable.\n \n A score of zero represents the largest (worst) carbon footprint an average person in the US outputs (approx. 95th + percentile). \n \n A score of 100 represents the smallest average carbon footprint (approx. 5th percentile and lower.) \n\n Finally, the 'treadliter' page is a resource to encourage healthy carbon footprint habits, and each week a user can input their activites and see how they trend that week. \n\n The 'friends' page is a resource for users to see other treadliters' scores and trends. If one wishes, they can follow other users or see top users."
+              "So how does it work 🤔🤔 \n \n 1️⃣ Input information about your habits in four categories - 'transporation', 'home', 'food', and 'shopping'. \n\n 2️⃣ Your score is calculated (head over to the 'dashboard' page to view). \n\n 3️⃣ Your score is converted to a percentage for accessiblity 👍 understandablness ✨ and comparability🔥.\n\n 🦶🦶 'treadliter' page is a resource to encourage healthy carbon footprint habits, and each week a user can input their activites and see how they trend that week. \n\n🤝🤝 'friends' is a resource for users to see other treadliters' scores and trends. If one wishes, they can follow other users or see top users."
             }
           </Typography>
           <Typography variant="h5" sx={{ mt: 4 }}>
