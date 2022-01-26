@@ -61,8 +61,6 @@ class Api::UserrecordsController < ApplicationController
       render json: {score: score, rank: rank, avg_score: avg_score}, status: :ok
     end 
 
-
-  end 
     def update
       userrecord = Userrecord.find_by(id: params[:id])
       userrecord.update!(userrecord_params)

@@ -1,14 +1,23 @@
 {
-  "name": "tread-lite",
-  "description": "Build scripts for Heroku",
-  "engines": {
-    "node": "16.x"
+  "name": "treadlite2",
+  "version": "1.0.0",
+  "description": "Treadlite aims to bring awareness to peoples' carbon footprint, using a complex and comprehensive scoring method.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
   },
   "scripts": {
-    "clean": "rm -rf public",
-    "build": "npm install --prefix client && npm run build --prefix client",
-    "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {}
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elijahms/treadlite.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elijahms/treadlite/issues"
+  },
+  "homepage": "https://github.com/elijahms/treadlite#readme"
 }
