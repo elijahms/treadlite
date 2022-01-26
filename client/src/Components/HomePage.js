@@ -4,9 +4,9 @@ import Grid from "@mui/material/Grid";
 import { NavLink } from "react-router-dom";
 import { useSpring, animated, config } from "@react-spring/web";
 import { useState, useEffect } from "react";
-// import SocialPerson from "../Images/socialperson.svg";
-// import TreeImage from "../Images/adventure.svg";
-// import MomentToRemember from "../Images/momenttoremember.svg";
+import SocialPerson from "../Images/socialperson.svg";
+import Adventure from "../Images/adventure.svg";
+import MomentToRemember from "../Images/momenttoremember.svg";
 
 const HomePage = () => {
   const [mainText, setMainText] = useState("Make less of an impact.");
@@ -115,7 +115,7 @@ const HomePage = () => {
               width: "100%",
               // border: "2px solid blue",
             }}
-            // src={SocialPerson}
+            src={SocialPerson}
           ></Box>
         </Grid>
         <Grid
@@ -166,7 +166,7 @@ const HomePage = () => {
                 width: "100%",
                 // border: "2px solid blue",
               }}
-              // src={TreeImage}
+              src={Adventure}
             ></Box>
           </Grid>
         )}
@@ -220,7 +220,7 @@ const HomePage = () => {
               width: "100%",
               // border: "2px solid blue",
             }}
-            // src={MomentToRemember}
+            src={MomentToRemember}
           ></Box>
         </Grid>
       </Grid>
