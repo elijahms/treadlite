@@ -241,7 +241,6 @@ const HomePage = () => {
           {"Elijah Silverman - 2022 "}
         </Typography>
       </Box>
-      <img src={Adventure}/>
     </div>
   );
 };
