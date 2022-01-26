@@ -224,23 +224,26 @@ const HomePage = () => {
           ></Box>
         </Grid>
       </Grid>
-      <Box
+      <Grid
+        container
+        justifyContent="center"
         sx={{
           width: "100vw",
           justify: "center",
-          pl: "42vw",
         }}
       >
-        <Typography
-          variant="p"
-          align="justify"
-          sx={{
-            color: "text.primary",
-          }}
-        >
-          {"Elijah Silverman - 2022 "}
-        </Typography>
-      </Box>
+        <Grid>
+          <Typography
+            variant="p"
+            align="justify"
+            sx={{
+              color: "text.primary",
+            }}
+          >
+            {"Elijah Silverman - 2022 "}
+          </Typography>
+        </Grid>
+      </Grid>
     </div>
   );
 };
