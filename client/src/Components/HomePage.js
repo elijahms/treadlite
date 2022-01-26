@@ -11,7 +11,21 @@ import MomentToRemember from "../assets/momenttoremember.svg";
 const HomePage = () => {
   const [mainText, setMainText] = useState("Make less of an impact.");
   const [flip, set] = useState(false);
-  let screenSize = window.innerWidth;
+  // let screenSize = window.innerWidth;
+
+//   const heightOutput = document.querySelector("#height");
+//   const widthOutput = document.querySelector("#width");
+  
+//  function reportWindowSize() {
+//    heightOutput.textContent = window.innerHeight;
+//    widthOutput.textContent = window.innerWidth;
+//  }
+
+//  window.onresize = reportWindowSize;
+
+let windowSize = document.documentElement.clientWidth
+window.onresize = function() {return windowSize};
+
 
   const MainText = useSpring({
     to: { opacity: 0 },
@@ -60,7 +74,7 @@ const HomePage = () => {
                   color: "#FFFFFF",
                   textAlign: "center",
                   fontSize: "10vw",
-                  "@media only screen and (max-width: 600px)": {
+                  "@media only screen and (max-width: 500px)": {
                     fontSize: "22vw",
                   },
                 }}
@@ -149,7 +163,7 @@ const HomePage = () => {
             </Typography>
           </Box>
         </Grid>
-        {screenSize < 600 && (
+        {windowSize < 600 && (
           <Grid
             xs={12}
             sx={

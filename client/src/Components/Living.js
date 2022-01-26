@@ -22,7 +22,7 @@ const Living = ({ setTabValue }) => {
   const [gas, setGas] = useState(false);
   const [oil, setOil] = useState(false);
   const [err, setErr] = useState("");
-  const [snackMsg, setSnackMsg] = useState("");
+  //const [snackMsg, setSnackMsg] = useState("");
 
   useEffect(() => {
     fetch("/api/userrecord").then((r) => {
@@ -38,12 +38,11 @@ const Living = ({ setTabValue }) => {
         });
       } else {
         r.json().then((err) => {
-          console.log("error");
+          setErr(err.errors);
         });
       }
     });
   }, []);
-
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -62,7 +61,9 @@ const Living = ({ setTabValue }) => {
       body: JSON.stringify(livingHabit),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(() => {console.log('Updated')});
+        r.json().then(() => {
+          console.log("Updated");
+        });
       } else {
         r.json().then((err) => console.log(err));
       }
@@ -117,7 +118,8 @@ const Living = ({ setTabValue }) => {
       </Stack>
 
       <Typography id="primary-heating-text" gutterBottom>
-        My living space is heated <span style={{textDecoration: 'underline'}}>primarily</span> with:
+        My living space is heated{" "}
+        <span style={{ textDecoration: "underline" }}>primarily</span> with:
       </Typography>
       <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
         <ButtonGroup fullWidth>
