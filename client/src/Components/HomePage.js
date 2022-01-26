@@ -4,9 +4,9 @@ import Grid from "@mui/material/Grid";
 import { NavLink } from "react-router-dom";
 import { useSpring, animated, config } from "@react-spring/web";
 import { useState, useEffect } from "react";
-import SocialPerson from "../Images/socialperson.svg";
-import Adventure from "../Images/adventure.svg";
-import MomentToRemember from "../Images/momenttoremember.svg";
+import SocialPerson from "../Assets/socialperson.svg";
+import Adventure from "../Assets/adventure.svg";
+import MomentToRemember from "../Assets/momenttoremember.svg";
 
 const HomePage = () => {
   const [mainText, setMainText] = useState("Make less of an impact.");
