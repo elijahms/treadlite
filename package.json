@@ -10,7 +10,5 @@
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run clean && npm run build && npm run deploy"
   },
-  "dependencies": {
-    "ruby": "^0.6.1"
-  }
+  "dependencies": {}
 }
