@@ -35,10 +35,10 @@ a:active {
 @media only screen and (max-width: 600px){
   .hero-image {
     background: url("./assets/Images/mobilesizefootprint.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    -webkit-background-size: 130vw;
+    -moz-background-size: 130vw;
+    -o-background-size: 130vw;
+    background-size: 130vw;
   }
 }
 
