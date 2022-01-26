@@ -25,7 +25,7 @@ a:active {
 }
 
 .hero-image {
-  background: url("./Assets/Images/footprint.jpg") no-repeat center center fixed;
+  background: url("./assets/Images/footprint.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -34,7 +34,7 @@ a:active {
 
 @media only screen and (max-width: 600px){
   .hero-image {
-    background: url("./Assets/Images/mobilesizefootprint.jpg") no-repeat center center fixed;
+    background: url("./assets/Images/mobilesizefootprint.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

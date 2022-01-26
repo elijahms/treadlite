@@ -4,9 +4,9 @@ import Grid from "@mui/material/Grid";
 import { NavLink } from "react-router-dom";
 import { useSpring, animated, config } from "@react-spring/web";
 import { useState, useEffect } from "react";
-import SocialPerson from "../Assets/socialperson.svg";
-import Adventure from "../Assets/adventure.svg";
-import MomentToRemember from "../Assets/momenttoremember.svg";
+import SocialPerson from "../assets/socialperson.svg";
+import Adventure from "../assets/adventure.svg";
+import MomentToRemember from "../assets/momenttoremember.svg";
 
 const HomePage = () => {
   const [mainText, setMainText] = useState("Make less of an impact.");
@@ -228,12 +228,12 @@ const HomePage = () => {
         sx={{
           width: "100vw",
           justify: "center",
-          pl: '42vw'
+          pl: "42vw",
         }}
       >
         <Typography
           variant="p"
-          align='justify'
+          align="justify"
           sx={{
             color: "text.primary",
           }}
@@ -241,6 +241,7 @@ const HomePage = () => {
           {"Elijah Silverman - 2022 "}
         </Typography>
       </Box>
+      <img src={Adventure}/>
     </div>
   );
 };

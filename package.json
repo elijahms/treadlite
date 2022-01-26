@@ -1,5 +1,5 @@
 {
-  "name": "treadlite2",
+  "name": "treadlite",
   "version": "1.0.0",
   "description": "Treadlite aims to bring awareness to peoples' carbon footprint, using a complex and comprehensive scoring method.",
   "main": "index.js",
