@@ -78,8 +78,10 @@ class Api::UserrecordsController < ApplicationController
   end
 
   def userscore
+    user = User.find_by(id: session[:user_id])
     userrecord = Userrecord.find_by(user_id: session[:user_id])
-    render json: userrecord, status: :ok
+    rank = user.user_rank
+    render json: {data: userrecord, rank: rank}, status: :ok
   end
 
   private

@@ -31,6 +31,7 @@ const Friends = ({ user }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [err, setErr] = useState("");
   const [followerList, setFollowerList] = useState([""]);
+  const [userRank, setUserRank] = useState(['4'])
   const [snackMsg, setSnackMsg] = useState("");
   const [userData, setUserData] = useState({
     username: "User",
@@ -120,7 +121,8 @@ const Friends = ({ user }) => {
     fetch("api/userscore").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
-          setUserData(data);
+          setUserData(data.data);
+          setUserRank(data.rank)
         });
       } else {
         r.json().then((err) => {
@@ -209,18 +211,20 @@ const Friends = ({ user }) => {
         </Stack>
       </Box>
       <Paper
+        elevation={0}
         sx={{
-          backgroundColor: "primary.main",
+          // backgroundColor: "primary.main",
           borderRadius: "12px",
           alignItems: "center",
-          ml: 10,
+          border: "2px solid green",
+          ml: 0,
           mt: 2,
-          mr: 10,
+          mr: 0,
           pt: 0,
           pb: 0,
         }}
       >
-        <List dense sx={{ pb: 0.2, pt: 0.2 }}>
+        <List sx={{ pb: 0.2, pt: 0.2 }}>
           <ListItem
             dense
             secondaryAction={
@@ -260,6 +264,14 @@ const Friends = ({ user }) => {
               </Box>
             }
           >
+            <Typography
+              variant="caption"
+              component="div"
+              color="text.secondary"
+              sx={{ fontSize: "14pt", mr: 1.1 }}
+            >
+              {`🥇${userRank}`}
+            </Typography>
             <ListItemAvatar>
               <Avatar sx={{ color: "#7558cc" }}>
                 {user ? user.first_name[0] + user.last_name[0] : "U"}
@@ -280,7 +292,7 @@ const Friends = ({ user }) => {
           flexDirection: "column",
           maxHeight: 550,
           overflow: "auto",
-          borderRadius: "7px",
+          // borderRadius: "7px",
         }}
       >
         <List>
@@ -299,7 +311,10 @@ const Friends = ({ user }) => {
             .map((friend, index) => {
               return (
                 <div key={index}>
-                  <Paper elevation={index < 20 ? parseInt(index) : 20}>
+                  <Paper
+                    elevation={1}
+                    // sx={{ borderRadius: "12px" }}
+                  >
                     <ListItem
                       secondaryAction={
                         <Box
