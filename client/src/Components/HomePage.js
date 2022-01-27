@@ -82,7 +82,7 @@ const HomePage = () => {
                 {mainText}
               </Typography>
             </animated.div>
-            <Box>
+            <Box component="a" href="#learn-more">
               <svg class="arrows">
                 <path class="a1" d="M0 0 L30 32 L60 0"></path>
                 <path class="a2" d="M0 20 L30 52 L60 20"></path>
@@ -93,15 +93,13 @@ const HomePage = () => {
         </Box>
       </animated.div>
       <Grid
+        id="learn-more"
         container
         spacing={5}
         sx={{
-          // display: "flex",
-          // flexDirection: "column",
           backgroundColor: "#A6CF98",
           alignItems: "center",
           whiteSpace: "pre-line",
-          // height: "90vh",
           width: "100vw",
           pl: 2,
           pr: 2,
@@ -109,14 +107,12 @@ const HomePage = () => {
           mr: 0,
           mt: 5,
           pb: 7,
-          // border: "2px solid red",
         }}
       >
         <Grid
           xs={12}
           lg={4}
           sx={{
-            // border: "2px solid red",
             justify: "center",
             alignItems: "center",
           }}
@@ -126,7 +122,7 @@ const HomePage = () => {
             sx={{
               // width: 650,
               // display: 'flex',
-              width: "100%",
+              width: "80%",
               // border: "2px solid blue",
             }}
             src={SocialPerson}
@@ -220,19 +216,15 @@ const HomePage = () => {
         <Grid
           xs={12}
           lg={6}
-          sx={
-            {
-              // border: "2px solid red"
-            }
-          }
+          sx={{
+            display: 'flex'
+          }}
         >
           <Box
             component="img"
             sx={{
-              // width: 650,
-              // display: 'flex',
-              width: "100%",
-              // border: "2px solid blue",
+              width: "60%",
+              margin: "auto",
             }}
             src={MomentToRemember}
           ></Box>

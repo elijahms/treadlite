@@ -7,21 +7,23 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Switch from "@mui/material/Switch";
 
 const Living = ({ setTabValue }) => {
   const [livingHabit, setLivingHabit] = useState({
     household_size: 2,
     zip_code: "00001",
-    elec_cost: 1,
-    gas_cost: 1,
-    oil_cost: 1,
+    // elec_cost: 1,
+    // gas_cost: 1,
+    // oil_cost: 1,
+    monthly_bill: 1,
     primary_heating: "elec",
   });
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const [elec, setElec] = useState(false);
-  const [gas, setGas] = useState(false);
-  const [oil, setOil] = useState(false);
+  const [notKnown, setNotKnown] = useState(false);
   const [err, setErr] = useState("");
+  const [primaryHeating, setPrimaryHeating] = useState("elec");
+  const [notKnownValue, setNotKnownValue] = useState(1);
   //const [snackMsg, setSnackMsg] = useState("");
 
   useEffect(() => {
@@ -30,9 +32,7 @@ const Living = ({ setTabValue }) => {
         r.json().then((userrecord) => {
           setLivingHabit({
             household_size: userrecord.household_size,
-            elec_cost: 1,
-            gas_cost: 1,
-            oil_cost: 1,
+            monthly_bill: 1,
             primary_heating: userrecord.primary_heating,
           });
         });
@@ -53,6 +53,7 @@ const Living = ({ setTabValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(livingHabit);
     fetch("/api/living", {
       method: "PATCH",
       headers: {
@@ -61,8 +62,9 @@ const Living = ({ setTabValue }) => {
       body: JSON.stringify(livingHabit),
     }).then((r) => {
       if (r.ok) {
-        r.json().then(() => {
+        r.json().then((r) => {
           console.log("Updated");
+          console.log(r);
         });
       } else {
         r.json().then((err) => console.log(err));
@@ -71,7 +73,21 @@ const Living = ({ setTabValue }) => {
     setTabValue(2);
   };
 
+  function notKnownFunc(e) {
+    setNotKnownValue(e.target.value);
+    setLivingHabit({
+      ...livingHabit,
+      primary_heating: 'unknown',
+      monthly_bill: e.target.value,
+    });
+  }
+
   const livingarr = ["One", "Two", "Three", "Four", "Five"];
+  const notknownarr = [
+    "  I barely use anything",
+    "  I'm an average person",
+    "  I leave the lights on ALWAYS.",
+  ];
 
   return (
     <Box
@@ -116,80 +132,107 @@ const Living = ({ setTabValue }) => {
           }
         />
       </Stack>
-
-      <Typography id="primary-heating-text" gutterBottom>
-        My living space is heated{" "}
-        <span style={{ textDecoration: "underline" }}>primarily</span> with:
+      <Typography sx={{ mt: 3 }} id="primary-heating-text" gutterBottom>
+        I have no clue what my utility bills are!{" "}
       </Typography>
-      <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <ButtonGroup fullWidth>
-          <Button
-            onClick={() => setElec(() => !elec)}
-            variant={elec ? "contained" : "outlined"}
-            disabled={gas || oil ? true : false}
-          >
-            Elec
-          </Button>
-          <Button
-            onClick={() => setGas(() => !gas)}
-            variant={gas ? "contained" : "outlined"}
-            disabled={elec || oil ? true : false}
-          >
-            Gas
-          </Button>
-          <Button
-            onClick={() => setOil(() => !oil)}
-            variant={oil ? "contained" : "outlined"}
-            disabled={elec || gas ? true : false}
-          >
-            Oil
-          </Button>
-        </ButtonGroup>
-      </Stack>
-      <Typography id="average-bill-text" gutterBottom>
-        My average monthly bill:
-      </Typography>
-      <Stack spacing={6} direction="row" sx={{ mb: 3 }} alignItems="center">
-        <TextField
-          disabled={elec ? false : true}
-          id="elec-input"
-          label="$$/month"
-          variant="outlined"
-          onChange={(e) =>
-            setLivingHabit({
-              ...livingHabit,
-              elec_cost: parseInt(e.target.value),
-              primary_heating: "elec",
-            })
-          }
-        />
-        <TextField
-          disabled={gas ? false : true}
-          id="gas-input"
-          label="$$/month"
-          variant="outlined"
-          onChange={(e) =>
-            setLivingHabit({
-              ...livingHabit,
-              gas_cost: parseInt(e.target.value),
-              primary_heating: "gas",
-            })
-          }
-        />
-        <TextField
-          disabled={oil ? false : true}
-          id="oil-input"
-          label="$$/month"
-          variant="outlined"
-          onChange={(e) =>
-            setLivingHabit({
-              ...livingHabit,
-              oil_cost: parseInt(e.target.value),
-              primary_heating: "oil",
-            })
-          }
-        />
-      </Stack>
+      <Switch
+        sx={{ mb: 3 }}
+        checked={notKnown}
+        onChange={() => setNotKnown(() => !notKnown)}
+      />
+      {!notKnown ? (
+        <Box>
+          <Typography id="primary-heating-text" gutterBottom>
+            My living space is heated{" "}
+            <span style={{ textDecoration: "underline" }}>primarily</span> with:
+          </Typography>
+          <Stack spacing={2} direction="row" sx={{ mb: 3 }} alignItems="center">
+            <ButtonGroup fullWidth>
+              <Button
+                onClick={() =>
+                  setLivingHabit({
+                    ...livingHabit,
+                    primary_heating: "elec",
+                  })
+                }
+                variant={
+                  livingHabit.primary_heating === "elec"
+                    ? "contained"
+                    : "outlined"
+                }
+                // disabled={gas || oil ? true : false}
+              >
+                Elec
+              </Button>
+              <Button
+                onClick={() =>
+                  setLivingHabit({
+                    ...livingHabit,
+                    primary_heating: "gas",
+                  })
+                }
+                variant={
+                  livingHabit.primary_heating === "gas"
+                    ? "contained"
+                    : "outlined"
+                }
+                // disabled={elec || oil ? true : false}
+              >
+                Gas
+              </Button>
+              <Button
+                onClick={() =>
+                  setLivingHabit({
+                    ...livingHabit,
+                    primary_heating: "oil",
+                  })
+                }
+                variant={
+                  livingHabit.primary_heating === "oil"
+                    ? "contained"
+                    : "outlined"
+                }
+                // disabled={elec || gas ? true : false}
+              >
+                Oil
+              </Button>
+            </ButtonGroup>
+          </Stack>
+          <Typography id="average-bill-text" gutterBottom>
+            My average monthly bill:
+          </Typography>
+          <TextField
+            id="bill-input"
+            label="$$/month"
+            variant="outlined"
+            fullWidth
+            onChange={(e) =>
+              setLivingHabit({
+                ...livingHabit,
+                monthly_bill: parseInt(e.target.value),
+              })
+            }
+          />
+        </Box>
+      ) : (
+        <Box>
+          <Typography id="guess-slider-label" gutterBottom>
+            My best guess is:
+            <span style={{ color: "#86adae" }}>
+              {notknownarr[notKnownValue]}
+            </span>
+          </Typography>
+          <Slider
+            aria-label="Do not Know"
+            size="medium"
+            value={notKnownValue}
+            step={1}
+            min={0}
+            max={2}
+            onChange={notKnownFunc}
+          />
+        </Box>
+      )}
       <Button
         type="submit"
         variant="contained"

@@ -8,6 +8,7 @@ class User < ApplicationRecord
             :username,
             presence: true
   validates :email, :username, uniqueness: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_one :userrecord, dependent: :destroy
 
   has_many :received_follows, foreign_key: :followed_user_id, class_name: "Friendship"
@@ -22,5 +23,4 @@ class User < ApplicationRecord
     rank = Userrecord.order(score: :desc).pluck(:user_id).index(self.id)
     rank + 1
   end
-
 end
