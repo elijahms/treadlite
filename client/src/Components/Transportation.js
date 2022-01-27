@@ -7,6 +7,7 @@ import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import SimpleDialog from "./SimpleDialog";
 
 const transportarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#3e5369"];
@@ -100,10 +101,14 @@ const Transportation = ({ setTabValue }) => {
         height: "auto",
         pl: 2,
         pr: 2,
-        mt: 3,
+        mt: 1,
       }}
     >
-      <Grid container spacing={0} sx={{ mb: 1, mt: 4 }}>
+      <SimpleDialog
+        dialogTitle={"More Info:"}
+        dialogContent={"EV = Electric Vehicle || MPG = Miles Per Gallon"}
+      />
+      <Grid container spacing={0} sx={{ mb: 1, mt: 1 }}>
         <Grid item xs={6} sm={6} md={2} lg={2}>
           <Typography id="non-linear-slider" gutterBottom>
             I use a car
@@ -210,14 +215,16 @@ const Transportation = ({ setTabValue }) => {
           }
         />
       </Stack>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={handleSubmit}
-      >
-        Next (1/4)
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3}}
+          onClick={handleSubmit}
+        >
+          Next (1/4)
+        </Button>
+      </Stack>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

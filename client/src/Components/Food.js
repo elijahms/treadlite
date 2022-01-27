@@ -8,6 +8,7 @@ import SpaIcon from "@mui/icons-material/Spa";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Typography from "@mui/material/Typography";
 import { useHistory } from "react-router-dom";
+import SimpleDialog from "./SimpleDialog";
 
 const Food = () => {
   const [foodHabit, setFoodHabit] = useState(3);
@@ -83,9 +84,15 @@ const Food = () => {
         height: "auto",
         pl: 2,
         pr: 2,
-        mt: 3,
+        mt: 1,
       }}
     >
+      <SimpleDialog
+        dialogTitle={"More Info:"}
+        dialogContent={
+          "Flexitarian means you are not strictly vegeratian, but eat meat very rarely."
+        }
+      />
       <Typography id="eating-habits" gutterBottom>
         My eating habits:{" "}
         <span style={{ color: `${colorarr[foodHabit]}` }}>
@@ -105,14 +112,16 @@ const Food = () => {
         />
         <FastfoodIcon />
       </Stack>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={handleSubmit}
-      >
-        Submit
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3 }}
+          onClick={handleSubmit}
+        >
+          Submit
+        </Button>
+      </Stack>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

@@ -34,7 +34,7 @@ const AccountPage = () => {
 
   return (
     <Container maxWidth="md" sx={{ height: "105vh" }}>
-      <Paper>
+      <Paper sx={{ borderRadius: "12px" }}>
         <Box sx={{ mt: 7, pb: 4 }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs

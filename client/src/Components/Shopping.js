@@ -18,6 +18,8 @@ import FormControl from "@mui/material/FormControl";
 import Divider from "@mui/material/Divider";
 import FiberNewIcon from "@mui/icons-material/FiberNew";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
+import SimpleDialog from "./SimpleDialog";
+
 
 const shoppingarr = ["Never", "Rarely", "Sometimes", "Often", "Always"];
 const shopping_freq_arr = ["Once", "Twice", "xThree", "xFour", "xFive"];
@@ -97,9 +99,15 @@ const Shopping = ({ setTabValue }) => {
         height: "auto",
         pl: 2,
         pr: 2,
-        mt: 3,
+        mt: 1,
       }}
     >
+      <SimpleDialog
+        dialogTitle={"More Info:"}
+        dialogContent={
+          "Clothing shopping can have a large impact on your carbon footprint. \n 'I Buy in store' as compared to shopping online."
+        }
+      />
       <Typography id="non-linear-slider" gutterBottom>
         I shop for clothing:{" "}
         <span style={{ color: `${colorarr[shoppingHabit.total_shop_freq]}` }}>
@@ -239,14 +247,16 @@ const Shopping = ({ setTabValue }) => {
         />
         <FiberNewIcon />
       </Stack>
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={handleSubmit}
-      >
-        Next (3/4)
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3}}
+          onClick={handleSubmit}
+        >
+          Next (3/4)
+        </Button>
+      </Stack>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

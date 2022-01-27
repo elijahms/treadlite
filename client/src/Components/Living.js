@@ -8,14 +8,12 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Switch from "@mui/material/Switch";
+import SimpleDialog from "./SimpleDialog";
 
 const Living = ({ setTabValue }) => {
   const [livingHabit, setLivingHabit] = useState({
     household_size: 2,
     zip_code: "00001",
-    // elec_cost: 1,
-    // gas_cost: 1,
-    // oil_cost: 1,
     monthly_bill: 1,
     primary_heating: "elec",
   });
@@ -53,7 +51,6 @@ const Living = ({ setTabValue }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(livingHabit);
     fetch("/api/living", {
       method: "PATCH",
       headers: {
@@ -64,10 +61,9 @@ const Living = ({ setTabValue }) => {
       if (r.ok) {
         r.json().then((r) => {
           console.log("Updated");
-          console.log(r);
         });
       } else {
-        r.json().then((err) => console.log(err));
+        r.json().then((err) => setErr(err.errors));
       }
     });
     setTabValue(2);
@@ -77,7 +73,7 @@ const Living = ({ setTabValue }) => {
     setNotKnownValue(e.target.value);
     setLivingHabit({
       ...livingHabit,
-      primary_heating: 'unknown',
+      primary_heating: "unknown",
       monthly_bill: e.target.value,
     });
   }
@@ -93,11 +89,17 @@ const Living = ({ setTabValue }) => {
     <Box
       sx={{
         height: "auto",
-        paddingLeft: "5%",
-        paddingRight: "5%",
-        mt: 3,
+        pl: 2,
+        pr: 2,
+        mt: 1,
       }}
     >
+      <SimpleDialog
+        dialogTitle={"More Info:"}
+        dialogContent={
+          "This section calculates your CO2 (Carbon Dioxide) impact based on your primary utility bill."
+        }
+      />
       <Typography id="house-size-label" gutterBottom>
         Household size:{" "}
         <span style={{ color: "#86adae" }}>
@@ -122,7 +124,6 @@ const Living = ({ setTabValue }) => {
         <TextField
           id="zipcode-input"
           label="zipcode"
-          // value={livingHabit.zip_code}
           variant="outlined"
           onChange={(e) =>
             setLivingHabit({
@@ -136,7 +137,7 @@ const Living = ({ setTabValue }) => {
         I have no clue what my utility bills are!{" "}
       </Typography>
       <Switch
-        sx={{ mb: 3 }}
+        sx={{ mb: 1 }}
         checked={notKnown}
         onChange={() => setNotKnown(() => !notKnown)}
       />
@@ -160,7 +161,6 @@ const Living = ({ setTabValue }) => {
                     ? "contained"
                     : "outlined"
                 }
-                // disabled={gas || oil ? true : false}
               >
                 Elec
               </Button>
@@ -176,7 +176,6 @@ const Living = ({ setTabValue }) => {
                     ? "contained"
                     : "outlined"
                 }
-                // disabled={elec || oil ? true : false}
               >
                 Gas
               </Button>
@@ -192,7 +191,6 @@ const Living = ({ setTabValue }) => {
                     ? "contained"
                     : "outlined"
                 }
-                // disabled={elec || gas ? true : false}
               >
                 Oil
               </Button>
@@ -233,14 +231,16 @@ const Living = ({ setTabValue }) => {
           />
         </Box>
       )}
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        onClick={handleSubmit}
-      >
-        Next (2/4)
-      </Button>
+      <Stack direction="row" spacing={2} justifyContent="flex-end">
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3 }}
+          onClick={handleSubmit}
+        >
+          Next (2/4)
+        </Button>
+      </Stack>
       <Snackbar
         open={openSnackBar}
         autoHideDuration={6000}

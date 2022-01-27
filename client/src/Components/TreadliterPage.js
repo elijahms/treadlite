@@ -94,15 +94,6 @@ const TreadliterPage = ({ user }) => {
     "Exclusively!",
   ];
 
-  // const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  // useEffect(() => {
-  //   if (prefersDarkMode) {
-  //     setColorArr(["#7B726A", "#92887C", "#BDB5AA", "#7B8235", "#0D280E"]);
-  //   } else {
-  //     setColorArr(["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#162640"]);
-  //   }
-  // }, []);
-
   return (
     <Container component="main" maxWidth="lg" sx={{ minHeight: "105vh" }}>
       <Paper elevation={2}
