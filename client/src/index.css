@@ -32,14 +32,14 @@ a:active {
   background-size: cover;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 450px) {
   .hero-image {
     background: url("./assets/footprint.svg") no-repeat center
       center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: 80vw;
+    background-size: cover;
   }
 }
 
