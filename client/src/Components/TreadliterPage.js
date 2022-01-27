@@ -7,7 +7,6 @@ import Slider from "@mui/material/Slider";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-//import useMediaQuery from "@mui/material/useMediaQuery";
 import Paper from "@mui/material/Paper";
 
 const TreadliterPage = ({ user }) => {
