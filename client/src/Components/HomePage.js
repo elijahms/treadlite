@@ -13,19 +13,18 @@ const HomePage = () => {
   const [flip, set] = useState(false);
   let screenSize = window.innerWidth;
 
-//   const heightOutput = document.querySelector("#height");
-//   const widthOutput = document.querySelector("#width");
-  
-//  function reportWindowSize() {
-//    heightOutput.textContent = window.innerHeight;
-//    widthOutput.textContent = window.innerWidth;
-//  }
+  //   const heightOutput = document.querySelector("#height");
+  //   const widthOutput = document.querySelector("#width");
 
-//  window.onresize = reportWindowSize;
+  //  function reportWindowSize() {
+  //    heightOutput.textContent = window.innerHeight;
+  //    widthOutput.textContent = window.innerWidth;
+  //  }
 
-// let windowSize = document.documentElement.clientWidth
-// window.onresize = function() {return windowSize};
+  //  window.onresize = reportWindowSize;
 
+  // let windowSize = document.documentElement.clientWidth
+  // window.onresize = function() {return windowSize};
 
   const MainText = useSpring({
     to: { opacity: 0 },
@@ -65,17 +64,17 @@ const HomePage = () => {
             // border: '2px solid blue'
           }}
         >
-          <Box sx={{ mt: "6vh", pl: 2, pr: 2, alignItems: "center" }}>
+          <Box sx={{ mt: "4vh", pl: 2, pr: 2, alignItems: "center" }}>
             <animated.div style={MainText}>
               <Typography
                 sx={{
-                  mt: 5,
+                  mt: 4,
                   filter: "brightness(200%)",
                   color: "#FFFFFF",
                   textAlign: "center",
                   fontSize: "10vw",
                   "@media only screen and (max-width: 500px)": {
-                    fontSize: "22vw",
+                    fontSize: "4rem",
                   },
                 }}
               >
@@ -83,10 +82,10 @@ const HomePage = () => {
               </Typography>
             </animated.div>
             <Box component="a" href="#learn-more">
-              <svg class="arrows">
-                <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                <path class="a2" d="M0 20 L30 52 L60 20"></path>
-                <path class="a3" d="M0 40 L30 72 L60 40"></path>
+              <svg className="arrows">
+                <path className="a1" d="M0 0 L30 32 L60 0"></path>
+                <path className="a2" d="M0 20 L30 52 L60 20"></path>
+                <path className="a3" d="M0 40 L30 72 L60 40"></path>
               </svg>
             </Box>
           </Box>
@@ -109,40 +108,21 @@ const HomePage = () => {
           pb: 7,
         }}
       >
-        <Grid
-          xs={12}
-          lg={4}
-          sx={{
-            justify: "center",
-            alignItems: "center",
-          }}
-        >
+        <Grid xs={12} lg={4} sx={{ display: "flex" }}>
           <Box
             component="img"
             sx={{
-              // width: 650,
-              // display: 'flex',
               width: "80%",
-              // border: "2px solid blue",
+              margin: "auto",
             }}
             src={SocialPerson}
           ></Box>
         </Grid>
-        <Grid
-          xs={12}
-          lg={8}
-          sx={
-            {
-              //  border: "2px solid red"
-            }
-          }
-        >
+        <Grid xs={12} lg={8}>
           <Box
             sx={{
               mt: 0,
               mb: 0,
-              // pl: 3,
-              // pr: 3,
               p: 2,
             }}
           >
@@ -160,44 +140,19 @@ const HomePage = () => {
           </Box>
         </Grid>
         {screenSize < 600 && (
-          <Grid
-            xs={12}
-            sx={
-              {
-                // border: "2px solid red"
-              }
-            }
-          >
+          <Grid sx={{ display: "flex" }} xs={12}>
             <Box
               component="img"
               sx={{
-                // width: 650,
-                // display: 'flex',
-                width: "100%",
-                // border: "2px solid blue",
+                margin: "auto",
+                width: "80%",
               }}
               src={Adventure}
             ></Box>
           </Grid>
         )}
-        <Grid
-          xs={12}
-          lg={6}
-          sx={
-            {
-              //  border: "2px solid red"
-            }
-          }
-        >
-          <Box
-            sx={{
-              // mt: 8.5,
-              // mb: 10,
-              // pl: 3,
-              // pr: 3,
-              p: 2,
-            }}
-          >
+        <Grid xs={12} lg={6}>
+          <Box sx={{ p: 2 }}>
             <Typography variant="h4" sx={{ color: "text.secondary" }}>
               {"If this is your first time here, head over to to the "}
               <NavLink exact to="/account">
@@ -217,7 +172,7 @@ const HomePage = () => {
           xs={12}
           lg={6}
           sx={{
-            display: 'flex'
+            display: "flex",
           }}
         >
           <Box

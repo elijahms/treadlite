@@ -60,9 +60,7 @@ const AboutPage = () => {
               },
             }}
           >
-            {
-              "Understand your carbon footprint with Treadlite"
-            }
+            {"Understand your carbon footprint with Treadlite"}
           </Typography>
           <Typography variant="h6" sx={{ mb: 5 }}>
             {

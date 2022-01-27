@@ -11,7 +11,7 @@ const DashboardPage = () => {
     rank: 0,
     avg_score: 0,
     best_cat: "n/a",
-    worst_cat: 'n/a'
+    worst_cat: "n/a",
   });
 
   useEffect(() => {
@@ -29,11 +29,11 @@ const DashboardPage = () => {
   }, []);
 
   return (
-    <Container component="main" maxWidth="lg" sx={{mb: 15}}>
+    <Container component="main" maxWidth="lg" sx={{ mb: 15 }}>
       <Paper
-      sx={{
-        borderRadius: "12px",
-      }}
+        sx={{
+          borderRadius: "12px",
+        }}
       >
         <Box
           sx={{
@@ -50,7 +50,7 @@ const DashboardPage = () => {
           <Typography
             component="h2"
             color="text.primary"
-            sx={{ fontSize: "2.5rem", mt: 2, mb: 2}}
+            sx={{ fontSize: "2.5rem", mt: 2, mb: 2 }}
           >
             {"YOUR SCORE"}
           </Typography>
@@ -59,7 +59,7 @@ const DashboardPage = () => {
               position: "relative",
               display: "inline-flex",
               mt: 0.6,
-              mb: 2
+              mb: 2,
             }}
           >
             <CircularProgress
@@ -91,7 +91,7 @@ const DashboardPage = () => {
           </Box>
           <Typography
             component="h3"
-            align='center'
+            align="center"
             color="text.secondary"
             sx={{ fontSize: "1.5rem", mt: 2 }}
           >
@@ -101,7 +101,7 @@ const DashboardPage = () => {
           </Typography>
           <Typography
             component="h3"
-            align='center'
+            align="center"
             color="text.secondary"
             sx={{ fontSize: "1.5rem", mt: 2 }}
           >

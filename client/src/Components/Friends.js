@@ -93,7 +93,7 @@ const Friends = ({ user }) => {
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
     fetch("api/users").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
@@ -217,12 +217,10 @@ const Friends = ({ user }) => {
           mt: 2,
           mr: 10,
           pt: 0,
-          pb: 0
+          pb: 0,
         }}
       >
-        <List dense
-        sx={{pb: 0.2, pt: 0.2}}
-        >
+        <List dense sx={{ pb: 0.2, pt: 0.2 }}>
           <ListItem
             dense
             secondaryAction={
@@ -235,7 +233,7 @@ const Friends = ({ user }) => {
               >
                 <CircularProgress
                   variant="determinate"
-                  sx={{color: "#7558cc"}}
+                  sx={{ color: "#7558cc" }}
                   value={userData.score}
                 />
                 <Box
@@ -295,7 +293,7 @@ const Friends = ({ user }) => {
               } else if (chipClick === "Following") {
                 return followingList.includes(f.id);
               } else {
-                return followerList.includes(f.id)
+                return followerList.includes(f.id);
               }
             })
             .map((friend, index) => {
