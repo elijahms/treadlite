@@ -18,7 +18,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Phase4Snapnote
+module Treadlite
   class Application < Rails::Application
     config.load_defaults 6.1
     # This is set in apps generated with the --api flag, and removes session/cookie middleware

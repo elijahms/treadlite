@@ -42,7 +42,7 @@ $ rails s
 
 ## Contact
 
-Created by [@elijahsilverman](https://elijahsilverman.com/) - feel free to contact me!
+Created by [@elijahsilverman](https://elijahsilverman.com) - feel free to contact me!
 
 ## Credit
 
