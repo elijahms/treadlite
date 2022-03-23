@@ -1,4 +1,4 @@
-class Api::UserrecordsController < ApplicationController  
+class Api::UserrecordsController < ApplicationController
   def create
     user = User.find_by(id: session[:user_id])
     userrecord = user.userrecord
@@ -72,7 +72,7 @@ class Api::UserrecordsController < ApplicationController
     if userrecord.calc_update_permission
       userrecord.update!(userrecord_params)
       render json: userrecord, status: :ok
-    else 
+    else
       render json: { errors: ['Sorry, You recently updated your trend. See FAQ for more details.'] }, status: :unauthorized
     end
   end
