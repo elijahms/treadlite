@@ -3,9 +3,7 @@ class Userrecord < ApplicationRecord
     if self.own_car == true
       if self.own_ev == true
         self.miles_per_gallon = 100
-      else
-      end
-weekly_co_em = self.miles_per_week / self.miles_per_gallon
+      weekly_co_em = self.miles_per_week / self.miles_per_gallon
       transportation_score = 100 - ((weekly_co_em - 1.15) / (20.47 - 1.15) * 100)
       transportation_score = transportation_score + self.public_transport * 2
     else
