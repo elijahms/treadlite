@@ -3,10 +3,9 @@ class Userrecord < ApplicationRecord
     if self.own_car == true
       if self.own_ev == true
         self.miles_per_gallon = 100
-        weekly_co_em = self.miles_per_week / self.miles_per_gallon
       else
-        weekly_co_em = self.miles_per_week / self.miles_per_gallon
       end
+weekly_co_em = self.miles_per_week / self.miles_per_gallon
       transportation_score = 100 - ((weekly_co_em - 1.15) / (20.47 - 1.15) * 100)
       transportation_score = transportation_score + self.public_transport * 2
     else
@@ -158,7 +157,7 @@ end
 # http://shrinkthatfootprint.com/food-carbon-footprint-diet --- eating breakdown
 # https://www.sciencedirect.com/science/article/pii/S0160412019315752?via%3Dihub -- total breakdown.
 # I took the weighted average fo each category domestic and overseas.
-# Then I removed the 'services category and replaced distributed it out the the 4 other categories unevently. 
+# Then I removed the 'services category and replaced distributed it out the the 4 other categories unevently.
 # I gave food a higher representation since it was seemingly underrepresented then I added 1 percent to each as I was off by 5%.
 # https://www.biofuelsdigest.com/bdigest/2020/04/21/4-ways-to-address-your-homes-carbon-footprint/ --alternative
 # https://www.bls.gov/regions/midwest/data/averageenergyprices_selectedareas_table.htm -- cost of elec per kw/h and cost of piped gas per therm
@@ -169,7 +168,7 @@ end
 # (average monthly gas bill per month / price per thousand cubic feet) pounds of CO2 per thousand cubic feet of natural gas.
 # ($$per month /Natural_gas_cost_1000CF)*EF_natural_gas == pounds of co2 per month
 # ($$per month /$10.68 )*119.58
-# Price per thousand cubic feet of natural gas	$10.68 -- source: Energy Information Administration: US Residential Natural Gas Prices.  2013. 2012 annual average. http://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm 
+# Price per thousand cubic feet of natural gas	$10.68 -- source: Energy Information Administration: US Residential Natural Gas Prices.  2013. 2012 annual average. http://www.eia.gov/dnav/ng/ng_pri_sum_dcu_nus_a.htm
 # Emission factor (natural gas/thousand cubic feet)	119.58 -- source: Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38. http://www.epa.gov/climatechange/ghgemissions/usinventoryreport.html
 # Average annual CO2 emissions from natural gas per household	7,892
 # Average household size 2.53 -- https://www.statista.com/statistics/183648/average-size-of-households-in-the-us/#:~:text=The%20average%20American%20household%20consisted%20of%202.53%20people%20in%202020.&text=As%20shown%20in%20the%20statistic,their%20usual%20place%20of%20residence.
@@ -193,9 +192,9 @@ end
 
 # ($$ price per month/fuel_oil_cost)*EF_fuel_oil_gallon == pounds of co2 per month
 # ($$ price per month/$4.02)*22.61
-#  ef_fuel_oil_gallon --source Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38. 
+#  ef_fuel_oil_gallon --source Calculation - EPA, Inventory of U.S. Greenhouse Gas Emissions and Sinks: 1990-2011, Annex 2,Table A-38.
 # http://www.epa.gov/climatechange/ghgemissions/usinventoryreport.html.
-# fuel oil cost --source Energy Information Administration, 2013. US No. 2 Heating Oil Residential Prices - 2012 annual average. 
+# fuel oil cost --source Energy Information Administration, 2013. US No. 2 Heating Oil Residential Prices - 2012 annual average.
 # http://www.eia.gov/petroleum/heatingoilpropane/, http://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s=M_EPD2F_PRS_NUS_DPG&f=M
 # e-grid https://www.epa.gov/egrid/data-explorer
 
