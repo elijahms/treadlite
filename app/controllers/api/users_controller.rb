@@ -23,7 +23,7 @@ class Api::UsersController < ApplicationController
       render json: followings, status: :ok
     else
       render json: { errors: ['No user found'] }, status: :not_found
-    end 
+    end
   end
 
   def get_followers
@@ -31,7 +31,7 @@ class Api::UsersController < ApplicationController
     if user
       followers = user.followers.map {|f| f.id}
       render json: followers, status: :ok
-    else 
+    else
       render json: { errors: ['No user found'] }, status: :not_found
     end
   end
