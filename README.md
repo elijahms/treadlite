@@ -29,6 +29,10 @@ Project is created with:
 - Comprehensive account page where the score is calculated based on the user's inputs.
 - Dashboard page to view your stats.
 
+## Known Issues
+
+- On Safari for desktop the landing page is extremely janky. Unkown reason.
+
 ## Setup
 
 To run this project, install it locally using npm:
