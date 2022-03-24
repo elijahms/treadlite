@@ -12,7 +12,7 @@ import Paper from "@mui/material/Paper";
 const TreadliterPage = ({ user }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [snackMessage, setSnackMessage] = useState("Success");
-  const [colorarr, setColorArr] = useState([
+  const [colorarr] = useState([
     "#a2d4c4",
     "#86adae",
     "	#667f92",
@@ -22,8 +22,7 @@ const TreadliterPage = ({ user }) => {
   let today = new Date();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  
+    window.scrollTo(0, 0);
   }, []);
 
   const [tlHabit, setTlHabit] = useState({
@@ -95,9 +94,7 @@ const TreadliterPage = ({ user }) => {
 
   return (
     <Container component="main" maxWidth="lg" sx={{ minHeight: "105vh" }}>
-      <Paper elevation={2}
-      sx={{ borderRadius: "12px" }}
-      >
+      <Paper elevation={2} sx={{ borderRadius: "12px" }}>
         <Box
           sx={{
             display: "flex",
@@ -108,8 +105,9 @@ const TreadliterPage = ({ user }) => {
             p: 2,
           }}
         >
-          <Typography sx={{ textAlign: "center", mb: 6,}} variant="h5">
-            Move Your Trends <span style={{color: 'grey'}} > - Treadliter </span>
+          <Typography sx={{ textAlign: "center", mb: 6 }} variant="h5">
+            Move Your Trends{" "}
+            <span style={{ color: "grey" }}> - Treadliter </span>
           </Typography>
 
           <Typography id="non-linear-slider" gutterBottom>

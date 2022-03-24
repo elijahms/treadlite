@@ -29,7 +29,7 @@ const Friends = ({ user }) => {
   const [chipClick, setChipClick] = useState("All");
   const [followingList, setFollowingList] = useState([""]);
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const [err, setErr] = useState("");
+  // const [err, setErr] = useState("");
   const [followerList, setFollowerList] = useState([""]);
   const [userRank, setUserRank] = useState(['4'])
   const [snackMsg, setSnackMsg] = useState("");
@@ -103,7 +103,7 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });
@@ -114,7 +114,7 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });
@@ -126,7 +126,7 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });
@@ -137,7 +137,7 @@ const Friends = ({ user }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });

@@ -9,7 +9,7 @@ import Adventure from "../assets/adventure.svg";
 import MomentToRemember from "../assets/momenttoremember.svg";
 
 const HomePage = () => {
-  const [mainText, setMainText] = useState("Make less of an impact.");
+  const [mainText] = useState("Make less of an impact.");
   const [flip, set] = useState(false);
   let screenSize = window.innerWidth;
 

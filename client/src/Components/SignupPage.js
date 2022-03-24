@@ -6,12 +6,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import { useState, useEffect } from 'react'
 
 const SignUpPage = ({ setUser }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [err, setErr] = useState('')
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const SignUpPage = ({ setUser }) => {
         r.json().then((user) => {
           setUser(user);
           setErr('')
-          history.push("/account");
+          navigate("/account");
         });
       } else {
         r.json().then((err) => {

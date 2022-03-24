@@ -8,7 +8,7 @@ import Friends from "./Friends";
 import TreadliterPage from "./TreadliterPage";
 import AboutPage from "./AboutPage";
 import HomePage from "./HomePage";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SignUpPage from "./SignupPage";
 import DashboardPage from "./DashboardPage";
@@ -20,19 +20,16 @@ const App = () => {
     fetch("/api/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          // console.log(user);
           setUser(user);
         });
       } else {
         r.json().then(() => {
-          console.log("Not Signed In");
         });
       }
     });
   }, []);
 
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-
   const theme = createTheme({
     palette: {
       type: "light",
@@ -56,36 +53,25 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <NewMain user={user} setUser={setUser} />
-      <Switch>
-        <Route exact path="/about">
-          <AboutPage />
-        </Route>
-        <Route exact path="/treadliter">
-          <TreadliterPage user={user} />
-        </Route>
-        <Route exact path="/friends">
-          <Friends user={user} />
-        </Route>
-        <Route exact path="/account">
-          {!user ? (
-            <SignUpPage setUser={setUser} />
-          ) : (
-            <AccountPage setUser={setUser} user={user} />
-          )}
-        </Route>
-        <Route exact path="/login">
-          <LoginPage setUser={setUser} />
-        </Route>
-        <Route exact path="/dashboard">
-          <DashboardPage />
-        </Route>
-        <Route path="/signup">
-          <SignUpPage setUser={setUser} />
-        </Route>
-        <Route path="/">
-          <HomePage />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/treadliter" element={<TreadliterPage user={user} />} />
+        <Route path="/friends" element={<Friends user={user} />} />
+        <Route
+          path="/account"
+          element={
+            !user ? (
+              <SignUpPage setUser={setUser} />
+            ) : (
+              <AccountPage setUser={setUser} user={user} />
+            )
+          }
+        />
+        <Route path="/login" element={<LoginPage setUser={setUser} />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/signup" element={<SignUpPage setUser={setUser} />} />
+        <Route path="/" element={<HomePage />} />
+      </Routes>
     </ThemeProvider>
   );
 };

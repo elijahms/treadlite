@@ -19,8 +19,8 @@ const Living = ({ setTabValue }) => {
   });
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [notKnown, setNotKnown] = useState(false);
-  const [err, setErr] = useState("");
-  const [primaryHeating, setPrimaryHeating] = useState("elec");
+  // const [err, setErr] = useState("");
+  // const [primaryHeating, setPrimaryHeating] = useState("elec");
   const [notKnownValue, setNotKnownValue] = useState(1);
   //const [snackMsg, setSnackMsg] = useState("");
 
@@ -36,7 +36,7 @@ const Living = ({ setTabValue }) => {
         });
       } else {
         r.json().then((err) => {
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });
@@ -63,7 +63,7 @@ const Living = ({ setTabValue }) => {
           console.log("Updated");
         });
       } else {
-        r.json().then((err) => setErr(err.errors));
+        // r.json().then((err) => setErr(err.errors));
       }
     });
     setTabValue(2);

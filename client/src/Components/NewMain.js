@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -19,13 +19,13 @@ const settings = ["Dashboard", "Account"];
 const ResponsiveAppBar = ({ user, setUser }) => {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogout = (event) => {
     fetch("/api/logout", { method: "DELETE" }).then(() => {});
     setUser(null);
     handleCloseUserMenu();
-    history.push("/");
+    navigate("/");
   };
 
   const handleOpenNavMenu = (event) => {

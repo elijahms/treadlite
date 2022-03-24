@@ -7,15 +7,15 @@ import Stack from "@mui/material/Stack";
 import SpaIcon from "@mui/icons-material/Spa";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import Typography from "@mui/material/Typography";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SimpleDialog from "./SimpleDialog";
 
 const Food = () => {
   const [foodHabit, setFoodHabit] = useState(3);
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  const [err, setErr] = useState("");
-  const [snackMsg, setSnackMsg] = useState("");
-  const history = useHistory();
+  // const [err, setErr] = useState("");
+  // const [snackMsg, setSnackMsg] = useState("");
+  const navigate = useNavigate();
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -40,17 +40,17 @@ const Food = () => {
     }).then((r) => {
       if (r.ok) {
         r.json().then(() => {
-          history.push("/dashboard");
+          navigate("/dashboard");
         });
       } else {
         r.json().then((err) => {
           error = true;
-          setErr(err.errors);
+          // setErr(err.errors);
         });
       }
     });
     if (error) {
-      setSnackMsg([...err]);
+      // setSnackMsg([...err]);
     }
     setOpenSnackBar(true);
   };
