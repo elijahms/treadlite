@@ -15,7 +15,7 @@ const colorarr = ["#a2d4c4", "#86adae", "	#667f92", "#3e5369", "#3e5369"];
 const Transportation = ({ setTabValue }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [err, setErr] = useState("");
-  const [snackMsg, setSnackMsg] = useState("");
+  const [snackMsg, setSnackMsg] = useState("Score Updated");
   const [transportationHabit, setTransportationHabit] = useState({
     miles_per_gallon: 20,
     miles_per_week: 275,
@@ -72,6 +72,7 @@ const Transportation = ({ setTabValue }) => {
     });
     if (error) {
       setSnackMsg([...err]);
+      openSnackBar(true);
     } else {
       setTabValue(1);
     }
@@ -219,7 +220,7 @@ const Transportation = ({ setTabValue }) => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ mt: 3}}
+          sx={{ mt: 3 }}
           onClick={handleSubmit}
         >
           Next (1/4)
@@ -229,7 +230,7 @@ const Transportation = ({ setTabValue }) => {
         open={openSnackBar}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Score Updated"
+        message={snackMsg}
       />
     </Box>
   );
