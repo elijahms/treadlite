@@ -32,6 +32,7 @@ Project is created with:
 ## Known Issues
 
 - On Safari for desktop the landing page is extremely janky. Unkown reason.
+- Not posting to heroku
 
 ## Setup
 
