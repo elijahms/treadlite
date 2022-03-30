@@ -16,7 +16,7 @@ gem 'pry', '~> 0.13.1'
 # gem 'active_model_serializers'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 5.6"
 
 gem 'faker', "~> 2.19.0"
 
