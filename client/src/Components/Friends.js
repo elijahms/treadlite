@@ -31,7 +31,7 @@ const Friends = ({ user }) => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
   // const [err, setErr] = useState("");
   const [followerList, setFollowerList] = useState([""]);
-  const [userRank, setUserRank] = useState(['4'])
+  const [userRank, setUserRank] = useState(["4"]);
   const [snackMsg, setSnackMsg] = useState("");
   const [userData, setUserData] = useState({
     username: "User",
@@ -107,6 +107,7 @@ const Friends = ({ user }) => {
         });
       }
     });
+
     fetch("api/following").then((r) => {
       if (r.ok) {
         r.json().then((data) => {
@@ -122,7 +123,7 @@ const Friends = ({ user }) => {
       if (r.ok) {
         r.json().then((data) => {
           setUserData(data.data);
-          setUserRank(data.rank)
+          setUserRank(data.rank);
         });
       } else {
         r.json().then((err) => {
