@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 
 module Treadlite
   class Application < Rails::Application
-    config.load_defaults 6.1
+    config.load_defaults 7
     # This is set in apps generated with the --api flag, and removes session/cookie middleware
     config.api_only = true
 
